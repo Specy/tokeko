@@ -7,6 +7,7 @@
     import Row from '$cmp/layout/Row.svelte';
     import {createCompilerStore} from '$src/routes/projects/[projectId]/projectStore';
     import Column from "$cmp/layout/Column.svelte";
+    import {formatTree} from "$lib/dotlr/DotlrFormat";
 
     export let project: Project;
     let store = createCompilerStore(project);
@@ -55,8 +56,8 @@
     <div class="pipe-container">
         <div class="pipe-container-inner">
                 <pre>
-{#if $store.result?.ok}
-{JSON.stringify($store.result.result, null, 4)}
+{#if $store.result?.type === 'parse'}
+{formatTree($store.result.result)}
 {/if}
                 </pre>
         </div>
@@ -74,13 +75,7 @@
 {#if $store.result}
     <Column padding="0.5rem" gap="0.5rem">
         <h1 id="jump-to">
-            {$store.result.ok ? "Execution successful" : "Execution failed"}
         </h1>
-        {#if $store.result.ok}
-            Ok
-        {:else}
-            Error
-        {/if}
     </Column>
 {/if}
 

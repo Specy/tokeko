@@ -1,5 +1,5 @@
 import {type Project} from "$stores/userProjectsStore";
-import {writable} from "svelte/store";
+import {get, writable} from "svelte/store";
 import {Grammar, LALRParser, LR1Parser} from '@specy/dotlr'
 import type {Tree} from "@specy/dotlr/dist/types";
 
@@ -7,13 +7,20 @@ type ProjectStoreData = {
     grammar: string,
     content: string,
     result?: {
-        ok: boolean,
+        type: 'prepare',
         grammar: Grammar,
-        parser: LR1Parser | LALRParser,
+        parser: LR1Parser,
+    } | {
+        type: 'parse',
+        grammar: Grammar,
+        parser: LR1Parser,
         result: Tree
     } | {
-        ok: false
+        type: 'error',
         error: string
+        grammar?: Grammar,
+        parser?: LR1Parser,
+        result?: Tree
     }
 }
 
@@ -23,14 +30,12 @@ export function createCompilerStore(project: Project) {
         content: project.content,
     })
 
-    function run(override?: { grammar?: string, content?: string }) {
+    function makeParser(grammar: string) {
         update(s => {
-            const grammar = override?.grammar || s.grammar;
-            const content = override?.content || s.content;
             const grammarParser = Grammar.fromGrammar(grammar)
             if (!grammarParser.ok) {
                 s.result = {
-                    ok: false,
+                    type: 'error',
                     error: JSON.stringify(grammarParser.val)
                 }
                 return s
@@ -39,23 +44,44 @@ export function createCompilerStore(project: Project) {
             const parser = LALRParser.fromGrammar(grammarParser.val)
             if (!parser.ok) {
                 s.result = {
-                    ok: false,
-                    error: JSON.stringify(parser.val)
-                }
-                return s
-            }
-            const result = parser.val.parse(content)
-            if(!result.ok){
-                s.result = {
-                    ok: false,
-                    error: JSON.stringify(result.val)
+                    type: 'error',
+                    error: JSON.stringify(parser.val),
+                    grammar: grammarClone
                 }
                 return s
             }
             s.result = {
-                ok: true,
+                type: 'prepare',
                 grammar: grammarClone,
-                parser: parser.val,
+                parser: parser.val
+            }
+            return s;
+        })
+    }
+
+
+    function run(override?: { grammar?: string, content?: string }) {
+        makeParser(override?.grammar || get({subscribe}).grammar)
+        update(s => {
+            const content = override?.content || s.content
+            if (s.result.type === 'error') {
+                return s
+            }
+            const parser = s.result.parser
+            const result = parser.parse(content)
+            if (!result.ok) {
+                s.result = {
+                    type: 'error',
+                    error: JSON.stringify(result.val),
+                    grammar: s.result.grammar,
+                    parser: parser
+                }
+                return s
+            }
+            s.result = {
+                grammar: s.result.grammar,
+                parser: parser,
+                type: 'parse',
                 result: result.val
             }
             return s;
