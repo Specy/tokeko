@@ -48,7 +48,8 @@
         />
         <Editor
                 style="flex: 1;"
-                language="dotlr"
+                runtimeGrammar={project.grammar}
+                language="dotlr-result"
                 bind:code={project.content}
                 highlightedLine={-1}
         />
@@ -60,7 +61,7 @@
 {formatTree($store.result.result)}
 {/if}
 {#if $store.result?.type === 'error'}
-{JSON.stringify($store.result.error, null, 2)}
+{$store.result.error}
 {/if}
 
                 </pre>
@@ -79,6 +80,7 @@
 {#if $store.result}
     <Column padding="0.5rem" gap="0.5rem">
         <h1 id="jump-to">
+            Result
         </h1>
     </Column>
 {/if}

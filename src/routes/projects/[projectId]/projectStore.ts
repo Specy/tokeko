@@ -1,7 +1,7 @@
 import {type Project} from "$stores/userProjectsStore";
 import {get, writable} from "svelte/store";
 import {Grammar, LALRParser, LR1Parser} from '@specy/dotlr'
-import type {Tree} from "@specy/dotlr/dist/types";
+import type { Tree } from '@specy/dotlr/types'
 
 type ProjectStoreData = {
     grammar: string,
@@ -36,7 +36,7 @@ export function createCompilerStore(project: Project) {
             if (!grammarParser.ok) {
                 s.result = {
                     type: 'error',
-                    error: JSON.stringify(grammarParser.val)
+                    error: JSON.stringify(grammarParser.val, null, 2)
                 }
                 return s
             }
@@ -45,7 +45,7 @@ export function createCompilerStore(project: Project) {
             if (!parser.ok) {
                 s.result = {
                     type: 'error',
-                    error: JSON.stringify(parser.val),
+                    error: JSON.stringify(parser.val, null, 2),
                     grammar: grammarClone
                 }
                 return s
@@ -72,7 +72,7 @@ export function createCompilerStore(project: Project) {
             if (!result.ok) {
                 s.result = {
                     type: 'error',
-                    error: JSON.stringify(result.val),
+                    error: JSON.stringify(result.val, null, 2),
                     grammar: s.result.grammar,
                     parser: parser
                 }

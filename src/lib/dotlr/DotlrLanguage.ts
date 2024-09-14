@@ -4,70 +4,45 @@ import {editor, type IDisposable, languages, Position, Range} from 'monaco-edito
 export const DotlrLanguage = {
     defaultToken: 'invalid',
     ignoreCase: true,
-    tokenPostfix: '.Dotlr',
-    keywords: [],
-    literals: ["true", "false"],
-    operators: ["%", "->", "'"],
-    symbols: /[=><!~?:&|+\-*\/\^%']+/,
-    digits: /\d+(_+\d+)*/,
+    tokenPostfix: '.dotlr',
+    // The main tokenizer for our language
     tokenizer: {
         root: [
-            {include: '@common'},
-        ],
-        digits_matcher: [
-            [/(@digits)[eE]([\-+]?(@digits))?[fFdD]?/, 'number.float'],
-            [/(@digits)\.(@digits)([eE][\-+]?(@digits))?[fFdD]?/, 'number.float'],
-            [/(@digits)[fFdD]/, 'number.float'],
-            [/(@digits)[lL]?/, 'number'],
-        ],
-        common: [
-            //TODO not sure why i need to do this
-            [/s\.t\./, 'keyword'],
-            [/([a-z$][\w$]*)(?=\(.*\))/, 'function'],
-            [/[a-z$][\w$]*/, {
-                "cases": {
-                    "@keywords": "keyword",
-                    "@literals": "literal",
-                    "@default": "identifier"
-                }
-            }],
-            {include: '@whitespace'},
-            [/_/, "identifier.ignore"],
-            // regular expressions
-            // delimiters
-            [/[{}]/, "expansion.brackets"],
-            [/[()\[\]]/, '@brackets'],
-            [/[<>](?!@symbols)/, '@brackets'],
-            [/@symbols/, {
+            // Non-terminal symbols (any uppercase word)
+            [/[A-Z][A-Za-z0-9]*/, {
                 cases: {
-                    '@operators': 'delimiter',
-                    '@default': ''
+                    '$S2==start': 'productionHead',
+                    '@default': 'nonTerminal'
                 }
             }],
-            // numbers
-            {include: "digits_matcher"},
-            // delimiter: after number because of .\d floats
-            [/[;,.]/, 'delimiter'],
-            // strings:
-            [/"([^"\\]|\\.)*$/, 'string.invalid'],  // non-teminated string
-            [/"/, 'string', '@string_double'],
+
+            // Production arrow
+            [/->/, 'productionArrow', '@production'],
+
+            // Terminal symbols (surrounded by single quotes)
+            [/'[^']*'/, 'terminal'],
+
+            // Special symbols (starting with %)
+            [/%[a-z][A-Za-z0-9]*/, 'special'],
+
+            // Regular expressions
+            [/\/.*?\//, 'regexp'],
+
+            // Whitespace
+            [/\s+/, {cases: {'@eos': {token: 'white', next: '@start'}, '@default': 'white'}}],
         ],
-        string_double: [
-            [/[^\\"]+/, 'string'],
-            [/"/, 'string', '@pop']
+
+        production: [
+            [/\n/, 'white', '@start'],
+            {include: '@root'}
         ],
-        comment: [
-            [/[^\/*]+/, 'comment'],
-            [/\/\*/, 'comment', '@push'],    // nested comment
-            ["\\*/", 'comment', '@pop'],
-            [/[\/*]/, 'comment']
-        ],
-        whitespace: [
-            [/[ \t\r\n]+/, 'white'],
-            [/\/\*/, 'comment', '@comment'],
-            [/\/\/.*$/, 'comment'],
-        ],
-    }
+
+        start: [
+            [/[A-Z][A-Za-z0-9]*/, 'productionHead', '@root'],
+            {include: '@root'}
+        ]
+    },
+
 }
 
 

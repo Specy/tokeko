@@ -2,16 +2,14 @@
     import {onMount} from 'svelte';
     import hljs from 'highlight.js/lib/core';
     import "highlight.js/styles/atom-one-dark.css"
-    import typescript from 'highlight.js/lib/languages/typescript';
     import {highlightJsGrammar} from '$src/lib/dotlr/hljsLanguage';
 
     export let style: string = ""
     export let source: string;
-    export let language: "dotlr" | "typescript"
+    export let language: "dotlr"
     let code: HTMLElement;
     onMount(() => {
         hljs.registerLanguage('dotlr', () => highlightJsGrammar);
-        hljs.registerLanguage('typescript', typescript);
     });
 
     function highlight(sourceCode: string, el: HTMLElement, lang: string) {
@@ -88,4 +86,36 @@
   :global(.hljs-identifierIgnore) {
     color: #6a6a6a;
   }
+
+  :global(.hljs-productionHead) {
+    color: #a6a6a6;
+    font-weight: bold;
+  }
+
+  :global(.hljs-productionArrow ) {
+    color: #beaa3d;
+  }
+
+  :global(.hljs-terminal) {
+    color: #ce9178;
+  }
+
+  :global(.hljs-nonTerminal) {
+    color: #978cca;
+  }
+
+  :global(.hljs-special) {
+    color: #509e82;
+    font-style: italic;
+  }
+
+  :global(.hljs-regexp) {
+    color: #d3547e;
+  }
+
+  :global(.hljs-invalid) {
+    color: #d72d2d;
+  }
+
+
 </style>

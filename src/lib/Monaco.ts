@@ -1,6 +1,5 @@
 import { browser } from '$app/environment';
 import { generateTheme } from '$lib/theme/editorTheme';
-//@ts-expect-error - Monaco doesn't have typescript definitions
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 import type monaco from 'monaco-editor'
 import {
@@ -15,6 +14,7 @@ class MonacoLoader {
 	private monaco: MonacoType;
 	loading: Promise<MonacoType>;
 	toDispose: monaco.IDisposable[] = [];
+	runtimeGrammarToDispose: monaco.IDisposable[] = []
 	constructor() {
 		if (browser) this.load()
 	}
@@ -54,17 +54,25 @@ class MonacoLoader {
 		this.toDispose.push(monaco.languages.registerCompletionItemProvider('dotlr', createDotlrCompletion()))
 
 	}
-	registerRuntimePushers = (language: 'dotlr' | 'plain', instance: monaco.editor.ITextModel) => {
+
+	registerRuntimePushers = (language: 'dotlr' | 'dotlr-result', instance: monaco.editor.ITextModel) => {
 		if(language === 'dotlr'){
 			const disposer = createDotlrRuntimeDiagnostics(instance)
 			return () => disposer.dispose()
 		}
+		return () => {}
 	}
+
+
 	async get() {
 		if (this.monaco) return this.monaco
 		await this.load()
 		return this.monaco
 	}
 }
+
+
+
+
 
 export const Monaco = new MonacoLoader()

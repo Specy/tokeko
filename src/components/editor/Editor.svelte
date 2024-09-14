@@ -1,21 +1,22 @@
 <script lang="ts">
     import {createEventDispatcher, onDestroy, onMount} from 'svelte';
     import type monaco from 'monaco-editor';
-    import {Monaco} from '$lib/Monaco';
     import type {MonacoType} from '$lib/Monaco';
+    import {Monaco} from '$lib/Monaco';
     import {generateTheme} from '$lib/theme/editorTheme';
+    import {getRuntimeDeltaDecorations} from "$lib/dotlr/RuntimeDotlr";
 
     export let disabled = false;
     export let code: string;
     export let highlightedLine: number;
     export let hasError = false;
-    export let language: 'dotlr' | 'plain';
+    export let language: 'dotlr' | 'dotlr-result';
     export let style = '';
     export let editor: monaco.editor.IStandaloneCodeEditor | null = null;
     export let config: monaco.editor.IStandaloneEditorConstructionOptions = {};
+    export let runtimeGrammar: string = undefined;
     let mockEditor: HTMLDivElement | null;
     let monacoInstance: MonacoType | null;
-    let decorations = [];
     const toDispose = [];
     const dispatcher = createEventDispatcher<{
         change: string;
@@ -63,17 +64,18 @@
         })
         toDispose.push(() => disposer.dispose());
         toDispose.push(Monaco.registerRuntimePushers(language, model))
-		let id = setTimeout(() => {
-			//trigger to run the diagnostics on build
-			editor.setValue(code)
-		}, 1000)
-		toDispose.push(() => clearTimeout(id));
+        let id = setTimeout(() => {
+            //trigger to run the diagnostics on build
+            editor.setValue(code)
+        }, 1000)
+        toDispose.push(() => clearTimeout(id));
     });
     $: {
         if (editor && code !== editor.getValue()) {
             editor.setValue(code);
         }
     }
+
     onDestroy(() => {
         toDispose.forEach((d) => {
             if (typeof d === 'function') return d();
@@ -81,9 +83,11 @@
         });
         editor?.dispose();
     });
+
+    $: decorations = editor?.createDecorationsCollection() ?? {set: () => {}};
     $: {
         if (editor) {
-            decorations = editor.deltaDecorations(decorations, [
+            decorations.set([
                 ...(highlightedLine >= 0
                     ? [
                         {
@@ -95,7 +99,8 @@
                             }
                         }
                     ]
-                    : [])
+                    : []),
+                ...(runtimeGrammar ? getRuntimeDeltaDecorations(editor.getModel(), runtimeGrammar, code) : [])
             ]);
         }
     }
@@ -119,6 +124,18 @@
   :global(.selected-line) {
     background-color: var(--accent);
     color: var(--accent-text);
+  }
+
+  :global(.runtime-token-Constant) {
+    background: rgba(0, 00, 255, 0.1);
+    border-radius: 2px;
+    border: solid 1px rgba(0, 00, 255, 0.8);
+  }
+
+  :global(.runtime-token-Regex) {
+    background: rgba(00, 150, 00, 0.1);
+    border-radius: 2px;
+    border: solid 1px rgba(00, 150, 00, 0.8);
   }
 
   :global(.overflow-guard, .monaco-editor) {

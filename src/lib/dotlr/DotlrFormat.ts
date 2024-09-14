@@ -1,16 +1,24 @@
+import type {Tree} from "@specy/dotlr/types";
 
-import type {ParserError, ParsingError, GrammarError, Tree} from '@specy/dotlr/dist/types'
 
-export function formatTree(tree: Tree, depth: number = 0, last: boolean = false): string {
-    const indent = ' '.repeat(depth * 2)
+export function formatTree(tree: Tree, indent: string = '', isLast: boolean = true): string {
+    const linePrefix = isLast ? '└─ ' : '├─ ';
+    let result = '';
+
     if (tree.type === 'Terminal') {
-        if(tree.value.token.type === 'Eof') return ""
-        const mid = last ? '└─' : '├─'
-        return `${indent} ${mid} ${tree.value.token.value}`
+        const { token, slice } = tree.value;
+        if (token.type !== 'Eof') {
+            result += `${indent}${linePrefix}${token.value} [${slice}]\n`;
+        }
+    } else {
+        const { symbol, pattern } = tree.value;
+        result += `${indent}${linePrefix}${symbol}\n`;
+
+        const newIndent = indent + (isLast ? '   ' : '│  ');
+        pattern.forEach((child, index) => {
+            result += formatTree(child, newIndent, index === pattern.length - 1);
+        });
     }
-    if (tree.type === 'NonTerminal') {
-        const mid = last || tree.value.pattern.length === 1 ? '└─' : '├─'
-        return `${indent} ${mid} ${tree.value.symbol}\n${tree.value.pattern.map((child, i) => formatTree(child, depth + 1, i === tree.value.pattern.length - 1)).join('\n')}`
-    }
-    return ''
+
+    return result;
 }
