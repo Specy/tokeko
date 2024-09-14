@@ -38,7 +38,7 @@
 </script>
 
 <div class="wrapper">
-    <Column gap="0.5rem">
+    <Column gap="0.5rem" style="min-height: 70%">
         <Editor
                 style="flex: 1;"
                 language="dotlr"

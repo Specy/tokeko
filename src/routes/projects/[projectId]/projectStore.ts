@@ -35,6 +35,7 @@ export function createCompilerStore(project: Project) {
                 }
                 return s
             }
+            const grammarClone = grammarParser.val.clone()
             const parser = LALRParser.fromGrammar(grammarParser.val)
             if (!parser.ok) {
                 s.result = {
@@ -53,7 +54,7 @@ export function createCompilerStore(project: Project) {
             }
             s.result = {
                 ok: true,
-                grammar: grammarParser.val,
+                grammar: grammarClone,
                 parser: parser.val,
                 result: result.val
             }

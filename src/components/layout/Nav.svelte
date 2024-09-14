@@ -58,7 +58,7 @@
 </div>
 <div class="mobile-menu" class:mobile-menu-open={open}>
     <a href="/projects" title="Go to your projects"> Projects </a>
-    <a href="/docs/tokeko" title="Go to the docs" class="link-icon"> <Book /> Docs </a>
+    <a href="/docs/dotlr" title="Go to the docs" class="link-icon"> <Book /> Docs </a>
     <a
             href="https://specy.app/donate"
 
