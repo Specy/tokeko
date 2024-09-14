@@ -59,6 +59,10 @@
 {#if $store.result?.type === 'parse'}
 {formatTree($store.result.result)}
 {/if}
+{#if $store.result?.type === 'error'}
+{JSON.stringify($store.result.error, null, 2)}
+{/if}
+
                 </pre>
         </div>
         <Row justify="between">
