@@ -84,9 +84,9 @@
         editor?.dispose();
     });
 
-    $: decorations = editor?.createDecorationsCollection() ?? {set: () => {}};
+    $: decorations = editor?.createDecorationsCollection()
     $: {
-        if (editor) {
+        if (editor && decorations) {
             decorations.set([
                 ...(highlightedLine >= 0
                     ? [

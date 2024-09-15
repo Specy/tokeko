@@ -8,6 +8,8 @@
     import {createCompilerStore} from '$src/routes/projects/[projectId]/projectStore';
     import Column from "$cmp/layout/Column.svelte";
     import {formatTree} from "$lib/dotlr/DotlrFormat";
+    import ExpandableContainer from "$cmp/layout/ExpandableContainer.svelte";
+    import FirstTableRenderer from "$cmp/dotlr/FirstTableRenderer.svelte";
 
     export let project: Project;
     let store = createCompilerStore(project);
@@ -18,15 +20,23 @@
         };
     });
 
-    function run() {
-        store?.run();
-        return //TODO
+    function scrollToResult(id: string) {
         setTimeout(() => {
-            const element = document.getElementById('jump-to');
+            const element = document.getElementById(id);
             if (element) {
                 element.scrollIntoView({behavior: 'smooth'});
             }
         }, 100);
+    }
+
+    function parseString() {
+        store?.parseString();
+        scrollToResult('result')
+    }
+
+    function parseGrammar() {
+        store?.parseGrammar()
+        scrollToResult('jump-to')
     }
 
     function reset() {
@@ -38,6 +48,9 @@
     $: $store.content = project.content;
 </script>
 
+<div id="result" style="position: absolute; top: 0; right: 0">
+
+</div>
 <div class="wrapper">
     <Column gap="0.5rem" style="min-height: 70%">
         <Editor
@@ -60,10 +73,9 @@
 {#if $store.result?.type === 'parse'}
 {formatTree($store.result.result)}
 {/if}
-{#if $store.result?.type === 'error'}
+                    {#if $store.result?.type === 'error'}
 {$store.result.error}
 {/if}
-
                 </pre>
         </div>
         <Row justify="between">
@@ -71,17 +83,32 @@
                 {#if $store.result}
                     <Button on:click={reset} border="secondary" color="primary">Reset</Button>
                 {/if}
-                <Button on:click={run} border="secondary" color="primary">Run</Button>
+                <Button on:click={parseGrammar} border="secondary" color="primary"
+                        disabled={project.grammar.trim() === ""}>Parse Grammar
+                </Button>
+
             </Row>
+            <Button on:click={parseString} border="secondary" color="primary"
+                    disabled={project.content.trim() === ""}>Parse String
+            </Button>
         </Row>
 
     </div>
 </div>
-{#if $store.result}
+{#if $store.result?.type !== 'error' && $store.result}
     <Column padding="0.5rem" gap="0.5rem">
         <h1 id="jump-to">
             Result
         </h1>
+        {#if $store.result?.parser}
+            <ExpandableContainer expanded={true}>
+                <h2 slot="title">First & Follow</h2>
+                <FirstTableRenderer
+                        first={$store.result.parser.getFirstTable()}
+                        follow={$store.result.parser.getFollowTable()}
+                />
+            </ExpandableContainer>
+        {/if}
     </Column>
 {/if}
 

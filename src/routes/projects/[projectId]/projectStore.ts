@@ -30,8 +30,9 @@ export function createCompilerStore(project: Project) {
         content: project.content,
     })
 
-    function makeParser(grammar: string) {
+    function parseGrammar(_grammar?: string) {
         update(s => {
+            const grammar = _grammar ?? get({subscribe}).grammar
             const grammarParser = Grammar.fromGrammar(grammar)
             if (!grammarParser.ok) {
                 s.result = {
@@ -60,8 +61,8 @@ export function createCompilerStore(project: Project) {
     }
 
 
-    function run(override?: { grammar?: string, content?: string }) {
-        makeParser(override?.grammar || get({subscribe}).grammar)
+    function parseString(override?: { grammar?: string, content?: string }) {
+        parseGrammar(override?.grammar || get({subscribe}).grammar)
         update(s => {
             const content = override?.content || s.content
             if (s.result.type === 'error') {
@@ -98,7 +99,8 @@ export function createCompilerStore(project: Project) {
 
     return {
         subscribe,
-        run,
+        parseString,
+        parseGrammar,
         reset,
         set: (data: ProjectStoreData) => {
             set(data)

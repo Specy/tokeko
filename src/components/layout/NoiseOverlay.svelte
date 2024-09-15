@@ -7,7 +7,7 @@
 	style="
 		background-image: url('/images/noise2.png');
 		opacity: {opacity}
-        "
+    "
 />
 
 <style>
