@@ -1,6 +1,14 @@
 <script lang="ts">
     import FaChevronDown from "~icons/fa/chevron-down.svelte";
+    import {onMount} from "svelte";
+
     export let expanded: boolean = false
+    export let defaultExpanded: boolean = undefined
+
+    onMount(() => {
+        if (defaultExpanded !== undefined) expanded = defaultExpanded
+    })
+
 </script>
 
 
@@ -15,7 +23,7 @@
         <slot name="title"/>
     </button>
     <div class="expandable-container-content">
-        <slot />
+        <slot/>
     </div>
 </div>
 
@@ -32,7 +40,7 @@
     .expandable-container {
         display: flex;
         flex-direction: column;
-        padding: 0.8rem;
+        padding: 0.5rem;
         background-color: var(--primary);
         color: var(--primary-text);
         border-radius: 0.4rem;
@@ -40,6 +48,7 @@
     }
 
     .chevron-icon {
+        margin-left: 0.3rem;
         transition: all 0.2s;
         transform: rotate(-90deg);
     }

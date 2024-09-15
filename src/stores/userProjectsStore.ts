@@ -11,6 +11,16 @@ export type Project = {
     updatedAt: number
     grammar: string
     content: string
+    keepOpen: {
+        grammar: boolean,
+        firstAndFollow: boolean,
+        automaton: boolean,
+        parsingTable: boolean,
+        parseTrace: boolean
+    }
+    options: {
+        columnFirstAndFollow: boolean
+    }
 }
 
 export function validateProject(project: Project): Project {
@@ -26,7 +36,17 @@ export function createProject(): Project {
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime(),
         content: ``,
-        grammar: ''
+        grammar: '',
+        keepOpen: {
+            grammar: false,
+            firstAndFollow: false,
+            automaton: false,
+            parsingTable: false,
+            parseTrace: false
+        },
+        options: {
+            columnFirstAndFollow: true
+        }
     }
 }
 

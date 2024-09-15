@@ -127,15 +127,16 @@
   }
 
   :global(.runtime-token-Constant) {
-    background: rgba(0, 00, 255, 0.1);
+
+    background: rgba(100, 74, 72, 0.2);
     border-radius: 2px;
-    border: solid 1px rgba(0, 00, 255, 0.8);
+    border: solid 1px rgba(100, 74, 72, 1);
   }
 
   :global(.runtime-token-Regex) {
-    background: rgba(00, 150, 00, 0.1);
+    background: rgb(78, 143, 121, 0.1);
     border-radius: 2px;
-    border: solid 1px rgba(00, 150, 00, 0.8);
+    border: solid 1px rgb(78, 143, 121, 0.8);
   }
 
   :global(.overflow-guard, .monaco-editor) {

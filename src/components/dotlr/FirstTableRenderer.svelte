@@ -1,19 +1,15 @@
 <script lang="ts">
     import type {FirstTable, FollowTable, Token} from "@specy/dotlr/types";
+    import {stringifyToken} from "$lib/dotlr/dotlrUtils";
 
     export let first: FirstTable
     export let follow: FollowTable
     export let column = true
 
-    function formatItem(item: Token) {
-        if (item.type === 'Eof') return "$"
-        if (item.type === 'Regex') return `%${item.value}`
-        if (item.type === 'Constant') return item.value
-        return ""
-    }
+
 
     function sortItems(a: Token, b: Token) {
-        return formatItem(a).localeCompare(formatItem(b))
+        return stringifyToken(a).localeCompare(stringifyToken(b))
     }
 
     $: keys = [...first.keys()]
@@ -28,22 +24,22 @@
             style:--cols={keys.length + 1}
     >
         <div class="header-cell">Symbol</div>
-        <div class="header-cell">FIRST</div>
-        <div class="header-cell">FOLLOW</div>
+        <div class="header-cell">First</div>
+        <div class="header-cell">Follow</div>
 
         {#each keys as key, i}
             <div class="header-cell">{key}</div>
             <div class="body-cell">
                 {#each firstItems[i] as item}
                     <div class="item">
-                        {formatItem(item)}
+                        {stringifyToken(item)}
                     </div>
                 {/each}
             </div>
             <div class="body-cell">
                 {#each followItems[i] as item}
                     <div class="item">
-                        {formatItem(item)}
+                        {stringifyToken(item)}
                     </div>
                 {/each}
             </div>
@@ -56,26 +52,26 @@
             style:--elements={keys.length * 3}
             style:--cols={keys.length + 1}
     >
-        <div class="header-cell">SYMBOL</div>
+        <div class="header-cell">Symbol</div>
         {#each keys as key}
             <div class="header-cell">{key}</div>
         {/each}
-        <div class="header-cell">FIRST</div>
+        <div class="header-cell">First</div>
         {#each firstItems as items}
             <div class="body-cell">
                 {#each items as item}
                     <div class="item">
-                        {formatItem(item)}
+                        {stringifyToken(item)}
                     </div>
                 {/each}
             </div>
         {/each}
-        <div class="header-cell">FOLLOW</div>
+        <div class="header-cell">Follow</div>
         {#each followItems as items}
             <div class="body-cell">
                 {#each items as item}
                     <div class="item">
-                        {formatItem(item)}
+                        {stringifyToken(item)}
                     </div>
                 {/each}
             </div>

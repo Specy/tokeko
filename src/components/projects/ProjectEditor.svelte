@@ -10,11 +10,25 @@
     import {formatTree} from "$lib/dotlr/DotlrFormat";
     import ExpandableContainer from "$cmp/layout/ExpandableContainer.svelte";
     import FirstTableRenderer from "$cmp/dotlr/FirstTableRenderer.svelte";
+    import AutomatonTableRenderer from "$cmp/dotlr/AutomatonTableRenderer.svelte";
+    import ActionTableRenderer from "$cmp/dotlr/ActionTableRenderer.svelte";
+    import GrammarRenderer from "$cmp/dotlr/GrammarRenderer.svelte";
+    import KeepOpenButton from "$cmp/projects/KeepOpenButton.svelte";
+    import TraceTableRenderer from "$cmp/dotlr/TraceTableRenderer.svelte";
 
     export let project: Project;
     let store = createCompilerStore(project);
+
+    let open: Record<keyof Project['keepOpen'], boolean> = {
+        grammar: false,
+        firstAndFollow: false,
+        automaton: false,
+        parsingTable: false,
+        parseTrace: false
+    }
     onMount(() => {
         Monaco.load();
+        open = {...project.keepOpen}
         return () => {
             Monaco.dispose();
         };
@@ -36,6 +50,12 @@
 
     function parseGrammar() {
         store?.parseGrammar()
+        for (const key in open) {
+            if (open[key]) {
+                scrollToResult(key)
+                return
+            }
+        }
         scrollToResult('jump-to')
     }
 
@@ -101,12 +121,81 @@
             Result
         </h1>
         {#if $store.result?.parser}
-            <ExpandableContainer expanded={true}>
-                <h2 slot="title">First & Follow</h2>
-                <FirstTableRenderer
-                        first={$store.result.parser.getFirstTable()}
-                        follow={$store.result.parser.getFollowTable()}
-                />
+            <ExpandableContainer defaultExpanded={project.keepOpen.grammar} bind:expanded={open.grammar}>
+                <Row slot="title" justify="between" align="center" wrap flex1>
+                    <h2 id="grammar">Grammar</h2>
+                    <KeepOpenButton bind:project openKey="grammar"/>
+                </Row>
+                <Row justify="center">
+                    <GrammarRenderer grammar={$store.result.grammar}/>
+                </Row>
+            </ExpandableContainer>
+            <ExpandableContainer defaultExpanded={project.keepOpen.firstAndFollow} bind:expanded={open.firstAndFollow}>
+                <Row slot="title" justify="between" align="center" wrap flex1>
+                    <h2 id="firstAndFollow">First & Follow</h2>
+                    <Row gap="0.5rem">
+                        <Button
+                                border="secondary"
+                                style="min-width: 7.5rem"
+                                on:click={(e) => {
+                                e.stopImmediatePropagation()
+                                project.options.columnFirstAndFollow = !project.options.columnFirstAndFollow
+                            }}
+                        >
+                            {project.options.columnFirstAndFollow ? "View row" : "View column"}
+                        </Button>
+                        <KeepOpenButton bind:project openKey="firstAndFollow"/>
+                    </Row>
+
+                </Row>
+                <Row justify="center">
+                    <FirstTableRenderer
+                            column={project.options.columnFirstAndFollow}
+                            first={$store.result.parser.getFirstTable()}
+                            follow={$store.result.parser.getFollowTable()}
+                    />
+                </Row>
+            </ExpandableContainer>
+            <ExpandableContainer defaultExpanded={project.keepOpen.automaton} bind:expanded={open.automaton}>
+                <Row slot="title" justify="between" align="center" wrap flex1>
+                    <h2 id="automaton">Automaton</h2>
+                    <KeepOpenButton bind:project openKey="automaton"/>
+                </Row>
+                <Row justify="center">
+                    <AutomatonTableRenderer
+                            table={$store.result.parser.getAutomaton()}
+                            terminals={$store.result.grammar.getConstantTokens()}
+                            nonTerminals={$store.result.grammar.getSymbols()}
+                    />
+                </Row>
+
+            </ExpandableContainer>
+            <ExpandableContainer defaultExpanded={project.keepOpen.parsingTable} bind:expanded={open.parsingTable}>
+                <Row slot="title" justify="between" align="center" wrap flex1>
+                    <h2 id="parsingTable">Parsing table</h2>
+                    <KeepOpenButton bind:project openKey="parsingTable"/>
+                </Row>
+                <Row justify="center">
+                    <ActionTableRenderer
+                            table={$store.result.parser.getParseTables()}
+                            terminals={$store.result.grammar.getConstantTokens()}
+                            nonTerminals={$store.result.grammar.getSymbols()}
+                    />
+                </Row>
+            </ExpandableContainer>
+        {/if}
+        {#if $store.result.type === 'parse'}
+            <ExpandableContainer defaultExpanded={project.keepOpen.parseTrace} bind:expanded={open.parseTrace}>
+                <Row slot="title" justify="between" align="center" wrap flex1>
+                    <h2 id="parsingTable">Parse trace</h2>
+                    <KeepOpenButton bind:project openKey="parseTrace"/>
+                </Row>
+                <Row justify="center">
+                    <TraceTableRenderer
+                            grammar={$store.result.grammar}
+                            trace={$store.result.trace}
+                    />
+                </Row>
             </ExpandableContainer>
         {/if}
     </Column>
