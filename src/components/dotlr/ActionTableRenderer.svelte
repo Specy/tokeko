@@ -49,7 +49,7 @@
         <div class="header-cell state">{i}</div>
         {#each terminals as t}
             <div class="body-cell">
-                {#each state.action.get(t) ?? [] as action}
+                {#each state.action.get(`'${t}'`) ?? [] as action}
                     <div class="item-centered">
                         {stringifyAction(action)}
                     </div>

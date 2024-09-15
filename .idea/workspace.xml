@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="Add parser choice">
-      <change afterPath="$PROJECT_DIR$/src/components/dotlr/ParserPicker.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/ActionTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/ActionTableRenderer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonTableRenderer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/FirstTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/FirstTableRenderer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/GrammarRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/GrammarRenderer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/TraceTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/TraceTableRenderer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/dotlr/dotlrUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dotlr/dotlrUtils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" afterDir="false" />
-    </list>
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="Add parser choice" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,7 +71,7 @@
       <workItem from="1726332337444" duration="1403000" />
       <workItem from="1726333778813" duration="7592000" />
       <workItem from="1726391165574" duration="1348000" />
-      <workItem from="1726392539271" duration="23659000" />
+      <workItem from="1726392539271" duration="23960000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -152,7 +137,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726421279272</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add parser choice">
+      <option name="closed" value="true" />
+      <created>1726424887709</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1726424887709</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
