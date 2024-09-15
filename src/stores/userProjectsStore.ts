@@ -1,5 +1,6 @@
 import {db} from "$src/lib/db"
 import {get, writable} from "svelte/store"
+import type {ParserType} from "$src/routes/projects/[projectId]/projectStore";
 
 
 export type Project = {
@@ -11,6 +12,7 @@ export type Project = {
     updatedAt: number
     grammar: string
     content: string
+    parserType: ParserType
     keepOpen: {
         grammar: boolean,
         firstAndFollow: boolean,
@@ -20,6 +22,8 @@ export type Project = {
     }
     options: {
         columnFirstAndFollow: boolean
+        noAposInParseTrace: boolean,
+        noAposInAutomaton:boolean
     }
 }
 
@@ -37,6 +41,7 @@ export function createProject(): Project {
         updatedAt: new Date().getTime(),
         content: ``,
         grammar: '',
+        parserType: 'LALR',
         keepOpen: {
             grammar: false,
             firstAndFollow: false,
@@ -45,7 +50,9 @@ export function createProject(): Project {
             parseTrace: false
         },
         options: {
-            columnFirstAndFollow: true
+            columnFirstAndFollow: false,
+            noAposInParseTrace: true,
+            noAposInAutomaton: true,
         }
     }
 }

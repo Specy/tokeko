@@ -4,22 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="add first/follow ui">
-      <change afterPath="$PROJECT_DIR$/src/components/dotlr/GrammarRenderer.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/projects/KeepOpenButton.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/dotlr/dotlrUtils.ts" afterDir="false" />
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="Add parser choice">
+      <change afterPath="$PROJECT_DIR$/src/components/dotlr/ParserPicker.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/dotlr/ActionTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/ActionTableRenderer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonTableRenderer.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/dotlr/FirstTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/FirstTableRenderer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/GotoTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonTableRenderer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dotlr/GrammarRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/GrammarRenderer.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/dotlr/TraceTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/TraceTableRenderer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/editor/Editor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/editor/Editor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/ExpandableContainer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/ExpandableContainer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/Row.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Row.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/dotlr/dotlrUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dotlr/dotlrUtils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" afterDir="false" />
     </list>
@@ -89,7 +86,7 @@
       <workItem from="1726332337444" duration="1403000" />
       <workItem from="1726333778813" duration="7592000" />
       <workItem from="1726391165574" duration="1348000" />
-      <workItem from="1726392539271" duration="19846000" />
+      <workItem from="1726392539271" duration="23659000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -139,7 +136,23 @@
       <option name="project" value="LOCAL" />
       <updated>1726405394538</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added action/automaton/trace UI">
+      <option name="closed" value="true" />
+      <created>1726421165176</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1726421165176</updated>
+    </task>
+    <task id="LOCAL-00008" summary="update readme">
+      <option name="closed" value="true" />
+      <created>1726421279272</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1726421279272</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,6 +163,9 @@
     <MESSAGE value="somewhat simple start" />
     <MESSAGE value="Add tokenization and better tree pring" />
     <MESSAGE value="add first/follow ui" />
-    <option name="LAST_COMMIT_MESSAGE" value="add first/follow ui" />
+    <MESSAGE value="Added action/automaton/trace UI" />
+    <MESSAGE value="update readme" />
+    <MESSAGE value="Add parser choice" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add parser choice" />
   </component>
 </project>

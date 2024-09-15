@@ -6,7 +6,7 @@
     export let nonTerminals: string[]
     export let terminals: string[]
     export let large = true
-
+    export let noApos = false
     let selectedState = -1
     $: normalizedItems = [...nonTerminals, ...terminals]
 
@@ -78,14 +78,14 @@
             <div class="body-cell-col">
                 {#each state.items as item}
                     <div class="item" style="align-items: center">
-                        {stringifyItem(item)}
+                        {stringifyItem(item, noApos)}
                     </div>
                 {/each}
             </div>
             <div class="body-cell-col">
                 {#each state.items as item}
                     <div class="item">
-                        {stringifyLookahead(item.lookahead)}
+                        {stringifyLookahead(item.lookahead, true)}
                     </div>
                 {/each}
             </div>
@@ -116,7 +116,7 @@
         gap: 0.1rem;
         background: var(--background-5);
         border-radius: 0.5rem;
-        overflow: hidden;
+        overflow-x: auto;
     }
 
 
@@ -182,4 +182,7 @@
         background-color: var(--secondary-5);
     }
 
+      .body-cell, .item, .header-cell {
+         text-wrap: nowrap;
+    }
 </style>

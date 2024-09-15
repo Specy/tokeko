@@ -32,14 +32,14 @@
             <div class="body-cell">
                 {#each firstItems[i] as item}
                     <div class="item">
-                        {stringifyToken(item)}
+                        {stringifyToken(item, true)}
                     </div>
                 {/each}
             </div>
             <div class="body-cell">
                 {#each followItems[i] as item}
                     <div class="item">
-                        {stringifyToken(item)}
+                        {stringifyToken(item, true)}
                     </div>
                 {/each}
             </div>
@@ -61,7 +61,7 @@
             <div class="body-cell">
                 {#each items as item}
                     <div class="item">
-                        {stringifyToken(item)}
+                        {stringifyToken(item, true)}
                     </div>
                 {/each}
             </div>
@@ -71,7 +71,7 @@
             <div class="body-cell">
                 {#each items as item}
                     <div class="item">
-                        {stringifyToken(item)}
+                        {stringifyToken(item, true)}
                     </div>
                 {/each}
             </div>
@@ -89,7 +89,7 @@
         gap: 0.1rem;
         background: var(--background-5);
         border-radius: 0.5rem;
-        overflow: hidden;
+        overflow-x: auto;
     }
 
     .table-col {
@@ -101,7 +101,8 @@
         justify-content: center;
         flex: 1;
         gap: 0.1rem;
-        padding: 0.2rem 1rem;
+        min-width: 4ch;
+        padding: 0.2rem 0;
         background: var(--secondary);
     }
 
@@ -116,5 +117,8 @@
         background: var(--secondary-10);
         gap: 0.1rem;
         display: flex;
+    }
+      .body-cell, .item, .header-cell {
+         text-wrap: nowrap;
     }
 </style>

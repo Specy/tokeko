@@ -3,26 +3,39 @@ import {get, writable} from "svelte/store";
 import {Grammar, LALRParser, LR1Parser} from '@specy/dotlr'
 import type {Trace, Tree} from '@specy/dotlr/types'
 
+
+export const PARSER_TYPES = ['LR1', 'LALR'] as const
+export type ParserType = typeof PARSER_TYPES[number]
+type Parser = LR1Parser | LALRParser
 type ProjectStoreData = {
     grammar: string,
     content: string,
+    parserType: ParserType
     result?: {
         type: 'prepare',
         grammar: Grammar,
-        parser: LR1Parser,
+        parser: Parser ,
     } | {
         type: 'parse',
         grammar: Grammar,
-        parser: LR1Parser,
+        parser: Parser,
         result: Tree
         trace: Trace
     } | {
         type: 'error',
         error: string
         grammar?: Grammar,
-        parser?: LR1Parser,
+        parser?: Parser,
         result?: Tree
         trace?: Trace
+    }
+}
+
+function createParser(type: ParserType, grammar: Grammar){
+    if(type === "LR1"){
+        return LR1Parser.fromGrammar(grammar)
+    }else if(type === 'LALR'){
+        return LALRParser.fromGrammar(grammar)
     }
 }
 
@@ -30,12 +43,14 @@ export function createCompilerStore(project: Project) {
     const {subscribe, update, set} = writable<ProjectStoreData>({
         grammar: project.grammar,
         content: project.content,
+        parserType: "LR1"
     })
 
     function parseGrammar(_grammar?: string) {
         update(s => {
             const grammar = _grammar ?? get({subscribe}).grammar
             const grammarParser = Grammar.fromGrammar(grammar)
+            const type = get({subscribe}).parserType
             if (!grammarParser.ok) {
                 s.result = {
                     type: 'error',
@@ -44,7 +59,7 @@ export function createCompilerStore(project: Project) {
                 return s
             }
             const grammarClone = grammarParser.val.clone()
-            const parser = LALRParser.fromGrammar(grammarParser.val)
+            const parser = createParser(type, grammarParser.val)
             if (!parser.ok) {
                 s.result = {
                     type: 'error',
@@ -100,11 +115,13 @@ export function createCompilerStore(project: Project) {
 
     }
 
+
     return {
         subscribe,
         parseString,
         parseGrammar,
         reset,
+
         set: (data: ProjectStoreData) => {
             set(data)
         }

@@ -5,7 +5,8 @@ import {
     stringifyLookahead,
     stringifyRule,
     stringifyToken,
-    stringifyTreeStack
+    stringifyTreeStack,
+    stringifyActionVerbose,
 } from "@specy/dotlr/utils";
 
 
@@ -16,5 +17,6 @@ export {
     stringifyLookahead,
     stringifyRule,
     stringifyToken,
+    stringifyActionVerbose,
     stringifyTreeStack
 }

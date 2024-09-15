@@ -36,7 +36,7 @@
         gap: 0.1rem;
         background: var(--background-5);
         border-radius: 0.5rem;
-        overflow: hidden;
+        overflow-x: auto;
     }
 
 
@@ -66,6 +66,8 @@
         color: var(--secondary-text);
     }
 
-
+  .body-cell, .item, .header-cell {
+         text-wrap: nowrap;
+    }
 
 </style>

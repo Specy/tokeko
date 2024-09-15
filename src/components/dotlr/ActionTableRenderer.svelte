@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type {Action, ParsingTables} from "@specy/dotlr/types";
-    import {stringifyToken} from "$lib/dotlr/dotlrUtils";
+    import type {ParsingTables} from "@specy/dotlr/types";
+    import {stringifyAction, stringifyToken} from "$lib/dotlr/dotlrUtils";
 
     export let table: ParsingTables
 
@@ -20,12 +20,6 @@
 
     }
 
-    function stringifyAction(action: Action) {
-        if (action.type === 'Accept') return `a${action.value.rule_index}`
-        if (action.type === 'Reduce') return `r${action.value.rule_index}`
-        if (action.type === 'Shift') return `s${action.value.next_state}`
-    }
-
     $: states = zipTable(table)
 </script>
 <div
@@ -34,7 +28,8 @@
 >
     <div class="header-cell"
          style="grid-row: span 2; display: flex; align-items: center;"
-    >State</div>
+    >State
+    </div>
 
     <div class="header-cell" style="grid-column: span {terminals.length + 1};">
         Action
@@ -91,17 +86,17 @@
 <style>
     .table {
         display: grid;
+        overflow-x: auto;
         width: fit-content;
         grid-template-columns: repeat(var(--cols), minmax(min-content, max-content));
         border: var(--background-5) solid 0.1rem;
         gap: 0.1rem;
         background: var(--background-5);
         border-radius: 0.5rem;
-        overflow: hidden;
     }
 
 
-    .header-cell{
+    .header-cell {
         text-align: center;
         padding: 0.2rem 2rem;
         font-weight: bold;
@@ -116,7 +111,6 @@
         gap: 0.1rem;
         display: flex;
     }
-
 
 
     .item, .item-centered {
@@ -142,5 +136,8 @@
         border: solid 0.2rem transparent;
     }
 
+    .body-cell,.header-cell {
+        text-wrap: nowrap;
+    }
 
 </style>

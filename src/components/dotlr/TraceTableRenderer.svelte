@@ -5,7 +5,7 @@
 
     export let trace: Trace
     export let grammar: Grammar
-
+    export let noApos = false
 
     $: rules = grammar.getProductions()
 </script>
@@ -30,12 +30,12 @@
         </div>
         <div class="body-cell">
             <div class="item">
-                {stringifyTreeStack(step.tree_stack).join(" ")}
+                {stringifyTreeStack(step.tree_stack, noApos).join(" ")}
             </div>
         </div>
         <div class="body-cell">
             <div class="item">
-                {step.remaining_tokens.map(stringifyToken).join(' ')}
+                {step.remaining_tokens.map(i => stringifyToken(i, true)).join(' ')}
             </div>
         </div>
         <div class="body-cell" style="gap: 0">
@@ -53,14 +53,14 @@
                     {step.action_taken.value.rule_index + 1}
                 </div>
                 <div class="item">
-                    {stringifyRule(rules[step.action_taken.value.rule_index])}
+                    {stringifyRule(rules[step.action_taken.value.rule_index], noApos)}
                 </div>
             {:else if step.action_taken.type === "Accept"}
                 <div class="item separated">
                     {step.action_taken.value.rule_index + 1}
                 </div>
                 <div class="item">
-                    {stringifyRule(rules[step.action_taken.value.rule_index])}
+                    {stringifyRule(rules[step.action_taken.value.rule_index], noApos)}
                 </div>
             {/if}
         </div>
@@ -73,7 +73,7 @@
         width: 5.5rem;
     }
 
-    .table, .table-col {
+    .table{
         display: grid;
         width: fit-content;
         grid-template-columns: repeat(var(--cols), minmax(min-content, max-content));
@@ -81,12 +81,9 @@
         gap: 0.1rem;
         background: var(--background-5);
         border-radius: 0.5rem;
-        overflow: hidden;
+        overflow-x: auto;
     }
 
-    .table-col {
-        grid-template-columns: repeat(3, minmax(min-content, max-content));
-    }
 
     .item {
         display: flex;
@@ -121,4 +118,7 @@
         border-left: solid 0.1rem var(--secondary-10);
     }
 
+    .body-cell, .item, .header-cell {
+         text-wrap: nowrap;
+    }
 </style>

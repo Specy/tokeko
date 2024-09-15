@@ -15,6 +15,7 @@
     import GrammarRenderer from "$cmp/dotlr/GrammarRenderer.svelte";
     import KeepOpenButton from "$cmp/projects/KeepOpenButton.svelte";
     import TraceTableRenderer from "$cmp/dotlr/TraceTableRenderer.svelte";
+    import ParserPicker from "$cmp/dotlr/ParserPicker.svelte";
 
     export let project: Project;
     let store = createCompilerStore(project);
@@ -45,7 +46,7 @@
 
     function parseString() {
         store?.parseString();
-        scrollToResult('result')
+        //scrollToResult('result')
     }
 
     function parseGrammar() {
@@ -66,6 +67,13 @@
 
     $: $store.grammar = project.grammar;
     $: $store.content = project.content;
+    $: {
+        if (project.parserType !== $store.parserType) {
+            $store.parserType = project.parserType
+            reset()
+        }
+
+    }
 </script>
 
 <div id="result" style="position: absolute; top: 0; right: 0">
@@ -98,15 +106,15 @@
 {/if}
                 </pre>
         </div>
-        <Row justify="between">
-            <Row gap="0.5rem">
+        <Row justify="between" gap="0.5rem" wrap>
+            <Row gap="0.5rem" wrap>
+                <ParserPicker bind:value={project.parserType}/>
                 {#if $store.result}
                     <Button on:click={reset} border="secondary" color="primary">Reset</Button>
                 {/if}
                 <Button on:click={parseGrammar} border="secondary" color="primary"
                         disabled={project.grammar.trim() === ""}>Parse Grammar
                 </Button>
-
             </Row>
             <Button on:click={parseString} border="secondary" color="primary"
                     disabled={project.content.trim() === ""}>Parse String
@@ -122,7 +130,7 @@
         </h1>
         {#if $store.result?.parser}
             <ExpandableContainer defaultExpanded={project.keepOpen.grammar} bind:expanded={open.grammar}>
-                <Row slot="title" justify="between" align="center" wrap flex1>
+                <Row slot="title" justify="between" align="center" wrap flex1 gap="0.5rem">
                     <h2 id="grammar">Grammar</h2>
                     <KeepOpenButton bind:project openKey="grammar"/>
                 </Row>
@@ -131,18 +139,18 @@
                 </Row>
             </ExpandableContainer>
             <ExpandableContainer defaultExpanded={project.keepOpen.firstAndFollow} bind:expanded={open.firstAndFollow}>
-                <Row slot="title" justify="between" align="center" wrap flex1>
+                <Row slot="title" justify="between" align="center" wrap flex1 gap="0.5rem">
                     <h2 id="firstAndFollow">First & Follow</h2>
                     <Row gap="0.5rem">
                         <Button
                                 border="secondary"
-                                style="min-width: 7.5rem"
+                                style="min-width: 9rem"
                                 on:click={(e) => {
                                 e.stopImmediatePropagation()
                                 project.options.columnFirstAndFollow = !project.options.columnFirstAndFollow
                             }}
                         >
-                            {project.options.columnFirstAndFollow ? "View row" : "View column"}
+                            {project.options.columnFirstAndFollow ? "View as row" : "View as column"}
                         </Button>
                         <KeepOpenButton bind:project openKey="firstAndFollow"/>
                     </Row>
@@ -157,12 +165,26 @@
                 </Row>
             </ExpandableContainer>
             <ExpandableContainer defaultExpanded={project.keepOpen.automaton} bind:expanded={open.automaton}>
-                <Row slot="title" justify="between" align="center" wrap flex1>
+                <Row slot="title" justify="between" align="center" wrap flex1 gap="0.5rem">
                     <h2 id="automaton">Automaton</h2>
-                    <KeepOpenButton bind:project openKey="automaton"/>
+                    <Row gap="0.5rem">
+                        <Button
+                                border="secondary"
+                                style="min-width: 9rem"
+                                on:click={e => {
+                                    e.stopImmediatePropagation()
+                                    project.options.noAposInAutomaton = !project.options.noAposInAutomaton
+                                }}
+                        >
+                            {project.options.noAposInAutomaton ? "Show apostrophe" : "Hide apostrophe"}
+                        </Button>
+                        <KeepOpenButton bind:project openKey="automaton"/>
+                    </Row>
+
                 </Row>
                 <Row justify="center">
                     <AutomatonTableRenderer
+                            noApos={project.options.noAposInAutomaton}
                             table={$store.result.parser.getAutomaton()}
                             terminals={$store.result.grammar.getConstantTokens()}
                             nonTerminals={$store.result.grammar.getSymbols()}
@@ -171,7 +193,7 @@
 
             </ExpandableContainer>
             <ExpandableContainer defaultExpanded={project.keepOpen.parsingTable} bind:expanded={open.parsingTable}>
-                <Row slot="title" justify="between" align="center" wrap flex1>
+                <Row slot="title" justify="between" align="center" wrap flex1 gap="0.5rem">
                     <h2 id="parsingTable">Parsing table</h2>
                     <KeepOpenButton bind:project openKey="parsingTable"/>
                 </Row>
@@ -186,14 +208,27 @@
         {/if}
         {#if $store.result.type === 'parse'}
             <ExpandableContainer defaultExpanded={project.keepOpen.parseTrace} bind:expanded={open.parseTrace}>
-                <Row slot="title" justify="between" align="center" wrap flex1>
+                <Row slot="title" justify="between" align="center" wrap flex1 gap="0.5rem">
                     <h2 id="parsingTable">Parse trace</h2>
-                    <KeepOpenButton bind:project openKey="parseTrace"/>
+                    <Row gap="0.5rem">
+                        <Button
+                                border="secondary"
+                                style="min-width: 9rem"
+                                on:click={e => {
+                                    e.stopImmediatePropagation()
+                                    project.options.noAposInParseTrace = !project.options.noAposInParseTrace
+                                }}
+                        >
+                            {project.options.noAposInParseTrace ? "Show apostrophe" : "Hide apostrophe"}
+                        </Button>
+                        <KeepOpenButton bind:project openKey="parseTrace"/>
+                    </Row>
                 </Row>
                 <Row justify="center">
                     <TraceTableRenderer
                             grammar={$store.result.grammar}
                             trace={$store.result.trace}
+                            noApos={project.options.noAposInParseTrace}
                     />
                 </Row>
             </ExpandableContainer>
