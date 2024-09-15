@@ -23,7 +23,8 @@ export type Project = {
     options: {
         columnFirstAndFollow: boolean
         noAposInParseTrace: boolean,
-        noAposInAutomaton:boolean
+        noAposInAutomaton:boolean,
+        showAutomatonAsGraph: boolean
     }
 }
 
@@ -53,6 +54,7 @@ export function createProject(): Project {
             columnFirstAndFollow: false,
             noAposInParseTrace: true,
             noAposInAutomaton: true,
+            showAutomatonAsGraph: false,
         }
     }
 }

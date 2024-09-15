@@ -16,6 +16,7 @@
     import KeepOpenButton from "$cmp/projects/KeepOpenButton.svelte";
     import TraceTableRenderer from "$cmp/dotlr/TraceTableRenderer.svelte";
     import ParserPicker from "$cmp/dotlr/ParserPicker.svelte";
+    import AutomatonGraphRenderer from "$cmp/dotlr/AutomatonGraphRenderer.svelte";
 
     export let project: Project;
     let store = createCompilerStore(project);
@@ -173,7 +174,21 @@
                                 style="min-width: 9rem"
                                 on:click={e => {
                                     e.stopImmediatePropagation()
+                                    project.options.showAutomatonAsGraph = !project.options.showAutomatonAsGraph
+                                        if(project.options.showAutomatonAsGraph){
+                                        scrollToResult('automaton')
+                                    }
+                                }}
+                        >
+                            {project.options.showAutomatonAsGraph ? "Show as table" : "Show as Graph"}
+                        </Button>
+                        <Button
+                                border="secondary"
+                                style="min-width: 9rem"
+                                on:click={e => {
+                                    e.stopImmediatePropagation()
                                     project.options.noAposInAutomaton = !project.options.noAposInAutomaton
+
                                 }}
                         >
                             {project.options.noAposInAutomaton ? "Show apostrophe" : "Hide apostrophe"}
@@ -182,14 +197,21 @@
                     </Row>
 
                 </Row>
-                <Row justify="center">
-                    <AutomatonTableRenderer
-                            noApos={project.options.noAposInAutomaton}
-                            table={$store.result.parser.getAutomaton()}
-                            terminals={$store.result.grammar.getConstantTokens()}
-                            nonTerminals={$store.result.grammar.getSymbols()}
-                    />
-                </Row>
+                <div style={project.options.showAutomatonAsGraph ? "display: none": "display: contents"}>
+
+                    <Row justify="center">
+                        <AutomatonTableRenderer
+                                noApos={project.options.noAposInAutomaton}
+                                table={$store.result.parser.getAutomaton()}
+                                terminals={$store.result.grammar.getConstantTokens()}
+                                nonTerminals={$store.result.grammar.getSymbols()}
+                        />
+                    </Row>
+                </div>
+                <div id="automaton-graph"
+                        style={project.options.showAutomatonAsGraph ? "display: contents": "display: none"}>
+                    <AutomatonGraphRenderer automaton={$store.result.parser.getAutomaton()}/>
+                </div>
 
             </ExpandableContainer>
             <ExpandableContainer defaultExpanded={project.keepOpen.parsingTable} bind:expanded={open.parsingTable}>

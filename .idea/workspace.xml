@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="Add parser choice" />
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fix">
+      <change afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraph.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraphRenderer.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/dotlr/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dotlr/ActionTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/ActionTableRenderer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +81,8 @@
       <workItem from="1726332337444" duration="1403000" />
       <workItem from="1726333778813" duration="7592000" />
       <workItem from="1726391165574" duration="1348000" />
-      <workItem from="1726392539271" duration="23960000" />
+      <workItem from="1726392539271" duration="24360000" />
+      <workItem from="1726431076216" duration="4829000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -145,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726424887709</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix">
+      <option name="closed" value="true" />
+      <created>1726425307340</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1726425307340</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,6 +178,7 @@
     <MESSAGE value="Added action/automaton/trace UI" />
     <MESSAGE value="update readme" />
     <MESSAGE value="Add parser choice" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add parser choice" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
 </project>

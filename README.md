@@ -12,7 +12,7 @@ A website to help learn parsers
 - [x] Tokenization (partial)
 - [x] GOTO/Action table
 - [x] Automaton table
-- [ ] Automaton graph
+- [x] Automaton graph
 - [x] parsing steps
 - [ ] custom syntax highlight (the grammar will be used to create random colors for the non temrinals, which will make it easier to understand the tree and the grmmar)
 - [ ] parse tree (AST) viewer 

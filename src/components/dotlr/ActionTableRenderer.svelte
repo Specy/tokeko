@@ -11,7 +11,6 @@
     function zipTable(table: ParsingTables) {
         const actionEntries = [...table.action_table.values()]
         const gotoEntries = [...table.goto_table.values()]
-        //TODO this can lead to clashes, remove it later
         return actionEntries.map(((a, i) => ({
                 action: new Map([...a.entries()].map(([k, v]) => [stringifyToken(k), v])),
                 goto: gotoEntries[i]
