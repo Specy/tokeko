@@ -123,7 +123,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    :global(body){
+    :global(html){
         overflow-y: scroll;
     }
 </style>

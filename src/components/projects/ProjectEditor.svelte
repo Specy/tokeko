@@ -7,7 +7,6 @@
     import Row from '$cmp/layout/Row.svelte';
     import {createCompilerStore} from '$src/routes/projects/[projectId]/projectStore';
     import Column from "$cmp/layout/Column.svelte";
-    import {formatTree} from "$lib/dotlr/DotlrFormat";
     import ExpandableContainer from "$cmp/layout/ExpandableContainer.svelte";
     import FirstTableRenderer from "$cmp/dotlr/FirstTableRenderer.svelte";
     import AutomatonTableRenderer from "$cmp/dotlr/AutomatonTableRenderer.svelte";
@@ -17,6 +16,8 @@
     import TraceTableRenderer from "$cmp/dotlr/TraceTableRenderer.svelte";
     import ParserPicker from "$cmp/dotlr/ParserPicker.svelte";
     import AutomatonGraphRenderer from "$cmp/dotlr/AutomatonGraphRenderer.svelte";
+    import TreeRenderer from "$cmp/dotlr/TreeRenderer.svelte";
+    import {stringifyError} from "$lib/dotlr/dotlrUtils";
 
     export let project: Project;
     let store = createCompilerStore(project);
@@ -98,14 +99,11 @@
     </Column>
     <div class="pipe-container">
         <div class="pipe-container-inner">
-                <pre>
-{#if $store.result?.type === 'parse'}
-{formatTree($store.result.result)}
-{/if}
-                    {#if $store.result?.type === 'error'}
-{$store.result.error}
-{/if}
-                </pre>
+            {#if $store.result?.type === 'error'}
+                <pre>{stringifyError($store.result.error)}</pre>
+            {:else}
+                <TreeRenderer tree={$store.result?.result ?? {type: "Terminal", value: {slice: "Root"}}}/>
+            {/if}
         </div>
         <Row justify="between" gap="0.5rem" wrap>
             <Row gap="0.5rem" wrap>
@@ -168,10 +166,10 @@
             <ExpandableContainer defaultExpanded={project.keepOpen.automaton} bind:expanded={open.automaton}>
                 <Row slot="title" justify="between" align="center" wrap flex1 gap="0.5rem">
                     <h2 id="automaton">Automaton</h2>
-                    <Row gap="0.5rem">
+                    <Row gap="0.5rem" wrap>
                         <Button
                                 border="secondary"
-                                style="min-width: 9rem"
+                                style="min-width: 8rem"
                                 on:click={e => {
                                     e.stopImmediatePropagation()
                                     project.options.showAutomatonAsGraph = !project.options.showAutomatonAsGraph
@@ -209,7 +207,8 @@
                     </Row>
                 </div>
                 <div id="automaton-graph"
-                        style={project.options.showAutomatonAsGraph ? "display: contents": "display: none"}>
+                     class="automaton-graph"
+                     class:automaton-graph-hidden={!project.options.showAutomatonAsGraph}>
                     <AutomatonGraphRenderer automaton={$store.result.parser.getAutomaton()}/>
                 </div>
 
@@ -291,11 +290,11 @@
         }
     }
 
-    .pipe-preset-select {
-        padding: 0.5rem 1rem;
-        border-radius: 0.4rem;
-        border: 1px solid var(--primary);
-        background-color: var(--primary);
-        color: var(--primary-text);
+    .automaton-graph {
+        display: contents;
+    }
+
+    .automaton-graph-hidden {
+        display: none;
     }
 </style>

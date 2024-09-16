@@ -15,4 +15,4 @@ A website to help learn parsers
 - [x] Automaton graph
 - [x] parsing steps
 - [ ] custom syntax highlight (the grammar will be used to create random colors for the non temrinals, which will make it easier to understand the tree and the grmmar)
-- [ ] parse tree (AST) viewer 
+- [x] parse tree (AST) viewer 

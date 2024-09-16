@@ -1,7 +1,7 @@
 import {type Project} from "$stores/userProjectsStore";
 import {get, writable} from "svelte/store";
 import {Grammar, LALRParser, LR1Parser} from '@specy/dotlr'
-import type {Trace, Tree} from '@specy/dotlr/types'
+import type {GrammarError, ParsingError, Trace, Tree, ParserError} from '@specy/dotlr/types'
 
 
 export const PARSER_TYPES = ['LR1', 'LALR'] as const
@@ -23,7 +23,7 @@ type ProjectStoreData = {
         trace: Trace
     } | {
         type: 'error',
-        error: string
+        error: ParsingError | GrammarError | ParserError
         grammar?: Grammar,
         parser?: Parser,
         result?: Tree
@@ -54,7 +54,7 @@ export function createCompilerStore(project: Project) {
             if (!grammarParser.ok) {
                 s.result = {
                     type: 'error',
-                    error: JSON.stringify(grammarParser.val, null, 2)
+                    error: grammarParser.val as GrammarError,
                 }
                 return s
             }
@@ -63,7 +63,7 @@ export function createCompilerStore(project: Project) {
             if (!parser.ok) {
                 s.result = {
                     type: 'error',
-                    error: JSON.stringify(parser.val, null, 2),
+                    error: parser.val as ParserError,
                     grammar: grammarClone
                 }
                 return s
@@ -90,7 +90,7 @@ export function createCompilerStore(project: Project) {
             if (!result.ok) {
                 s.result = {
                     type: 'error',
-                    error: JSON.stringify(result.val, null, 2),
+                    error: result.val as ParsingError,
                     grammar: s.result.grammar,
                     parser: parser
                 }

@@ -8,6 +8,7 @@ import {
 	createDotlrHoverProvider, createDotlrRuntimeDiagnostics,
 	DotlrLanguage
 } from "$lib/dotlr/DotlrLanguage";
+import {createDotlrRuntimeRuntimeDiagnostics} from "$lib/dotlr/RuntimeDotlr";
 export type MonacoType = typeof monaco
 
 class MonacoLoader {
@@ -27,6 +28,7 @@ class MonacoLoader {
 		const monaco: MonacoType = await this.loading
 		monaco.editor.defineTheme('custom-theme', generateTheme())
 		monaco.languages.register({ id: 'dotlr' })
+		monaco.languages.register({ id: 'dotlr-result' })
 		this.monaco = monaco
 		this.registerLanguages()
 		self.MonacoEnvironment = {

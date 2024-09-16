@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type {AtomicPattern, Automaton, Item, Token} from "@specy/dotlr/types";
-    import {stringifyItem, stringifyLookahead, stringifyToken} from "$lib/dotlr/dotlrUtils";
+    import type {AtomicPattern, Automaton} from "@specy/dotlr/types";
+    import {stringifyItem, stringifyLookahead} from "$lib/dotlr/dotlrUtils";
 
     export let table: Automaton
     export let nonTerminals: string[]
@@ -120,7 +120,6 @@
     }
 
 
-
     .header-cell {
         text-align: center;
         padding: 0.2rem 2rem;
@@ -128,7 +127,6 @@
         background: var(--secondary-10);
         color: var(--secondary-text);
     }
-
 
 
     .body-cell, .body-cell-col {
@@ -164,10 +162,6 @@
         font-size: 1rem;
     }
 
-    .highlighted-item {
-        border: solid 0.2rem var(--accent);
-        border-radius: 0.2rem;
-    }
 
     .state {
         display: flex;
@@ -182,7 +176,12 @@
         background-color: var(--secondary-5);
     }
 
-      .body-cell, .item, .header-cell {
-         text-wrap: nowrap;
+    .body-cell, .item, .header-cell {
+        text-wrap: nowrap;
+    }
+
+    .highlighted-item {
+        border: solid 0.2rem var(--accent);
+        border-radius: 0.2rem;
     }
 </style>

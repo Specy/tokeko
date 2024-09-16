@@ -16,28 +16,36 @@ type Link = {
     target: number,
     label: string
 }
+type VisualizationConfig = {
+    curveFactor: number;
+    labelOffset: number;
+}
 
 export class ParserVisualization {
     private svg: d3.Selection<SVGSVGElement, unknown, HTMLElement, any>;
     private width: number;
     private height: number;
-    private nodeWidth: number = 140;
-    private nodeHeight: number = 100;
     private simulation: d3.Simulation<any, undefined>;
     private toDispose: (() => void)[] = [];
-    private automaton: Automaton;
+    automaton: Automaton;
     private target: HTMLElement;
     private svgGroup: d3.Selection<SVGGElement, unknown, HTMLElement, any>;
+    private config: VisualizationConfig;
+    private bg: d3.Selection<SVGRectElement, unknown, HTMLElement, any>;
 
-    constructor(automaton: Automaton, target: HTMLElement) {
+    constructor(automaton: Automaton, target: HTMLElement, config: Partial<VisualizationConfig> = {}) {
         this.automaton = automaton;
         this.target = target;
+        this.config = {
+            curveFactor: 0.1,
+            labelOffset: 30,
+            ...config
+        };
         this.svg = d3.select(this.target).append('svg');
         this.updateDimensions(target);
         const resizeObserver = new ResizeObserver(() => this.updateDimensions(target));
         resizeObserver.observe(this.target);
         this.toDispose.push(() => resizeObserver.disconnect());
-
     }
 
     dispose(): void {
@@ -47,11 +55,22 @@ export class ParserVisualization {
 
     private updateDimensions(container: HTMLElement): void {
         if (container) {
-            this.width = container.clientWidth;
-            this.height = container.clientHeight;
+            const width = container.clientWidth
+            const height = container.clientHeight;
+
+            if (!width || !height || (this.width === width && this.height === height)) {
+                return;
+            }
+            this.width = width;
+            this.height = height;
             this.svg
                 .attr('width', this.width)
                 .attr('height', this.height);
+            this.bg
+                ?.attr('width', this.width * 5)
+                .attr('height', this.height * 5)
+                .attr('x', -this.width * 2.5)
+                .attr('y', -this.height * 2.5)
             if (this.simulation) {
                 this.simulation.force('center', d3.forceCenter(this.width / 2, this.height / 2));
                 this.simulation.alpha(1).restart();
@@ -62,13 +81,13 @@ export class ParserVisualization {
     private calculateNodeWidth(stateInfo: string[]): number {
         const textLengths = stateInfo.map(info => info.length);
         const maxLength = Math.max(...textLengths);
-        const charWidth = 8; // Assuming each character roughly takes 8px
-        return Math.max(100, maxLength * charWidth); // Minimum width of 100
+        const charWidth = 8;
+        return Math.max(100, maxLength * charWidth);
     }
 
     private calculateNodeHeight(stateInfo: string[]): number {
-        const baseHeight = 50; // Base height for label and padding
-        const lineHeight = 16; // Height per line of stateInfo
+        const baseHeight = 50;
+        const lineHeight = 20;
         return baseHeight + stateInfo.length * lineHeight;
     }
 
@@ -77,15 +96,45 @@ export class ParserVisualization {
     }
 
     public render(): void {
-        this.svgGroup = this.svg.append('g'); // Create a group for the entire graph
+        if (!this.width || !this.height) {
+            this.width = 1
+            this.height = 1
+        }
+        this.svgGroup = this.svg.append('g');
+        this.svgGroup.attr('class', 'automaton_graph');
 
-        // Add zoom behavior to the SVG
+
+        const defs = this.svg.append('defs');
+        defs.append('marker')
+            .attr('id', 'arrowhead')
+            .attr('viewBox', '0 -5 10 10')
+            .attr('refX', 8)
+            .attr('refY', 0)
+            .attr('markerWidth', 6)
+            .attr('markerHeight', 6)
+            .attr('orient', 'auto')
+            .append('path')
+            .attr('d', 'M0,-5L10,0L0,5')
+            .attr('fill', 'var(--arrow-color, #999)');
+
+
+        defs.append('pattern')
+            .attr('id', 'dotted-grid')
+            .attr('width', 20)
+            .attr('height', 20)
+            .attr('patternUnits', 'userSpaceOnUse')
+            .append('circle')
+            .attr('cx', 5)
+            .attr('cy', 5)
+            .attr('r', 1.5)
+            .attr('fill', 'var(--dotted-grid-color)');
+
+
         const zoom = d3.zoom<SVGSVGElement, unknown>()
-            .scaleExtent([0.1, 4]) // Zoom range (min, max)
+            .scaleExtent([0.1, 4])
             .on('zoom', (event) => this.zoomed(event));
 
-        this.svg.call(zoom); // Attach zoom behavior to the svg
-
+        this.svg.call(zoom);
         const nodes = this.automaton.states.map(state => {
             const stateInfo = this.formatStateInfo(state);
             const width = this.calculateNodeWidth(stateInfo);
@@ -108,7 +157,7 @@ export class ParserVisualization {
             }) satisfies Link)
         );
 
-        // Use the svgGroup instead of svg to append elements
+
         this.createVisualization(nodes, links);
     }
 
@@ -117,36 +166,47 @@ export class ParserVisualization {
     }
 
     private createVisualization(nodes: Node[], links: Link[]): void {
-        //@ts-expect-error
+        // @ts-expect-error
         this.simulation = d3.forceSimulation(nodes)
             .force('link', d3.forceLink(links)
                 .id((d: any) => d.id)
-                .distance(300)  // Adjust the link distance for better spacing
-                .strength(0.9)) // Stronger links to pull nodes together
-            .force('charge', d3.forceManyBody().strength(-2500))  // Increase repulsion between nodes
-            .force('center', d3.forceCenter(this.width / 2, this.height / 2)) // Center the graph
-            .force('collision', d3.forceCollide().radius((d: any) => Math.max(d.width, d.height) / 2 + 50))  // Increase collision radius to avoid overlap
-            .force('x', d3.forceX(this.width / 2).strength(0.2)) // Add a weak force towards the center horizontally
-            .force('y', d3.forceY(this.height / 2).strength(0.2)); // Add a weak force towards the center vertically
+                .distance(300)
+                .strength(0.9))
+            .force('charge', d3.forceManyBody().strength(-2500))
+            .force('center', d3.forceCenter(this.width / 2, this.height / 2))
+            .force('collision', d3.forceCollide().radius((d: any) => Math.max(d.width, d.height) / 2 + 50))
+            .force('x', d3.forceX(this.width / 2).strength(0.2))
+            .force('y', d3.forceY(this.height / 2).strength(0.2));
 
-        // Create the links, nodes, and labels inside the svgGroup for zoom and drag support
         const link = this.svgGroup.append('g')
             .selectAll('path')
             .data(links)
             .enter().append('path')
-            .attr('class', 'automaton_link');
+            .attr('class', 'automaton_link')
+            .attr('marker-end', 'url(#arrowhead)');
+
+
+        this.bg = this.svgGroup.append('rect')
+            .attr('width', this.width * 5)
+            .attr('height', this.height * 5)
+            .attr('x', -this.width * 2.5)
+            .attr('y', -this.height * 2.5)
+            .attr('fill', 'url(#dotted-grid)')
+            .attr('class', 'background-grid');
+
 
         const node = this.svgGroup.append('g')
             .selectAll('g')
             .data(nodes)
             .enter().append('g')
+            .attr('class', (d, i) => i === 0 ? 'automaton_node automaton_first_node' : 'automaton_node')
             .call(d3.drag()
                 .on('start', (event, d) => this.dragstarted(event, d))
                 .on('drag', (event, d) => this.dragged(event, d))
                 .on('end', (event, d) => this.dragended(event, d)));
 
         node.append('rect')
-            .attr('class', 'automaton_node')
+            .attr('class', 'automaton_node-bg')
             .attr('width', (d: any) => d.width)
             .attr('height', (d: any) => d.height)
             .attr('x', (d: any) => -d.width / 2)
@@ -155,26 +215,38 @@ export class ParserVisualization {
             .attr('ry', 6)
             .attr('stroke-width', 2);
 
+
+        node.append('rect')
+            .attr('class', 'automaton_state-header-bg')
+            .attr('width', (d: any) => d.width)
+            .attr('height', 30)
+            .attr('x', (d: any) => -d.width / 2)
+            .attr('y', (d: any) => -d.height / 2)
+            .attr('rx', 6)
+            .attr('ry', 6);
+
         node.append('text')
             .attr('class', 'automaton_state-label')
             .attr('text-anchor', 'middle')
             .attr('y', (d: any) => -d.height / 2 + 20)
+            .attr('font-weight', 'bold')
             .text((d: any) => d.label);
 
         node.append('text')
             .attr('class', 'automaton_state-info')
             .attr('text-anchor', 'start')
             .attr('x', (d: any) => -d.width / 2 + 10)
-            .attr('y', (d: any) => -d.height / 2 + 40)
+            .attr('y', (d: any) => -d.height / 2 + 35)
             .selectAll('tspan')
             .data((d: any) => d.stateInfo)
             .enter().append('tspan')
-            .attr('x', function (_, i, nodes) {
-                //@ts-expect-error
-                const parentData = d3.select(this.parentNode).datum();
+            .attr('x', function () {
+
+                // @ts-expect-error
+                const parentData = d3.select(this.parentNode).datum() as Node;
                 return -parentData.width / 2 + 10;
             })
-            .attr('dy', 15)
+            .attr('dy', 20)
             .text((d: any) => d);
 
         const linkLabel = this.svgGroup.append('g')
@@ -196,27 +268,88 @@ export class ParserVisualization {
 
 
     private linkArc(d: any): string {
-        const dx = d.target.x - d.source.x;
-        const dy = d.target.y - d.source.y;
-        const dr = Math.sqrt(dx * dx + dy * dy) * 2;
-        return `M${d.source.x},${d.source.y}A${dr},${dr} 0 0,1 ${d.target.x},${d.target.y}`;
+        const sourceNode = d.source;
+        const targetNode = d.target;
+
+        const dx = targetNode.x - sourceNode.x;
+        const dy = targetNode.y - sourceNode.y;
+
+
+        const angle = Math.atan2(dy, dx);
+
+
+        const getEdgePoint = (node: any, outgoing: boolean) => {
+            const nodeAngle = outgoing ? angle : angle + Math.PI;
+            const xSign = Math.cos(nodeAngle) >= 0 ? 1 : -1;
+            const ySign = Math.sin(nodeAngle) >= 0 ? 1 : -1;
+
+            const halfWidth = node.width / 2;
+            const halfHeight = node.height / 2;
+
+            const ratio = Math.min(
+                Math.abs(halfWidth / Math.cos(nodeAngle)),
+                Math.abs(halfHeight / Math.sin(nodeAngle))
+            );
+
+            return {
+                x: node.x + xSign * Math.abs(ratio * Math.cos(nodeAngle)),
+                y: node.y + ySign * Math.abs(ratio * Math.sin(nodeAngle))
+            };
+        };
+
+        const start = getEdgePoint(sourceNode, true);
+        const end = getEdgePoint(targetNode, false);
+
+
+        const midX = (start.x + end.x) / 2;
+        const midY = (start.y + end.y) / 2;
+        const controlX = midX + (dy * this.config.curveFactor);
+        const controlY = midY - (dx * this.config.curveFactor);
+
+        return `M${start.x},${start.y} Q${controlX},${controlY} ${end.x},${end.y}`;
     }
 
     private getLinkLabelPosition(d: any): [number, number] {
-        const dx = d.target.x - d.source.x;
-        const dy = d.target.y - d.source.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const labelDistance = 100; // Distance from the source node
+        const sourceNode = d.source;
+        const targetNode = d.target;
 
-        // Normalize the direction vector (dx, dy)
-        const directionX = dx / distance;
-        const directionY = dy / distance;
+        const dx = targetNode.x - sourceNode.x;
+        const dy = targetNode.y - sourceNode.y;
 
-        // Position the label closer to the source node
-        const labelX = d.source.x + directionX * labelDistance;
-        const labelY = d.source.y + directionY * labelDistance;
 
-        return [labelX, labelY];
+        const angle = Math.atan2(dy, dx);
+
+
+        const getEdgePoint = (node: any) => {
+            const xSign = Math.cos(angle) >= 0 ? 1 : -1;
+            const ySign = Math.sin(angle) >= 0 ? 1 : -1;
+
+            const halfWidth = node.width / 2;
+            const halfHeight = node.height / 2;
+
+            const ratio = Math.min(
+                Math.abs(halfWidth / Math.cos(angle)),
+                Math.abs(halfHeight / Math.sin(angle))
+            );
+
+            return {
+                x: node.x + xSign * Math.abs(ratio * Math.cos(angle)),
+                y: node.y + ySign * Math.abs(ratio * Math.sin(angle))
+            };
+        };
+
+        const start = getEdgePoint(sourceNode);
+
+
+        const labelX = start.x + Math.cos(angle) * this.config.labelOffset;
+        const labelY = start.y + Math.sin(angle) * this.config.labelOffset;
+
+
+        const perpendicularOffsetDistance = 5;
+        const offsetX = -Math.sin(angle) * perpendicularOffsetDistance;
+        const offsetY = Math.cos(angle) * perpendicularOffsetDistance;
+
+        return [labelX + offsetX, labelY + offsetY];
     }
 
     private dragstarted(event: any, d: any): void {
@@ -237,7 +370,6 @@ export class ParserVisualization {
     }
 }
 
-// Usage example:
-// const automaton: Automaton = { ... }; // Your automaton data
-// const visualization = new LALRVisualization(automaton, '#graph');
-// visualization.render();
+
+
+

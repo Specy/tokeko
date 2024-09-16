@@ -12,7 +12,7 @@
 
 <style>
 	.overlay {
-		position: fixed;
+		position: absolute;
 		inset: 0;
 		z-index: 2;
 		background-size: var(--noise-size);

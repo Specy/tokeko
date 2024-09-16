@@ -4,7 +4,7 @@
     import type {MonacoType} from '$lib/Monaco';
     import {Monaco} from '$lib/Monaco';
     import {generateTheme} from '$lib/theme/editorTheme';
-    import {getRuntimeDeltaDecorations} from "$lib/dotlr/RuntimeDotlr";
+    import {createDotlrRuntimeRuntimeDiagnostics, getRuntimeDeltaDecorations} from "$lib/dotlr/RuntimeDotlr";
 
     export let disabled = false;
     export let code: string;
@@ -17,6 +17,16 @@
     export let runtimeGrammar: string = undefined;
     let mockEditor: HTMLDivElement | null;
     let monacoInstance: MonacoType | null;
+    let runtimeDiagnostic: monaco.editor.IDisposable;
+
+    $: {
+        if(editor && runtimeGrammar){
+            runtimeDiagnostic?.dispose();
+            runtimeDiagnostic = createDotlrRuntimeRuntimeDiagnostics(editor.getModel(), runtimeGrammar);
+        }
+    }
+
+
     const toDispose = [];
     const dispatcher = createEventDispatcher<{
         change: string;

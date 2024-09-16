@@ -1,5 +1,7 @@
-import {editor, Position, Range,} from "monaco-editor";
-import {Grammar, LR1Parser} from "@specy/dotlr";
+import {editor, type IDisposable, Position, Range,} from "monaco-editor";
+import {Grammar, LALRParser, LR1Parser} from "@specy/dotlr";
+import type {ParsingError} from "@specy/dotlr/types";
+import {stringifyParsingError, stringifyToken} from "$lib/dotlr/dotlrUtils";
 
 export function createRuntimeDotlrHoverProvider() {
     return {
@@ -43,5 +45,57 @@ export function getRuntimeDeltaDecorations(model: editor.ITextModel, grammar: st
             }
         }
     })
-
 }
+
+export function createDotlrRuntimeRuntimeDiagnostics(model: editor.ITextModel, _grammar: string) {
+    const disposable: IDisposable[] = []
+    const grammar = Grammar.fromGrammar(_grammar)
+    disposable.push(model.onDidChangeContent(() => {
+        const text = model.getValue()
+        const end = model.getPositionAt(text.length)
+        const markers = []
+        if (!grammar.ok) return editor.setModelMarkers(model, 'dotlr', [])
+        const parser = LALRParser.fromGrammar(grammar.val.clone())
+        if (!parser.ok) return editor.setModelMarkers(model, 'dotlr', [])
+        const parsed = parser.val.parse(text)
+        if (parsed.ok) return editor.setModelMarkers(model, 'dotlr', [])
+        const err = parsed.val as ParsingError
+        if (err.type === "UnexpectedEof") {
+            markers.push({
+                startLineNumber: end.lineNumber,
+                startColumn: end.column,
+                endLineNumber: end.lineNumber,
+                endColumn: end.column + 1,
+                message: stringifyParsingError(err),
+                severity: 8
+            })
+        } else if (err.type === 'UnknownToken') {
+            markers.push({
+                startLineNumber: 0,
+                startColumn: 0,
+                endLineNumber: end.lineNumber,
+                endColumn: end.column,
+                message: stringifyParsingError(err),
+                severity: 8
+            })
+        } else if (err.type === "UnexpectedToken") {
+            markers.push({
+                startLineNumber: 0,
+                startColumn: 0,
+                endLineNumber: end.lineNumber,
+                endColumn: end.column,
+                message: stringifyParsingError(err),
+                severity: 8
+            })
+        }
+
+        editor.setModelMarkers(model, 'dotlr', markers)
+    }))
+    return {
+        dispose() {
+            disposable.forEach(d => d.dispose())
+        }
+    }
+}
+
+
