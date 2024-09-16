@@ -36,6 +36,17 @@
                     <h1 class="welcome-title textShadow">
                         Tokeko
                     </h1>
+                    <div style="max-width: 30rem" class="text">
+                        An educational platform designed to help users understand and learn about different types of
+                        parsers, grammar structures, and parsing techniques. With interactive features, you can explore
+                        complex parsing concepts in a visual and intuitive way.
+                    </div>
+                    <ul style="max-width: 30rem;" class="text">
+                        <li>Write your own grammar and parse a language with either LR(1) or LALR parsers</li>
+                        <li>Learn how the parser is constructed, viewing the FIRST/FOLLOW and automaton tables/graphs</li>
+                        <li>View the steps needed to parse a string, and the resulting parse tree</li>
+                        <li>Editor with text completion and error reporting, useful error messages and traces</li>
+                    </ul>
                     <div style="text-shadow: 2px 2px 10px black;">
                     </div>
                     <ul style="max-width: 30rem;">
@@ -116,12 +127,16 @@
   }
 
   .presentation-content {
-    padding: 0 10vw;
+    padding: 0 5vw;
   }
 
   .welcome-title {
     font-size: 3rem;
     color: var(--primary-text);
+  }
+
+  .text {
+    text-shadow: 2px 2px 6px black;
   }
 
   .presentation {
@@ -150,8 +165,8 @@
     top: 0;
     left: 0;
     position: absolute;
-    background-image: url('/images/tokeko-editor-wide.webp');
-    mask: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.1) 70%);
+    background-image: url('/images/tokeko-result-wide.webp');
+    mask: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.05) 70%);
     filter: blur(1px);
     background-repeat: no-repeat;
     background-position: center;
@@ -193,6 +208,11 @@
     }
     .presentation-content {
       padding: 0 1rem;
+    }
+    .preview-image {
+    mask: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.05) 70%);
+      background-image: url('/images/tokeko-editor-narrow.webp');
+
     }
   }
 

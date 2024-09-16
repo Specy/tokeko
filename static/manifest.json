@@ -9,9 +9,9 @@
     "description": "Tools to learn and create parsers",
     "screenshots": [
         {
-            "src": "/images/tokeko-editor-wide.webp",
+            "src": "/images/tokeko-result-wide.webp",
             "type": "image/png",
-            "sizes": "1918x907",
+            "sizes": "2036x1318",
             "form_factor": "wide"
         }, {
             "src": "/images/tokeko-editor-narrow.webp",

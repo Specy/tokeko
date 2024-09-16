@@ -82,12 +82,13 @@
                         on:onDownload={(e) => onDownload(e.detail.project)}
                 />
             </div>
+
         {/each}
     </div>
     {#if !$projectStore.initialized}
         <h2>Loading...</h2>
     {/if}
-    {#if !$projectStore.projects.length && !$projectStore.initialized}
+    {#if !$projectStore.projects.length && $projectStore.initialized}
         <p style="width:100%; text-align:center;">No projects yet, create one!</p>
     {/if}
 </Page>
