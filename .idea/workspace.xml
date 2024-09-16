@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="add docs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +82,7 @@
       <workItem from="1726485051259" duration="412000" />
       <workItem from="1726487058368" duration="6450000" />
       <workItem from="1726508238104" duration="20000" />
+      <workItem from="1726516471512" duration="689000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />

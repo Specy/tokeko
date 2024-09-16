@@ -11,7 +11,6 @@
     import FirstTableRenderer from "$cmp/dotlr/FirstTableRenderer.svelte";
     import AutomatonTableRenderer from "$cmp/dotlr/AutomatonTableRenderer.svelte";
     import GrammarRenderer from "$cmp/dotlr/GrammarRenderer.svelte";
-    import KeepOpenButton from "$cmp/projects/KeepOpenButton.svelte";
     import TraceTableRenderer from "$cmp/dotlr/TraceTableRenderer.svelte";
     import ParserPicker from "$cmp/dotlr/ParserPicker.svelte";
     import AutomatonGraphRenderer from "$cmp/dotlr/AutomatonGraphRenderer.svelte";
@@ -24,16 +23,8 @@
     export let project: Project;
     let store = createCompilerStore(project);
 
-    let open: Record<keyof Project['keepOpen'], boolean> = {
-        grammar: false,
-        firstAndFollow: false,
-        automaton: false,
-        parsingTable: false,
-        parseTrace: false
-    }
     onMount(() => {
         Monaco.load();
-        open = {...project.keepOpen}
         //try to parse but dont show anything if not possible
         parseString()
         if ($store.result?.type === "error") {
@@ -151,19 +142,18 @@
             Result
         </h1>
         {#if $store.result?.parser}
-            <ExpandableContainer defaultExpanded={project.keepOpen.grammar} bind:expanded={open.grammar}>
+            <ExpandableContainer bind:expanded={project.keepOpen.grammar}>
                 <Row slot="title" justify="between" align="center" wrap flex1 gap="0.5rem">
                     <h2 id="grammar">Grammar</h2>
-                    <KeepOpenButton bind:project openKey="grammar"/>
                 </Row>
                 <Row justify="center">
                     <GrammarRenderer grammar={$store.result.grammar}/>
                 </Row>
             </ExpandableContainer>
-            <ExpandableContainer defaultExpanded={project.keepOpen.firstAndFollow} bind:expanded={open.firstAndFollow}>
+            <ExpandableContainer bind:expanded={project.keepOpen.firstAndFollow}>
                 <Row slot="title" justify="between" align="center" wrap flex1 gap="0.5rem">
                     <h2 id="firstAndFollow">First & Follow</h2>
-                    <Row gap="0.5rem">
+                    <div class="el-header">
                         <Button
                                 border="secondary"
                                 style="min-width: 9rem"
@@ -174,9 +164,7 @@
                         >
                             {project.options.columnFirstAndFollow ? "View as row" : "View as column"}
                         </Button>
-                        <KeepOpenButton bind:project openKey="firstAndFollow"/>
-                    </Row>
-
+                    </div>
                 </Row>
                 <Row justify="center">
                     <FirstTableRenderer
@@ -186,10 +174,10 @@
                     />
                 </Row>
             </ExpandableContainer>
-            <ExpandableContainer defaultExpanded={project.keepOpen.automaton} bind:expanded={open.automaton}>
+            <ExpandableContainer bind:expanded={project.keepOpen.automaton}>
                 <Row slot="title" justify="between" align="center" wrap flex1 gap="0.5rem">
                     <h2 id="automaton">Automaton</h2>
-                    <Row gap="0.5rem" wrap>
+                    <div class="el-header">
                         <Button
                                 border="secondary"
                                 style="min-width: 8rem"
@@ -214,8 +202,7 @@
                         >
                             {project.options.noAposInAutomaton ? "Show apostrophe" : "Hide apostrophe"}
                         </Button>
-                        <KeepOpenButton bind:project openKey="automaton"/>
-                    </Row>
+                    </div>
 
                 </Row>
                 <div style={project.options.showAutomatonAsGraph ? "display: none": "display: contents"}>
@@ -237,10 +224,10 @@
                 </div>
 
             </ExpandableContainer>
-            <ExpandableContainer defaultExpanded={project.keepOpen.parsingTable} bind:expanded={open.parsingTable}>
+            <ExpandableContainer bind:expanded={project.keepOpen.parsingTable}>
                 <Row slot="title" justify="between" align="center" wrap flex1 gap="0.5rem">
                     <h2 id="parsingTable">Parsing table</h2>
-                    <Row gap="0.5rem" wrap>
+                    <div class="el-header">
                         <Button
                                 border="secondary"
                                 style="min-width: 9rem"
@@ -252,8 +239,7 @@
                         >
                             {project.options.noAposInParsingTable ? "Show apostrophe" : "Hide apostrophe"}
                         </Button>
-                        <KeepOpenButton bind:project openKey="parsingTable"/>
-                    </Row>
+                    </div>
                 </Row>
                 <Row justify="center">
                     <ParsingTableRenderer
@@ -267,10 +253,10 @@
             </ExpandableContainer>
         {/if}
         {#if $store.result.type === 'parse'}
-            <ExpandableContainer defaultExpanded={project.keepOpen.parseTrace} bind:expanded={open.parseTrace}>
+            <ExpandableContainer bind:expanded={project.keepOpen.parseTrace}>
                 <Row slot="title" justify="between" align="center" wrap flex1 gap="0.5rem">
                     <h2 id="parsingTable">Parse trace</h2>
-                    <Row gap="0.5rem">
+                    <div class="el-header">
                         <Button
                                 border="secondary"
                                 style="min-width: 9rem"
@@ -281,8 +267,7 @@
                         >
                             {project.options.noAposInParseTrace ? "Show apostrophe" : "Hide apostrophe"}
                         </Button>
-                        <KeepOpenButton bind:project openKey="parseTrace"/>
-                    </Row>
+                    </div>
                 </Row>
                 <Row justify="center">
                     <TraceTableRenderer
@@ -336,5 +321,17 @@
 
     .automaton-graph-hidden {
         display: none;
+    }
+    .el-header{
+        display: flex;
+        gap: 0.5rem;
+        flex: 1;
+        justify-content: flex-end;
+    }
+    @media (max-width: 500px) {
+        .el-header{
+            justify-content: flex-end;
+            flex: 1;
+        }
     }
 </style>
