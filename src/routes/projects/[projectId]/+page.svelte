@@ -18,6 +18,7 @@
     import {prompter} from '$src/stores/promptStore';
     import FaDonate from '~icons/fa6-solid/hand-holding-dollar.svelte';
     import Link from "~icons/fa6-solid/share-nodes.svelte";
+    import DotlrDocs from "$cmp/dotlr/DotlrDocs.svelte";
 
     let showDocs = false;
     let project: Project | undefined;
@@ -145,7 +146,7 @@
                 padding="0.8rem"
                 gap="0.5rem"
         >
-            docs
+            <DotlrDocs />
         </Column>
     </FloatingContainer>
 </Page>

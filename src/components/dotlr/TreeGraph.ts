@@ -127,7 +127,6 @@ export class ParseTreeVisualization {
             return d.type === 'NonTerminal' ? d.value.pattern : null;
         });
         root.each(d => {
-            console.log(this.calculateNodeSize(d.data));
             (d as any).nodeWidth = this.calculateNodeSize(d.data)
         });
         const treeLayout = d3.tree<Tree>()

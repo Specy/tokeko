@@ -3,6 +3,7 @@
     import Page from '$cmp/layout/Page.svelte';
     import {createProject} from "$stores/userProjectsStore";
     import lzstring from "lz-string";
+    import DotlrDocs from "$cmp/dotlr/DotlrDocs.svelte";
     const p = createProject();
     const s = lzstring.compressToEncodedURIComponent(JSON.stringify(p));
     const url = `/projects/share?project=${s}`;
@@ -17,15 +18,8 @@
 
 <Nav/>
 <Page cropped padding='1rem' mobilePadding='1rem' gap="1rem">
-    <h1>
-        Tokeko documentation
-    </h1>
-    <div>
-        Docs in progress
-        <a href="https://github.com/umut-sahin/dotlr" style="color: var(--accent)">
-            Look here for the syntax of the grammar
-        </a>
-    </div>
+
+    <DotlrDocs />
     <a href="{url}" class="tryit">
         Try it
     </a>

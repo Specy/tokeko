@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fix layout">
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fix force">
+      <change afterPath="$PROJECT_DIR$/src/components/dotlr/DotlrDocs.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/ActionTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/ParsingTableRenderer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraph.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraph.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/TreeGraph.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/TreeGraph.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/inputs/Button.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/inputs/Button.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/inputs/ButtonLink.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/inputs/ButtonLink.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/docs/dotlr/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +81,7 @@
       <workItem from="1726480792945" duration="1162000" />
       <workItem from="1726482750152" duration="1874000" />
       <workItem from="1726485051259" duration="412000" />
-      <workItem from="1726487058368" duration="5048000" />
+      <workItem from="1726487058368" duration="5736000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -236,7 +227,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726485407227</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fix force">
+      <option name="closed" value="true" />
+      <created>1726492517650</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1726492517650</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,6 +258,7 @@
     <MESSAGE value="cornered arrows" />
     <MESSAGE value="Added auto save and fix tokens in table" />
     <MESSAGE value="fix layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix layout" />
+    <MESSAGE value="fix force" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix force" />
   </component>
 </project>
