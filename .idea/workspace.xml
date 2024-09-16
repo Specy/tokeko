@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fix force">
-      <change afterPath="$PROJECT_DIR$/src/components/dotlr/DotlrDocs.svelte" afterDir="false" />
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="add docs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/docs/dotlr/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +79,8 @@
       <workItem from="1726480792945" duration="1162000" />
       <workItem from="1726482750152" duration="1874000" />
       <workItem from="1726485051259" duration="412000" />
-      <workItem from="1726487058368" duration="5736000" />
+      <workItem from="1726487058368" duration="6450000" />
+      <workItem from="1726508238104" duration="20000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -235,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726492517650</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="add docs">
+      <option name="closed" value="true" />
+      <created>1726493193571</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1726493193571</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,6 +266,7 @@
     <MESSAGE value="Added auto save and fix tokens in table" />
     <MESSAGE value="fix layout" />
     <MESSAGE value="fix force" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix force" />
+    <MESSAGE value="add docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="add docs" />
   </component>
 </project>
