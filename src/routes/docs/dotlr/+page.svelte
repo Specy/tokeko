@@ -1,8 +1,11 @@
 <script lang="ts">
     import Nav from '$cmp/layout/Nav.svelte';
     import Page from '$cmp/layout/Page.svelte';
-
-    const url = '/projects/share?project=N4IgbgpgTgzglgewHYgFwEYA0I4BM0gwAWAhlBCNkiQLYWogCqS1d+2uEMAxlHAA4AXRCgaUQvCCUERcAQUFp0AdgBMANgAsqlQFZd6gJzrsAV365pshUrVb1y3QA506AAxYJyGUkUN0ANRuAejiAOZQtDRkBACiAAQAtAB88QkA5AHp8QBCADpQeUgJKbkFRTlJqelu6eVIlaXp6Oni-GQw0AAqAJ789CAAMgBKodgA1hAQ-ADy-aKgEVExqABmJAA2ndircLCCcki4AGIIGxsIAO5o61sQ2CSmggjRz6KCUKb3IO2wcEhhLokABGG3ot22Pw6EC6kW44M2nQAvtgEEIRDA0KBuGdTDQkMc9jADkdTucrjdEd8kAg5PwEDAAJJIORPF7SZBoD5fKi0+lMpAABWhsJI8K5nwgSKRQA'
+    import {createProject} from "$stores/userProjectsStore";
+    import lzstring from "lz-string";
+    const p = createProject();
+    const s = lzstring.compressToEncodedURIComponent(JSON.stringify(p));
+    const url = `/projects/share?project=${s}`;
 </script>
 
 <svelte:head>
