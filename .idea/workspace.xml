@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="Add default project">
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="cornered arrows">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraph.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraph.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonTableRenderer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +81,8 @@
       <workItem from="1726392539271" duration="24360000" />
       <workItem from="1726431076216" duration="17310000" />
       <workItem from="1726479906259" duration="600000" />
-      <workItem from="1726480792945" duration="962000" />
+      <workItem from="1726480792945" duration="1162000" />
+      <workItem from="1726482750152" duration="1570000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -199,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726480457605</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="cornered arrows">
+      <option name="closed" value="true" />
+      <created>1726481972468</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1726481972468</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +232,7 @@
     <MESSAGE value="Change colors" />
     <MESSAGE value="update s68k" />
     <MESSAGE value="Add default project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add default project" />
+    <MESSAGE value="cornered arrows" />
+    <option name="LAST_COMMIT_MESSAGE" value="cornered arrows" />
   </component>
 </project>

@@ -1,14 +1,19 @@
 <script lang="ts">
     import type {AtomicPattern, Automaton} from "@specy/dotlr/types";
-    import {stringifyItem, stringifyLookahead} from "$lib/dotlr/dotlrUtils";
+    import {stringifyItem, stringifyLookahead, stringifyToken} from "$lib/dotlr/dotlrUtils";
 
     export let table: Automaton
     export let nonTerminals: string[]
     export let terminals: string[]
+    export let regexes: string[]
     export let large = true
     export let noApos = false
     let selectedState = -1
-    $: normalizedItems = [...nonTerminals, ...terminals]
+    $: normalizedItems = [
+        ...nonTerminals,
+        ...terminals.map(t => `'${t}'`),
+        ...regexes.map(r => `%${r}`)
+    ]
 
     function normalizeTransition(transition: Map<AtomicPattern, number>) {
         const entries = transition.entries()
@@ -18,7 +23,7 @@
                 const index = normalizedItems.findIndex(i => i === pattern.value)
                 normalized[index] = id
             } else if (pattern.type === "Token") {
-                const val = pattern.value.type === 'Constant' ? pattern.value.value : undefined
+                const val = stringifyToken(pattern.value)
                 if (val === undefined) continue
                 const index = normalizedItems.findIndex(i => i === val)
                 normalized[index] = id
@@ -55,7 +60,7 @@
 {#if large}
     <div
             class="table"
-            style:--cols={nonTerminals.length + terminals.length + 3}
+            style:--cols={nonTerminals.length + terminals.length + regexes.length + 3}
     >
         <div class="header-cell">State</div>
         <div class="header-cell">Items</div>
@@ -63,8 +68,11 @@
         {#each nonTerminals as nt}
             <div class="header-cell">{nt}</div>
         {/each}
-        {#each terminals as t}
+        {#each terminals.map(i => noApos ? i : `'${i}'`)  as t}
             <div class="header-cell">{t}</div>
+        {/each}
+        {#each regexes as r}
+            <div class="header-cell">%{r}</div>
         {/each}
         {#each table.states as state}
             <button

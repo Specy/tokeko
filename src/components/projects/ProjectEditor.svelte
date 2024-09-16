@@ -203,6 +203,7 @@
                                 table={$store.result.parser.getAutomaton()}
                                 terminals={$store.result.grammar.getConstantTokens()}
                                 nonTerminals={$store.result.grammar.getSymbols()}
+                                regexes={[...$store.result.grammar.getRegexTokens().keys()]}
                         />
                     </Row>
                 </div>
