@@ -40,11 +40,16 @@ export function createProject(): Project {
         description: "",
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime(),
-        content: `1+0+1`,
-        grammar: `E -> E '+' B
-E -> B
-B -> '0'
-B -> '1'`,
+        content: `foo(bar+baz)`,
+        grammar: `P -> E
+
+E -> E '+' T
+E -> T
+
+T -> %id '(' E ')'
+T -> %id
+
+%id -> /[A-Za-z][A-Za-z0-9]+/`,
         parserType: 'LALR',
         keepOpen: {
             grammar: false,

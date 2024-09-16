@@ -84,7 +84,7 @@
 <div class="wrapper">
     <Column gap="0.5rem" style="min-height: 70%">
         <Editor
-                style="flex: 1;"
+                style="flex: 1; min-height: 40vh;"
                 language="dotlr"
                 bind:code={project.grammar}
                 highlightedLine={-1}
@@ -286,7 +286,8 @@
 
     @media (max-width: 768px) {
         .wrapper {
-            display: flex;
+        grid-template-columns: 1fr;
+            grid-template-rows: 4fr 3fr;
             flex-direction: column;
         }
     }

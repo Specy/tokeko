@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="cornered arrows">
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="Added auto save and fix tokens in table">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonTableRenderer.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +79,8 @@
       <workItem from="1726431076216" duration="17310000" />
       <workItem from="1726479906259" duration="600000" />
       <workItem from="1726480792945" duration="1162000" />
-      <workItem from="1726482750152" duration="1570000" />
+      <workItem from="1726482750152" duration="1874000" />
+      <workItem from="1726485051259" duration="309000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -212,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726481972468</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Added auto save and fix tokens in table">
+      <option name="closed" value="true" />
+      <created>1726484647121</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1726484647121</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,6 +239,7 @@
     <MESSAGE value="update s68k" />
     <MESSAGE value="Add default project" />
     <MESSAGE value="cornered arrows" />
-    <option name="LAST_COMMIT_MESSAGE" value="cornered arrows" />
+    <MESSAGE value="Added auto save and fix tokens in table" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added auto save and fix tokens in table" />
   </component>
 </project>
