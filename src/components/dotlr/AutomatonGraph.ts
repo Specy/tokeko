@@ -105,18 +105,19 @@ export class ParserVisualization {
 
 
         const defs = this.svg.append('defs');
-        defs.append('marker')
-            .attr('id', 'arrowhead')
-            .attr('viewBox', '0 -5 10 10')
-            .attr('refX', 8)
-            .attr('refY', 0)
+
+        const a = defs.append('marker')
+            .attr('id', 'automata_arrowhead')
+            .attr('viewBox', '0 0 12 12')
+            .attr('refX', 11)
+            .attr('refY', 6)
             .attr('markerWidth', 6)
             .attr('markerHeight', 6)
             .attr('orient', 'auto')
             .append('path')
-            .attr('d', 'M0,-5L10,0L0,5')
-            .attr('fill', 'var(--arrow-color, #999)');
-
+            .attr('d', 'M2.15777 1.57889C1.62585 1.31293 1 1.69972 1 2.29443V9.70557C1 10.3003 1.62585 10.6871 2.15777 10.4211L9.56891 6.71554C10.1586 6.42072 10.1586 5.57928 9.56892 5.28446L2.15777 1.57889Z')
+            .attr('fill', 'var(--arrow-color, #999)')
+            .attr('stroke', 'var(--arrow-color, #999)')
 
         defs.append('pattern')
             .attr('id', 'dotted-grid')
@@ -178,13 +179,6 @@ export class ParserVisualization {
             .force('x', d3.forceX(this.width / 2).strength(0.2))
             .force('y', d3.forceY(this.height / 2).strength(0.2));
 
-        const link = this.svgGroup.append('g')
-            .selectAll('path')
-            .data(links)
-            .enter().append('path')
-            .attr('class', 'automaton_link')
-            .attr('marker-end', 'url(#arrowhead)');
-
 
         this.bg = this.svgGroup.append('rect')
             .attr('width', this.width * 5)
@@ -193,6 +187,14 @@ export class ParserVisualization {
             .attr('y', -this.height * 2.5)
             .attr('fill', 'url(#dotted-grid)')
             .attr('class', 'background-grid');
+
+
+        const link = this.svgGroup.append('g')
+            .selectAll('path')
+            .data(links)
+            .enter().append('path')
+            .attr('class', 'automaton_link')
+            .attr('marker-end', 'url(#automata_arrowhead)');
 
 
         const node = this.svgGroup.append('g')
