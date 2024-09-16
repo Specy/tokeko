@@ -3,6 +3,9 @@
 
 [Tokeko](https://tokeko.specy.app) is an educational platform designed to help users understand and learn about different types of parsers, grammar structures, and parsing techniques. With interactive features, you can explore complex parsing concepts in a visual and intuitive way.
 
+![Tokeko](./static/images/tokeko-editor-wide.webp)
+![Tokeko](./static/images/tokeko-result-wide.webp)
+
 ## Features
 
 - [x] **LR(1) parser** — Supports LR(1) grammar parsing
