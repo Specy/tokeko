@@ -171,20 +171,20 @@ export class ParserVisualization {
         this.simulation = d3.forceSimulation(nodes)
             .force('link', d3.forceLink(links)
                 .id((d: any) => d.id)
-                .distance(300)
-                .strength(0.9))
-            .force('charge', d3.forceManyBody().strength(-2500))
+                .distance(180)
+                .strength(0.6))
+            .force('charge', d3.forceManyBody().strength(-4000))
             .force('center', d3.forceCenter(this.width / 2, this.height / 2))
-            .force('collision', d3.forceCollide().radius((d: any) => Math.max(d.width, d.height) / 2 + 50))
-            .force('x', d3.forceX(this.width / 2).strength(0.2))
-            .force('y', d3.forceY(this.height / 2).strength(0.2));
+            .force('collision', d3.forceCollide().radius((d: any) => Math.max(d.width, d.height) / 2 + 20))
+            .force('x', d3.forceX(this.width / 2).strength(0.1))
+            .force('y', d3.forceY(this.height / 2).strength(0.1));
 
 
         this.bg = this.svgGroup.append('rect')
-            .attr('width', this.width * 5)
-            .attr('height', this.height * 5)
-            .attr('x', -this.width * 2.5)
-            .attr('y', -this.height * 2.5)
+            .attr('width', this.width * 15)
+            .attr('height', this.height * 15)
+            .attr('x', -this.width * 7.5)
+            .attr('y', -this.height * 7.5)
             .attr('fill', 'url(#dotted-grid)')
             .attr('class', 'background-grid');
 

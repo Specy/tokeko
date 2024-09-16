@@ -9,11 +9,13 @@
 	export let active = false;
 	export let title = '';
 	export let href: string;
+	export let blank = false;
 </script>
 
 <a
 	{href}
 	{title}
+	target={blank ? '_blank' : undefined}
 	on:click={(e) => {
 		if (disabled) {
 			e.preventDefault();

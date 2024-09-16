@@ -23,13 +23,17 @@ export type Project = {
     options: {
         columnFirstAndFollow: boolean
         noAposInParseTrace: boolean,
-        noAposInAutomaton:boolean,
+        noAposInAutomaton: boolean,
+        noAposInParsingTable: boolean,
         showAutomatonAsGraph: boolean
     }
 }
 
 export function validateProject(project: Project): Project {
-    return {...createProject(), ...project}
+    const defaultProject = createProject()
+    project.options = {...defaultProject.options, ...project.options}
+    project.keepOpen = {...defaultProject.keepOpen, ...project.keepOpen}
+    return {...defaultProject, ...project}
 }
 
 export function createProject(): Project {
@@ -62,6 +66,7 @@ T -> %id
             columnFirstAndFollow: false,
             noAposInParseTrace: true,
             noAposInAutomaton: true,
+            noAposInParsingTable: true,
             showAutomatonAsGraph: false,
         }
     }

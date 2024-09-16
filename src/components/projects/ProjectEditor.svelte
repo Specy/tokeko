@@ -10,7 +10,6 @@
     import ExpandableContainer from "$cmp/layout/ExpandableContainer.svelte";
     import FirstTableRenderer from "$cmp/dotlr/FirstTableRenderer.svelte";
     import AutomatonTableRenderer from "$cmp/dotlr/AutomatonTableRenderer.svelte";
-    import ActionTableRenderer from "$cmp/dotlr/ActionTableRenderer.svelte";
     import GrammarRenderer from "$cmp/dotlr/GrammarRenderer.svelte";
     import KeepOpenButton from "$cmp/projects/KeepOpenButton.svelte";
     import TraceTableRenderer from "$cmp/dotlr/TraceTableRenderer.svelte";
@@ -18,6 +17,9 @@
     import AutomatonGraphRenderer from "$cmp/dotlr/AutomatonGraphRenderer.svelte";
     import TreeRenderer from "$cmp/dotlr/TreeRenderer.svelte";
     import {stringifyError} from "$lib/dotlr/dotlrUtils";
+    import ParsingTableRenderer from "$cmp/dotlr/ParsingTableRenderer.svelte";
+    // @ts-ignore
+    import GoDown from "~icons/fa6-solid/angles-down.svelte";
 
     export let project: Project;
     let store = createCompilerStore(project);
@@ -32,6 +34,12 @@
     onMount(() => {
         Monaco.load();
         open = {...project.keepOpen}
+        //try to parse but dont show anything if not possible
+        parseString()
+        if ($store.result?.type === "error") {
+            $store.result = undefined
+        }
+
         return () => {
             Monaco.dispose();
         };
@@ -48,11 +56,9 @@
 
     function parseString() {
         store?.parseString();
-        //scrollToResult('result')
     }
 
-    function parseGrammar() {
-        store?.parseGrammar()
+    function scrollToNearestResult() {
         for (const key in open) {
             if (open[key]) {
                 scrollToResult(key)
@@ -60,6 +66,11 @@
             }
         }
         scrollToResult('jump-to')
+    }
+
+    function parseGrammar() {
+        store?.parseGrammar()
+        scrollToNearestResult()
     }
 
     function reset() {
@@ -109,15 +120,27 @@
             <Row gap="0.5rem" wrap>
                 <ParserPicker bind:value={project.parserType}/>
                 {#if $store.result}
-                    <Button on:click={reset} border="secondary" color="primary">Reset</Button>
+                    <Button on:click={reset} border="secondary" color="primary">
+                        Reset
+                    </Button>
                 {/if}
                 <Button on:click={parseGrammar} border="secondary" color="primary"
                         disabled={project.grammar.trim() === ""}>Parse Grammar
                 </Button>
             </Row>
-            <Button on:click={parseString} border="secondary" color="primary"
-                    disabled={project.content.trim() === ""}>Parse String
-            </Button>
+            <Row gap="0.5rem">
+                {#if $store.result && $store.result.type !== 'error'}
+                    <Button
+                            title="Scroll to nearest result"
+                            hasIcon style="width: 2.8rem" on:click={scrollToNearestResult}>
+                        <GoDown/>
+                    </Button>
+                {/if}
+
+                <Button on:click={parseString} border="secondary" color="primary"
+                        disabled={project.content.trim() === ""}>Parse String
+                </Button>
+            </Row>
         </Row>
 
     </div>
@@ -217,13 +240,28 @@
             <ExpandableContainer defaultExpanded={project.keepOpen.parsingTable} bind:expanded={open.parsingTable}>
                 <Row slot="title" justify="between" align="center" wrap flex1 gap="0.5rem">
                     <h2 id="parsingTable">Parsing table</h2>
-                    <KeepOpenButton bind:project openKey="parsingTable"/>
+                    <Row gap="0.5rem" wrap>
+                        <Button
+                                border="secondary"
+                                style="min-width: 9rem"
+                                on:click={e => {
+                                    e.stopImmediatePropagation()
+                                    project.options.noAposInParsingTable = !project.options.noAposInParsingTable
+
+                                }}
+                        >
+                            {project.options.noAposInParsingTable ? "Show apostrophe" : "Hide apostrophe"}
+                        </Button>
+                        <KeepOpenButton bind:project openKey="parsingTable"/>
+                    </Row>
                 </Row>
                 <Row justify="center">
-                    <ActionTableRenderer
+                    <ParsingTableRenderer
+                            noApos={project.options.noAposInParsingTable}
                             table={$store.result.parser.getParseTables()}
                             terminals={$store.result.grammar.getConstantTokens()}
                             nonTerminals={$store.result.grammar.getSymbols()}
+                            regexes={[...$store.result.grammar.getRegexTokens().keys()]}
                     />
                 </Row>
             </ExpandableContainer>
@@ -286,7 +324,7 @@
 
     @media (max-width: 768px) {
         .wrapper {
-        grid-template-columns: 1fr;
+            grid-template-columns: 1fr;
             grid-template-rows: 4fr 3fr;
             flex-direction: column;
         }

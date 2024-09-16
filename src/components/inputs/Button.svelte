@@ -3,6 +3,7 @@
 	export let disabled = false;
 	export let style = '';
 	export let hasIcon = false;
+	export let iconLeft = false;
 	export let color: ColorName = 'secondary';
 	export let hoverColor: ColorName | undefined = undefined;
 	export let border: ColorName | undefined = undefined;
@@ -14,6 +15,7 @@
 	type="button"
 	class="btn"
 	class:hasIcon
+	class:icon-left={iconLeft}
 	{title}
 	style="
 	--btn-color:var(--{color}); 
@@ -67,5 +69,11 @@
 		align-items: center;
 		justify-content: center;
 		padding: 0.35rem 0.6rem;
+	}
+	.icon-left{
+		display: flex;
+		align-items: center;
+		gap: 0.3rem;
+		padding-left: 0.5rem;
 	}
 </style>

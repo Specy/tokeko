@@ -16,6 +16,8 @@
     import ProjectEditor from '$cmp/projects/ProjectEditor.svelte';
     import lzstring from 'lz-string';
     import {prompter} from '$src/stores/promptStore';
+    import FaDonate from '~icons/fa6-solid/hand-holding-dollar.svelte';
+    import Link from "~icons/fa6-solid/share-nodes.svelte";
 
     let showDocs = false;
     let project: Project | undefined;
@@ -100,10 +102,27 @@
         </h3>
 
         <Row gap="0.5rem" style="margin-left: auto; height: 2.4rem">
-            <Button hasIcon on:click={share}>
+            <ButtonLink
+                    href="https://specy.app/donate"
+                    hasIcon
+                    style="height: 100%; font-size: 1.2rem"
+                    blank
+                    title="Donate"
+            >
+                <FaDonate/>
+            </ButtonLink>
+            <Button
+                    hasIcon
+                    on:click={share}
+                    title="Share"
+            >
                 <Share/>
             </Button>
-            <Button hasIcon on:click={() => (showDocs = !showDocs)}>
+            <Button
+                    hasIcon
+                    on:click={() => (showDocs = !showDocs)}
+                    title="Documentation"
+            >
                 <Book/>
             </Button>
             {#if project?.id === 'share'}

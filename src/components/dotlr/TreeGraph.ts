@@ -113,8 +113,11 @@ export class ParseTreeVisualization {
         return state.items.map(item => stringifyItem(item));
     }
 
+    private calculateNodeSize(el: Tree): number {
+        return (this.getElementText(el).length * 10) + 16
+    }
+
     private createVisualization(): void {
-        const linkStraightness = this.config.curveFactor ?? 0.1;
         const nodeSeparation = {
             x: 50,
             y: 70
@@ -123,10 +126,18 @@ export class ParseTreeVisualization {
         const root = d3.hierarchy(this.tree, (d: Tree) => {
             return d.type === 'NonTerminal' ? d.value.pattern : null;
         });
-
+        root.each(d => {
+            console.log(this.calculateNodeSize(d.data));
+            (d as any).nodeWidth = this.calculateNodeSize(d.data)
+        });
         const treeLayout = d3.tree<Tree>()
             .size([this.width, this.height])
-            .nodeSize([nodeSeparation.x, nodeSeparation.y]);
+            .nodeSize([nodeSeparation.x, nodeSeparation.y])
+            .separation((a, b) => {
+                const aw = (a as any).nodeWidth;
+                const bw = (b as any).nodeWidth;
+                return Math.max(Math.max(aw / bw / 3, bw / aw / 3) + 0.5, 1)
+            })
 
 
         const treeData = treeLayout(root);
@@ -136,10 +147,10 @@ export class ParseTreeVisualization {
         });
 
         this.bg = this.svgGroup.append('rect')
-            .attr('width', this.width * 5)
-            .attr('height', this.height * 5)
-            .attr('x', -this.width * 2.5)
-            .attr('y', -this.height * 2.5)
+            .attr('width', this.width * 20)
+            .attr('height', this.height * 20)
+            .attr('x', -this.width * 10)
+            .attr('y', -this.height * 10)
             .attr('fill', 'url(#dotted-grid)')
             .attr('class', 'background-grid');
 
@@ -148,7 +159,7 @@ export class ParseTreeVisualization {
             .data(treeData.links())
             .enter().append('path')
             .attr('class', 'tree_link')
-            .attr('d', d3.linkVertical<unknown, {x: number, y: number}>()
+            .attr('d', d3.linkVertical<unknown, { x: number, y: number }>()
                 .x(d => d.x)
                 .y(d => d.y)
             )
@@ -163,10 +174,10 @@ export class ParseTreeVisualization {
         node.append('rect')
             .attr('rx', this.config.nodeSize / 2)
             .attr('ry', this.config.nodeSize / 2)
-            .attr('width', d => Math.max(this.config.nodeSize, this.getElementText(d.data).length * 16))
+            .attr('width', d => Math.max(this.config.nodeSize, this.calculateNodeSize(d.data)))
             .attr('height', this.config.nodeSize)
-            .attr('x', d => -Math.max(this.config.nodeSize, this.getElementText(d.data).length * 16) / 2)
-            .attr('y', -this.config.nodeSize / 2 )
+            .attr('x', d => -Math.max(this.config.nodeSize, this.calculateNodeSize(d.data)) / 2)
+            .attr('y', -this.config.nodeSize / 2)
             .attr('r', this.config.nodeSize)
             .attr('class', d => d.data.type === 'Terminal' ? 'tree_terminal' : 'tree_non_terminal');
 
