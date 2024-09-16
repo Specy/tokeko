@@ -4,27 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="add automaton graph">
-      <change afterPath="$PROJECT_DIR$/src/components/dotlr/TreeGraph.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/dotlr/TreeRenderer.svelte" afterDir="false" />
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="Added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraph.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraph.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraphRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraphRenderer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonTableRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonTableRenderer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/editor/Editor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/editor/Editor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/NoiseOverlay.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/NoiseOverlay.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/Page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/global.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/Monaco.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Monaco.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/dotlr/DotlrLanguage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dotlr/DotlrLanguage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/dotlr/RuntimeDotlr.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dotlr/RuntimeDotlr.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/dotlr/dotlrUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dotlr/dotlrUtils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/docs/dotlr/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +77,7 @@
       <workItem from="1726333778813" duration="7592000" />
       <workItem from="1726391165574" duration="1348000" />
       <workItem from="1726392539271" duration="24360000" />
-      <workItem from="1726431076216" duration="16292000" />
+      <workItem from="1726431076216" duration="17179000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -183,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726442476610</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added">
+      <option name="closed" value="true" />
+      <created>1726479000652</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1726479000652</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,6 +191,7 @@
     <MESSAGE value="Add parser choice" />
     <MESSAGE value="fix" />
     <MESSAGE value="add automaton graph" />
-    <option name="LAST_COMMIT_MESSAGE" value="add automaton graph" />
+    <MESSAGE value="Added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added" />
   </component>
 </project>

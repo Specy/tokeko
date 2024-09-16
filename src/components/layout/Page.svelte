@@ -38,6 +38,9 @@
 		flex: 1;
 	}
 	.content-padded {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
 		padding: var(--padding);
 		@media (max-width: 768px) {
 			padding: var(--mobile-padding);
