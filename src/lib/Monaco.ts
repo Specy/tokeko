@@ -3,8 +3,6 @@ import {generateTheme} from '$lib/theme/editorTheme';
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 import type monaco from 'monaco-editor'
-import type * as typescript from 'typescript'
-import * as ts from 'typescript';
 import {
     createDotlrCompletion,
     createDotlrFormatter,
@@ -146,19 +144,5 @@ const tsGlobal = `
         type: 'Eof'
     }
 `
-
-export function objectFactory(ts: typeof typescript, object: object) {
-    //use JSON.parse(JSON.stringify(object)) to create a deep copy of the object
-    const factory = ts.factory
-    return factory.createCallExpression(
-        factory.createPropertyAccessExpression(
-            factory.createIdentifier("JSON"),
-            factory.createIdentifier("parse")
-        ),
-        undefined,
-        [factory.createStringLiteral(JSON.stringify(object))]
-    );
-}
-
 
 export const Monaco = new MonacoLoader()

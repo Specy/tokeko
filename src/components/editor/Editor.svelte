@@ -1,7 +1,7 @@
 <script lang="ts">
     import {createEventDispatcher, onDestroy, onMount} from 'svelte';
     import type monaco from 'monaco-editor';
-    import {type MonacoType, objectFactory} from '$lib/Monaco';
+    import {type MonacoType} from '$lib/Monaco';
     import {Monaco} from '$lib/Monaco';
     import {generateTheme} from '$lib/theme/editorTheme';
     import {createDotlrRuntimeRuntimeDiagnostics, getRuntimeDeltaDecorations} from "$lib/dotlr/RuntimeDotlr";
