@@ -1,7 +1,6 @@
 import {browser} from '$app/environment';
 import {generateTheme} from '$lib/theme/editorTheme';
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
-import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 import type monaco from 'monaco-editor'
 import {
     createDotlrCompletion,
@@ -20,7 +19,6 @@ class MonacoLoader {
         monaco: MonacoType,
     }>;
     toDispose: monaco.IDisposable[] = [];
-    runtimeGrammarToDispose: monaco.IDisposable[] = []
 
     constructor() {
         if (browser) this.load()
@@ -65,9 +63,10 @@ class MonacoLoader {
         });
         this.registerLanguages()
         self.MonacoEnvironment = {
-            getWorker: function (_, label) {
+            getWorker: async function (_, label) {
                 if (label === 'typescript' || label === 'javascript') {
-                    return new tsWorker()
+                    const worker = await import('monaco-editor/esm/vs/language/typescript/ts.worker?worker')
+                    return new worker.default()
                 }
                 return new editorWorker()
             }

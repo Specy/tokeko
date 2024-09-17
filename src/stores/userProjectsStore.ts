@@ -47,7 +47,7 @@ export function createProject(): Project {
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime(),
         content: `foo(bar+baz)`,
-        code: '',
+        code: 'const tree = PARSE("")',
         grammar: `P -> E
 
 E -> E '+' T
