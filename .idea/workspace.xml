@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fix">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/Monaco.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Monaco.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +83,7 @@
       <workItem from="1726508238104" duration="20000" />
       <workItem from="1726516471512" duration="1037000" />
       <workItem from="1726572122835" duration="18873000" />
-      <workItem from="1726600521690" duration="941000" />
+      <workItem from="1726600521690" duration="1333000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -279,7 +277,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726600776071</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fix">
+      <option name="closed" value="true" />
+      <created>1726601756281</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1726601756281</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,6 +1,5 @@
 import {browser} from '$app/environment';
 import {generateTheme} from '$lib/theme/editorTheme';
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 import type monaco from 'monaco-editor'
 import {
     createDotlrCompletion,
@@ -68,7 +67,8 @@ class MonacoLoader {
                     const worker = await import('monaco-editor/esm/vs/language/typescript/ts.worker?worker')
                     return new worker.default()
                 }
-                return new editorWorker()
+                const worker = await import('monaco-editor/esm/vs/editor/editor.worker?worker')
+                return new worker.default()
             }
         }
         return {monaco}

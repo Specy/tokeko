@@ -1,6 +1,6 @@
 <script lang="ts">
     import type {ConsoleOutput} from "$lib/sandbox";
-    import {JSONEditor} from "svelte-jsoneditor";
+    //import {JSONEditor} from "svelte-jsoneditor";
 
     import Card from "$cmp/layout/Card.svelte";
     //'log' | 'error' | 'warn' | 'info'
@@ -26,6 +26,8 @@
                 {:else if typeof arg === 'number'}
                     {arg}
                 {:else}
+                    {JSON.stringify(arg, null, 2)}
+                   <!--
                     <JSONEditor
                             content={{json: arg}}
                             mainMenuBar={false}
@@ -33,6 +35,8 @@
                             statusBar={false}
                             readOnly={true}
                     />
+
+                   -->
                 {/if}
             {/each}
         </div>
