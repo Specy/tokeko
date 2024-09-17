@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fix">
-      <change beforePath="$PROJECT_DIR$/src/lib/Monaco.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Monaco.ts" afterDir="false" />
-    </list>
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="test" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +81,7 @@
       <workItem from="1726508238104" duration="20000" />
       <workItem from="1726516471512" duration="1037000" />
       <workItem from="1726572122835" duration="18873000" />
-      <workItem from="1726600521690" duration="1333000" />
+      <workItem from="1726600521690" duration="1733000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -285,7 +283,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726601756281</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="test">
+      <option name="closed" value="true" />
+      <created>1726602264253</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1726602264253</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,6 +318,7 @@
     <MESSAGE value="Add code editor" />
     <MESSAGE value="Add code editor and ts runner" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="test" />
+    <option name="LAST_COMMIT_MESSAGE" value="test" />
   </component>
 </project>
