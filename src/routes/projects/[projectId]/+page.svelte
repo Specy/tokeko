@@ -19,6 +19,7 @@
     import FaDonate from '~icons/fa6-solid/hand-holding-dollar.svelte';
     import Link from "~icons/fa6-solid/share-nodes.svelte";
     import DotlrDocs from "$cmp/dotlr/DotlrDocs.svelte";
+    import type {ConsoleOutput} from "$lib/sandbox";
 
     let showDocs = false;
     let project: Project | undefined;

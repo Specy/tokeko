@@ -53,6 +53,7 @@
 		"s-ago": "^2.2.0",
 		"sass": "^1.75.0",
 		"svelte-body": "^1.4.0",
+		"svelte-jsoneditor": "^0.23.8",
 		"ts-results": "^3.3.0",
 		"unplugin-icons": "^0.18.5",
 		"vite-plugin-top-level-await": "^1.4.1",

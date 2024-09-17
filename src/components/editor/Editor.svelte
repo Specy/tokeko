@@ -1,7 +1,7 @@
 <script lang="ts">
     import {createEventDispatcher, onDestroy, onMount} from 'svelte';
     import type monaco from 'monaco-editor';
-    import type {MonacoType} from '$lib/Monaco';
+    import {type MonacoType, objectFactory} from '$lib/Monaco';
     import {Monaco} from '$lib/Monaco';
     import {generateTheme} from '$lib/theme/editorTheme';
     import {createDotlrRuntimeRuntimeDiagnostics, getRuntimeDeltaDecorations} from "$lib/dotlr/RuntimeDotlr";
@@ -10,7 +10,7 @@
     export let code: string;
     export let highlightedLine: number;
     export let hasError = false;
-    export let language: 'dotlr' | 'dotlr-result';
+    export let language: 'dotlr' | 'dotlr-result' | "typescript";
     export let style = '';
     export let editor: monaco.editor.IStandaloneCodeEditor | null = null;
     export let config: monaco.editor.IStandaloneEditorConstructionOptions = {};

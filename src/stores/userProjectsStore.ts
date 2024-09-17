@@ -11,6 +11,7 @@ export type Project = {
     createdAt: number,
     updatedAt: number
     grammar: string
+    code: string
     content: string
     parserType: ParserType
     keepOpen: {
@@ -25,7 +26,8 @@ export type Project = {
         noAposInParseTrace: boolean,
         noAposInAutomaton: boolean,
         noAposInParsingTable: boolean,
-        showAutomatonAsGraph: boolean
+        showAutomatonAsGraph: boolean,
+        mode: "tokens" | "code"
     }
 }
 
@@ -45,6 +47,7 @@ export function createProject(): Project {
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime(),
         content: `foo(bar+baz)`,
+        code: '',
         grammar: `P -> E
 
 E -> E '+' T
@@ -68,6 +71,7 @@ T -> %id
             noAposInAutomaton: true,
             noAposInParsingTable: true,
             showAutomatonAsGraph: false,
+            mode: 'tokens'
         }
     }
 }

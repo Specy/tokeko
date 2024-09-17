@@ -78,7 +78,7 @@ const baseDarkTheme = {
             cssProp: 'hint'
         },
         warn: {
-            hex: '#ed4f4f',
+            hex: '#edb44f',
             name: 'warn',
             cssProp: 'warn'
         },
@@ -91,6 +91,11 @@ const baseDarkTheme = {
             hex: '#d04434',
             name: 'danger',
             cssProp: 'danger'
+        },
+        info: {
+            hex: '#3478d0',
+            name: 'info',
+            cssProp: 'info'
         }
     }
 } satisfies SerializedTheme

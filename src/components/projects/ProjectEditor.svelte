@@ -19,10 +19,13 @@
     import ParsingTableRenderer from "$cmp/dotlr/ParsingTableRenderer.svelte";
     // @ts-ignore
     import GoDown from "~icons/fa6-solid/angles-down.svelte";
+    import ParseTreeCodeExecutor from "$cmp/dotlr/ParseTreeCodeExecutor.svelte";
+    import type {ConsoleOutput} from "$lib/sandbox";
+    import ConsoleEditor from "$cmp/dotlr/ConsoleEditor.svelte";
 
     export let project: Project;
     let store = createCompilerStore(project);
-
+    let runtimeResult: ConsoleOutput[] | undefined = undefined
     onMount(() => {
         Monaco.load();
         //try to parse but dont show anything if not possible
@@ -65,6 +68,7 @@
     }
 
     function reset() {
+        runtimeResult = undefined
         store?.reset();
     }
 
@@ -91,22 +95,54 @@
                 bind:code={project.grammar}
                 highlightedLine={-1}
         />
-        <Editor
-                style="flex: 1;"
-                runtimeGrammar={project.grammar}
-                language="dotlr-result"
-                bind:code={project.content}
-                highlightedLine={-1}
-        />
+        <div class="mode" class:mode-hidden={project.options.mode === 'tokens'}>
+            <ParseTreeCodeExecutor
+                    bind:code={project.code}
+                    grammar={$store.grammar}
+                    on:run={async () => {
+                    const res = await store.executeTypescript(project.code)
+                    runtimeResult = res.consoleOutput
+                }}
+            />
+            <button class="mode-selector-button" on:click={() => project.options.mode = "tokens"}>
+                Tokens
+            </button>
+        </div>
+        <div class="mode" class:mode-hidden={project.options.mode === 'code'}>
+            <Editor
+                    runtimeGrammar={project.grammar}
+                    language="dotlr-result"
+                    bind:code={project.content}
+                    highlightedLine={-1}
+            />
+
+            <button class="mode-selector-button" on:click={() => project.options.mode = "code"}>
+                Code
+            </button>
+        </div>
     </Column>
     <div class="pipe-container">
-        <div class="pipe-container-inner">
-            {#if $store.result?.type === 'error'}
-                <pre>{stringifyError($store.result.error)}</pre>
-            {:else}
-                <TreeRenderer tree={$store.result?.result ?? {type: "Terminal", value: {slice: "Root"}}}/>
+        <Column style="flex: 1; height: 100%; overflow-y: auto" gap="0.5rem">
+            <div class="pipe-container-inner">
+                {#if $store.result?.type === 'error'}
+                    <pre>{stringifyError($store.result.error)}</pre>
+                {:else}
+                    <TreeRenderer tree={$store.result?.result ?? {type: "Terminal", value: {slice: "Root"}}}/>
+                {/if}
+            </div>
+            {#if runtimeResult}
+                <div
+                        style="
+                        display: flex;
+                        max-height: 50%;
+                        width: 100%;
+"
+                >
+                    <ConsoleEditor logs={runtimeResult}/>
+                </div>
             {/if}
-        </div>
+        </Column>
+
         <Row justify="between" gap="0.5rem" wrap>
             <Row gap="0.5rem" wrap>
                 <ParserPicker bind:value={project.parserType}/>
@@ -307,6 +343,36 @@
         padding: 0 0.5rem;
     }
 
+    .mode {
+        display: flex;
+        flex: 1;
+        position: relative;
+    }
+
+    .mode-selector-button {
+        position: absolute;
+        width: 6rem;
+        background-color: var(--secondary-5);
+        border: dashed 0.1rem var(--secondary-15);
+        color: var(--secondary-text);
+        font-size: 1rem;
+        padding: 0.5rem 0.8rem;
+        cursor: pointer;
+        z-index: 10;
+         border-bottom-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+        right: 0;
+        top: 0;
+
+        transition: background-color 0.3s;
+    }
+    .mode-selector-button:hover{
+        background-color: var(--secondary-5);
+    }
+    .mode-hidden {
+        display: none;
+    }
+
     @media (max-width: 768px) {
         .wrapper {
             grid-template-columns: 1fr;
@@ -322,14 +388,16 @@
     .automaton-graph-hidden {
         display: none;
     }
-    .el-header{
+
+    .el-header {
         display: flex;
         gap: 0.5rem;
         flex: 1;
         justify-content: flex-end;
     }
+
     @media (max-width: 500px) {
-        .el-header{
+        .el-header {
             justify-content: flex-end;
             flex: 1;
         }
