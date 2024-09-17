@@ -18,10 +18,8 @@ export type MonacoType = typeof monaco
 
 class MonacoLoader {
     private monaco: MonacoType;
-    private ts: typeof typescript;
     loading: Promise<{
         monaco: MonacoType,
-        ts: typeof typescript
     }>;
     toDispose: monaco.IDisposable[] = [];
     runtimeGrammarToDispose: monaco.IDisposable[] = []
@@ -46,18 +44,16 @@ class MonacoLoader {
     }
 
 
-    async load(): Promise<{ monaco: MonacoType, ts: typeof typescript }> {
+    async load(): Promise<{ monaco: MonacoType}> {
         if (this.loading) return this.loading
         this.loading = new Promise(async res => {
-            const [monaco, ts] = await Promise.all([
+            const [monaco] = await Promise.all([
                 import('monaco-editor'),
-                import('typescript')
             ])
-            res({monaco, ts: ts})
+            res({monaco})
         })
-        const {monaco, ts} = await this.loading
+        const {monaco} = await this.loading
         this.monaco = monaco
-        this.ts = ts
         monaco.editor.defineTheme('custom-theme', generateTheme())
         monaco.languages.register({id: 'dotlr'})
         monaco.languages.register({id: 'dotlr-result'})
@@ -78,55 +74,7 @@ class MonacoLoader {
                 return new editorWorker()
             }
         }
-        return {monaco, ts}
-    }
-
-    //converts a typescript code to a tree
-    codeToTree(code: string): ts.Node {
-        const ts = this.ts
-        const sourceFile = ts.createSourceFile(
-            'example.ts',
-            code,
-            ts.ScriptTarget.Latest,
-            true
-        );
-        console.log(sourceFile.statements[0])
-        return sourceFile.statements[0]
-
-    }
-
-    replaceParseCalls(sourceCode: string, fnName: string, onMatch: (ts: typeof typescript, node: ts.Node) => ts.Node): string {
-        const ts = this.ts
-        const id = Math.floor(Math.random() * 1000000)
-        const sourceFile = ts.createSourceFile(
-            `${id}-example.ts`,
-            sourceCode,
-            ts.ScriptTarget.Latest,
-            true
-        );
-
-        function visit(node: ts.Node): ts.Node {
-            if (
-                ts.isCallExpression(node) &&
-                ts.isIdentifier(node.expression) &&
-                node.expression.text === fnName
-            ) {
-                const arg = node.arguments[0];
-                if (!arg) return node
-                return onMatch(ts, arg)
-            }
-            //@ts-expect-error - ts.visitEachChild works
-            return ts.visitEachChild(node, visit, ts.nullTransformationContext);
-        }
-
-        const result = ts.transform(sourceFile, [
-            //@ts-expect-error - ts.visitNode works
-            (context) => (rootNode) => ts.visitNode(rootNode, visit)
-        ]);
-
-        const printer = ts.createPrinter({newLine: ts.NewLineKind.LineFeed});
-        const res = printer.printFile(result.transformed[0] as ts.SourceFile);
-        return res
+        return {monaco}
     }
 
     setTheme = (theme: string) => {
