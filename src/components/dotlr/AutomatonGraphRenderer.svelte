@@ -6,6 +6,7 @@
 
     let ref: HTMLElement = null
     let prev: ParserVisualization = null
+    export let noApos: boolean = false
     export let automaton: Automaton
 
     onDestroy(() => {
@@ -14,20 +15,20 @@
         }
     })
 
-    function updateRef(automaton: Automaton, el: HTMLElement) {
+    function updateRef(automaton: Automaton, el: HTMLElement, noApos: boolean) {
         if (el) {
-            if(automaton === prev?.automaton){
+            if(automaton === prev?.automaton && noApos === !prev?.config.useApostrophes){
                 return
             }
             if (prev) {
                 prev.dispose()
             }
-            prev = new ParserVisualization(automaton, el)
+            prev = new ParserVisualization(automaton, el, {useApostrophes: !noApos})
             prev.render()
         }
     }
 
-    $: if (ref) updateRef(automaton, ref)
+    $: if (ref) updateRef(automaton, ref, noApos)
 </script>
 
 <div class="container" bind:this={ref}>
@@ -60,6 +61,7 @@
     }
     :global(.automaton_state-header-bg){
         fill: var(--primary-5);
+        stroke-width: 2px;
     }
 
     :global(.automaton_link) {

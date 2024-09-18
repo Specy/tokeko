@@ -10,13 +10,13 @@
     import Github from "~icons/fa-brands/Github.svelte";
     import Column from "$cmp/layout/Column.svelte";
     import Row from "$cmp/layout/Row.svelte";
+    import {installEventStore} from "$stores/userInstallEventStore";
 
-    let installEvent: Event | null = null
     onMount(() => {
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault()
             console.log('beforeinstallprompt', e)
-            installEvent = e
+            $installEventStore = e
         })
     })
 </script>
@@ -80,18 +80,18 @@
 
                     </div>
 
-                    {#if installEvent}
+                    {#if $installEventStore}
                         <Button
                                 style="gap: 0.5rem;"
                                 color="secondary"
                                 on:click={async () => {
 							try {
 								// @ts-ignore
-								await installEvent.prompt()
+								await $installEventStore.prompt()
 							} catch (e) {
 								console.error(e)
 							}
-							installEvent = null
+							$installEventStore = null
 						}}
                         >
                             <Icon>

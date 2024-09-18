@@ -197,7 +197,9 @@
                 {#if $store.result?.type === 'error'}
                     <pre>{stringifyError($store.result.error)}</pre>
                 {:else}
-                    <TreeRenderer tree={$store.result?.result ?? {type: "Terminal", value: {slice: "Root"}}}/>
+                    <TreeRenderer
+                            tree={$store.result?.result ?? {type: "Terminal", value: {slice: "Root"}}}
+                    />
                 {/if}
             </div>
             {#if runtimeResult}
@@ -324,7 +326,10 @@
                 <div id="automaton-graph"
                      class="automaton-graph"
                      class:automaton-graph-hidden={!project.options.showAutomatonAsGraph}>
-                    <AutomatonGraphRenderer automaton={$store.result.parser.getAutomaton()}/>
+                    <AutomatonGraphRenderer
+                            automaton={$store.result.parser.getAutomaton()}
+                            noApos={project.options.noAposInAutomaton}
+                    />
                 </div>
 
             </ExpandableContainer>

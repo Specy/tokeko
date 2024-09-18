@@ -19,6 +19,7 @@ type Link = {
 type VisualizationConfig = {
     curveFactor: number;
     labelOffset: number;
+    useApostrophes: boolean;
 }
 
 export class ParserVisualization {
@@ -30,7 +31,7 @@ export class ParserVisualization {
     automaton: Automaton;
     private target: HTMLElement;
     private svgGroup: d3.Selection<SVGGElement, unknown, HTMLElement, any>;
-    private config: VisualizationConfig;
+    config: VisualizationConfig;
     private bg: d3.Selection<SVGRectElement, unknown, HTMLElement, any>;
 
     constructor(automaton: Automaton, target: HTMLElement, config: Partial<VisualizationConfig> = {}) {
@@ -39,6 +40,7 @@ export class ParserVisualization {
         this.config = {
             curveFactor: 0.1,
             labelOffset: 30,
+            useApostrophes: true,
             ...config
         };
         this.svg = d3.select(this.target).append('svg');
@@ -154,7 +156,7 @@ export class ParserVisualization {
             Array.from(state.transitions.entries()).map(([pattern, targetId]) => ({
                 source: state.id,
                 target: targetId,
-                label: stringifyAtom(pattern)
+                label: stringifyAtom(pattern, this.config.useApostrophes)
             }) satisfies Link)
         );
 
@@ -163,7 +165,7 @@ export class ParserVisualization {
     }
 
     private formatStateInfo(state: State): string[] {
-        return state.items.map(item => stringifyItem(item));
+        return state.items.map(item => stringifyItem(item,  this.config.useApostrophes));
     }
 
     private createVisualization(nodes: Node[], links: Link[]): void {

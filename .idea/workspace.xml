@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="improve types and add metadata">
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fixes colors">
+      <change afterPath="$PROJECT_DIR$/src/stores/userInstallEventStore.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraph.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraph.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraphRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraphRenderer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dotlr/TreeRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/TreeRenderer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +94,8 @@
       <workItem from="1726656287809" duration="1638000" />
       <workItem from="1726659246937" duration="40000" />
       <workItem from="1726677648124" duration="2328000" />
-      <workItem from="1726681749889" duration="1062000" />
+      <workItem from="1726681749889" duration="1328000" />
+      <workItem from="1726685782590" duration="654000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -348,7 +353,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726679975414</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="fixes colors">
+      <option name="closed" value="true" />
+      <created>1726683075292</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1726683075293</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,6 +394,7 @@
     <MESSAGE value="Finish runtime" />
     <MESSAGE value="fix" />
     <MESSAGE value="improve types and add metadata" />
-    <option name="LAST_COMMIT_MESSAGE" value="improve types and add metadata" />
+    <MESSAGE value="fixes colors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes colors" />
   </component>
 </project>
