@@ -46,7 +46,7 @@ T -> %id
     The app comes with a typescript runtime that you can use to utilize the parser you have created.
     <br/>
     The global <b>PARSE</b> function will use the grammar you have defined, and the types <b>ThisTree, ThisToken,
-    ThisTerminal, ThisNonTerminal</b>
+    ThisTerminal, ThisNonTerminal, ThisRegex</b>
     are the types of your grammar.
     <br/>
     Alternatively you can use directly the parsers and grammar functions, look at the type definitions below.

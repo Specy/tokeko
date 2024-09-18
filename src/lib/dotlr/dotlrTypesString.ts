@@ -16,7 +16,7 @@ declare type Tree<NT = string, T = Token> = {
     type: 'Terminal'
     value: {
         token: T,
-        slice: NT
+        slice: string
     }
 } | {
     type: 'NonTerminal'
@@ -26,12 +26,12 @@ declare type Tree<NT = string, T = Token> = {
     }
 }
 
-declare type Token<C = string> = {
+declare type Token<C = string, R = string> = {
     type: 'Constant'
     value: C
 } | {
     type: 'Regex',
-    value: string
+    value: R
 } | {
     type: 'Eof'
 }
@@ -223,17 +223,20 @@ declare class LALR1Parser extends Parser {
 export function getTsGlobal(grammar?: string) {
     const nonTerminals = [] as string[]
     const terminals = [] as string[]
+    const regexes = [] as string[]
     if(grammar){
         const g = Grammar.parse(grammar)
         if(g.ok){
             nonTerminals.push(...g.val.getSymbols().map(s => `'${s.replace(/'/g, "\\'")}'`))
             terminals.push(...g.val.getConstantTokens().map(s => `'${s.replace(/'/g, "\\'")}'`))
+            regexes.push(...([...g.val.getRegexTokens().keys()].map(s => `'${s.replace(/'/g, "\\'")}'`)))
         }
     }
     return `${DOTLR_TYPES_STRING}
     declare type ThisNonTerminal = ${nonTerminals.join(' | ') || 'string'}
     declare type ThisTerminal = ${terminals.join(' | ') || 'string'}
-    declare type ThisToken = Token<ThisTerminal>
+    declare type ThisRegex = ${regexes.join(' | ') || 'string'}
+    declare type ThisToken = Token<ThisTerminal, ThisRegex>
     declare type ThisTree = Tree<ThisNonTerminal, ThisToken>
     declare function PARSE(text: string): Result<ThisTree, ParsingError | GrammarError | ParserError>`
 }
