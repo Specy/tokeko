@@ -124,6 +124,7 @@ declare type AtomicPattern<T extends Token = Token> = {
 declare type Trace<Tr extends Tree = Tree> = {
     steps: Step<Tr>[];
 };
+
 declare type Step<Tr extends Tree = Tree> = {
     state_stack: number[];
     tree_stack: Tr[];
@@ -236,10 +237,12 @@ declare type Err<T> = {
     ok: false;
     val: T;
 } 
+
 declare type Ok<T> = {
     ok: true;
     val: T;
 }
+
 declare type Result<T, E> = Ok<T> | Err<E>
 `.trim()
 
@@ -256,15 +259,21 @@ export function getTsGlobal(grammar?: string) {
         }
     }
     return `declare type ThisNonTerminal = ${nonTerminals.join(' | ') || 'string'}
+
 declare type ThisTerminal = ${terminals.join(' | ') || 'string'}
+
 declare type ThisRegex = ${regexes.join(' | ') || 'string'}
+
 declare type ThisToken = Token<ThisTerminal, ThisRegex>
+
 declare type ThisTree = Tree<ThisNonTerminal, ThisToken>
+
 declare type ParseResult = {
     tree: ThisTree
     grammar: Grammar<ThisTerminal, ThisNonTerminal, ThisRegex>
     parser: Parser<ThisTerminal, ThisNonTerminal, ThisRegex>
 }
+
 declare function PARSE(text: string): Result<ParseResult, ParsingError | GrammarError | ParserError>
 
 ${DOTLR_TYPES_STRING}`
