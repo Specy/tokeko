@@ -155,6 +155,7 @@
                             iconLeft
                             color="primary"
                             border="secondary"
+                            className="with-min-width"
                             on:click={async () => {
                             const res = await store.executeTypescript(project.code)
                             runtimeResult = res.consoleOutput

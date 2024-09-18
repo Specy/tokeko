@@ -4,28 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="add back editor">
-      <change afterPath="$PROJECT_DIR$/src/lib/dotlr/dotlrTypesString.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SyntaxHighlighter.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SyntaxHighlighter.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/ConsoleEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/ConsoleEditor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/DotlrDocs.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/DotlrDocs.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/ParseTreeCodeExecutor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/ParseTreeCodeExecutor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/ParserPicker.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/ParserPicker.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/editor/Editor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/editor/Editor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/inputs/Button.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/inputs/Button.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/Monaco.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Monaco.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/dotlr/DotlrLanguage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dotlr/DotlrLanguage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/dotlr/RuntimeDotlr.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dotlr/RuntimeDotlr.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/sandbox.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/sandbox.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/theme/svelteTheme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/theme/svelteTheme.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/docs/dotlr/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/userProjectsStore.ts" afterDir="false" />
-    </list>
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="Finish runtime" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,7 +82,7 @@
       <workItem from="1726516471512" duration="1037000" />
       <workItem from="1726572122835" duration="18873000" />
       <workItem from="1726600521690" duration="2019000" />
-      <workItem from="1726605344706" duration="8032000" />
+      <workItem from="1726605344706" duration="8327000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -321,7 +300,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726602474604</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Finish runtime">
+      <option name="closed" value="true" />
+      <created>1726655077671</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1726655077671</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,6 +337,7 @@
     <MESSAGE value="fix" />
     <MESSAGE value="test" />
     <MESSAGE value="add back editor" />
-    <option name="LAST_COMMIT_MESSAGE" value="add back editor" />
+    <MESSAGE value="Finish runtime" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finish runtime" />
   </component>
 </project>
