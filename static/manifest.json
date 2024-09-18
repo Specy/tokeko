@@ -1,7 +1,7 @@
 {
     "name": "Tokeko",
     "short_name": "Tokeko",
-    "theme_color": "#553b6a",
+    "theme_color": "#1f1a27",
     "background_color": "#1f1a27",
     "display": "standalone",
     "scope": "/",
