@@ -59,7 +59,7 @@
         fill: transparent;
     }
     :global(.tree_terminal){
-        fill: color-mix(in srgb, var(--accent) 70%, var(--primary-15));
+        fill: var(--accent);
     }
      :global(.tree_non_terminal){
         fill: var(--primary-15);
