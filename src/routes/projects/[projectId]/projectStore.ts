@@ -126,7 +126,11 @@ export function createCompilerStore(project: Project) {
                     const res = parser.val.parse(code)
                     return {
                         ok: res.ok,
-                        val: res.val
+                        val: {
+                            tree: res.val,
+                            parser: parser.val,
+                            grammar: grammarParser.val
+                        }
                     }
                 },
                 Grammar,

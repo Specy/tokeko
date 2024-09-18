@@ -6,8 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/DotlrDocs.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/DotlrDocs.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/inputs/Button.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/inputs/Button.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/inputs/ButtonLink.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/inputs/ButtonLink.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/dotlr/dotlrTypesString.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dotlr/dotlrTypesString.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/projects/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/manifest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +95,9 @@
       <workItem from="1726572122835" duration="18873000" />
       <workItem from="1726600521690" duration="2019000" />
       <workItem from="1726605344706" duration="8735000" />
-      <workItem from="1726656287809" duration="1448000" />
+      <workItem from="1726656287809" duration="1638000" />
+      <workItem from="1726659246937" duration="40000" />
+      <workItem from="1726677648124" duration="1958000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -321,7 +331,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726655433594</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="fix">
+      <option name="closed" value="true" />
+      <created>1726657936663</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1726657936663</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -60,3 +60,5 @@ With Tokeko, you can:
 ### Parsing Steps
 After compiling a language or parsing a string, Tokeko breaks down the process step by step. You can click on each step to see the details and gain deeper insights into how the parsing works.
 
+### More info
+For more info about the parser itself and how to use the grammar, please [visit the dotlr](https://github.com/umut-sahin/dotlr?tab=readme-ov-file#how-does-it-work) library

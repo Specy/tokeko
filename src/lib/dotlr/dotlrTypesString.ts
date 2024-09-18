@@ -1,52 +1,169 @@
 import {Grammar} from "@specy/dotlr";
 
+
 export const DOTLR_TYPES_STRING = `
+declare type FirstTable<T extends Token = Token> = Map<string, T[]>;
 
-declare type Err<T> = {
-    ok: false;
-    val: T;
-} 
-declare type Ok<T> = {
-    ok: true;
-    val: T;
-}
-declare type Result<T, E> = Ok<T> | Err<E>
+declare type FollowTable<T extends Token = Token> = Map<string, T[]>;
 
-declare type Tree<NT = string, T = Token> = {
-    type: 'Terminal'
+declare type GoToTable<NT extends string = string> = Map<NT, number>[];
+
+declare type ActionTable<T extends Token = Token> = Map<T, Action[]>[];
+
+declare type ParsingTables<NT extends string = string, T extends Token = Token> = {
+    action_table: ActionTable<T>;
+    goto_table: GoToTable<NT>;
+};
+
+declare type Tree<NT extends string = string, T extends Token = Token> = {
+    type: 'Terminal';
     value: {
-        token: T,
-        slice: string
-    }
+        token: T;
+        slice: string;
+    };
 } | {
-    type: 'NonTerminal'
+    type: 'NonTerminal';
     value: {
-        symbol: NT,
-        pattern: Tree<NT, T>[]
-    }
-}
+        symbol: NT;
+        pattern: Tree<NT, T>[];
+    };
+};
 
 declare type Token<C = string, R = string> = {
-    type: 'Constant'
-    value: C
+    type: 'Constant';
+    value: C;
 } | {
-    type: 'Regex',
-    value: R
+    type: 'Regex';
+    value: R;
 } | {
-    type: 'Eof'
+    type: 'Eof';
+};
+
+declare class Grammar<
+    T extends string = string, 
+    NT extends string = string, 
+    R extends string = string
+> {
+    grammar: _Grammar;
+    private cache;
+    private constructor();
+    static parse<T extends string = string, NT extends string = string, R extends string = string>(grammar: string): Ok<Grammar<T, NT, R>> | Err<GrammarError>;
+    getSymbols(): NT[];
+    getConstantTokens(): T[];
+    getStartSymbol(): NT;
+    getProductions(): Rule<Token<T, R>>[];
+    getRegexTokens(): Map<R, string>;
+    stringify(): string;
+    clone(): Grammar<T, NT, R>;
 }
 
-declare type Rule = {
+class Parser<
+    T extends string = string, 
+    NT extends string = string, 
+    R extends string = string
+> {
+    private parser;
+    private cache;
+    constructor(parser: _Parser);
+    parse(input: string): Ok<Tree<NT, Token<T, R>>> | Err<ParsingError>;
+    getActionTable(): ActionTable<Token<T, R>>;
+    getGotoTable(): GoToTable<NT>;
+    getParseTables(): ParsingTables<NT, Token<T, R>>;
+    getAutomaton(): Automaton<Token<T, R>>;
+    getFirstTable(): FirstTable<Token<T, R>>;
+    getFollowTable(): FollowTable<Token<T, R>>;
+    tokenize(input: string): Err<ParsingError> | Ok<{
+        token: Token<T, R>;
+        slice: string;
+    }[]>;
+    trace(input: string): Err<ParsingError> | Ok<{
+        trace: Trace<Tree<NT, Token<T, R>>>;
+        tree: Tree<NT, Token<T, R>>;
+    }>;
+}
+
+declare class LR1Parser<
+    T extends string = string, 
+    NT extends string = string, 
+    R extends string = string
+> {
+    private constructor();
+    /**
+     * Consumes a grammar and returns a parser, the grammar is consumed 
+     * and the ownership is transferred to the parser
+     */
+    static fromGrammar<G extends Grammar>(grammar: G): Ok<LR1Parser<string, string, string>> | Err<ParserError>;
+}
+
+declare class LALR1Parser<
+    T extends string = string, 
+    NT extends string = string, 
+    R extends string = string
+> {
+    private constructor();
+    /**
+     * Consumes a grammar and returns a parser, the grammar is consumed 
+     * and the ownership is transferred to the parser
+     */
+    static fromGrammar<G extends Grammar>(grammar: G): Err<ParserError> | Ok<LALR1Parser<string, string, string>>;
+}
+
+declare type Rule<T extends Token = Token> = {
     symbol: string;
-    pattern: AtomicPattern[];
+    pattern: AtomicPattern<T>[];
 };
-declare type AtomicPattern = {
+
+declare type AtomicPattern<T extends Token = Token> = {
     type: 'Symbol';
     value: string;
 } | {
     type: 'Token';
-    value: Token;
+    value: T;
 };
+
+declare type Trace<Tr extends Tree = Tree> = {
+    steps: Step<Tr>[];
+};
+declare type Step<Tr extends Tree = Tree> = {
+    state_stack: number[];
+    tree_stack: Tr[];
+    remaining_tokens: Tr extends Tree<any, infer T> ? T[] : never;
+    action_taken: Action;
+};
+
+declare type Item<T extends Token = Token> = {
+    rule: Rule<T>;
+    dot: number;
+    lookahead: T[];
+};
+
+declare type State<T extends Token = Token> = {
+    id: number;
+    items: Item<T>[];
+    transitions: Map<AtomicPattern<T>, number>;
+};
+
+declare type Automaton<T extends Token = Token> = {
+    states: State<T>[];
+};
+
+declare type Action = {
+    type: 'Shift';
+    value: {
+        next_state: number;
+    };
+} | {
+    type: 'Reduce';
+    value: {
+        rule_index: number;
+    };
+} | {
+    type: 'Accept';
+    value: {
+        rule_index: number;
+    };
+};
+
 declare type GrammarError = {
     type: "UnexpectedToken";
     value: {
@@ -68,26 +185,35 @@ declare type GrammarError = {
         regex: string;
     };
 };
-declare type ParserError = {
+
+declare type ParserError<T extends Token = Token> = {
     type: "EmptyGrammar";
 } | {
     type: "UndefinedSymbol";
     value: {
         symbol: string;
-        rule: Rule;
+        rule: Rule<T>;
     };
 } | {
     type: "UndefinedRegexToken";
     value: {
         regex_token: string;
-        rule: Rule;
+        rule: Rule<T>;
     };
 } | {
     type: "Conflict";
+    parser: {
+        grammar: any;
+        first_table: any;
+        follow_table: any;
+        automaton: any;
+        parsing_tables: any;
+    };
     state: number;
     token: string;
 };
-declare type ParsingError = {
+
+declare type ParsingError<T extends Token = Token> = {
     type: "UnknownToken";
     value: {
         token: string;
@@ -96,128 +222,25 @@ declare type ParsingError = {
     type: "UnexpectedToken";
     value: {
         token: string;
-        expected: Token[];
+        expected: T[];
     };
 } | {
     type: "UnexpectedEof";
     value: {
-        expected: Token[];
+        expected: T[];
     };
 };
 
-declare type Trace = {
-    steps: Step[];
-};
-declare type Step = {
-    state_stack: number[];
-    tree_stack: Tree[];
-    remaining_tokens: Token[];
-    action_taken: Action;
-};
-declare type Item = {
-    rule: Rule;
-    dot: number;
-    lookahead: Token[];
-};
-declare type State = {
-    id: number;
-    items: Item[];
-    transitions: Map<AtomicPattern, number>;
-};
-declare type Automaton = {
-    states: State[];
-};
-declare type Action = {
-    type: 'Shift';
-    value: {
-        next_state: number;
-    };
-} | {
-    type: 'Reduce';
-    value: {
-        rule_index: number;
-    };
-} | {
-    type: 'Accept';
-    value: {
-        rule_index: number;
-    };
-};
-declare type FirstTable = Map<string, Token[]>;
-declare type FollowTable = FirstTable;
-declare type GoToTable = Map<string, number>[];
-declare type ActionTable = Map<Token, Action[]>[];
-declare type ParsingTables = {
-    action_table: ActionTable;
-    goto_table: GoToTable;
-};
 
-declare class Grammar {
-
-    private constructor();
-
-    static parse(grammar: string): Ok<Grammar> | Err<GrammarError>;
-
-    getSymbols(): string[];
-
-    getConstantTokens(): string[];
-
-    getStartSymbol(): string;
-
-    getProductions(): Rule[];
-
-    getRegexTokens(): Map<string, string>;
-
-    stringify(): string;
-
-    clone(): Grammar;
+declare type Err<T> = {
+    ok: false;
+    val: T;
+} 
+declare type Ok<T> = {
+    ok: true;
+    val: T;
 }
-
-class Parser {
-    parse(input: string): Ok<Tree> | Err<ParsingError>;
-
-    getActionTable(): ActionTable;
-
-    getGotoTable(): GoToTable;
-
-    getParseTables(): ParsingTables;
-
-    getAutomaton(): Automaton;
-
-    getFirstTable(): FirstTable;
-
-    getFollowTable(): FirstTable;
-
-    tokenize(input: string): Err<ParsingError> | Ok<{
-        token: Token;
-        slice: string;
-    }[]>;
-
-    trace(input: string): Err<ParsingError> | Ok<{
-        trace: Trace;
-        tree: Tree;
-    }>;
-}
-
-declare class LR1Parser extends Parser {
-    private constructor();
-
-    /**
-     * Consumes a grammar and returns a parser, the grammar is 
-     * consumed and the ownership is transferred to the parser
-     */
-    static fromGrammar(grammar: Grammar): Ok<LR1Parser> | Err<ParserError>;
-}
-
-declare class LALR1Parser extends Parser {
-    private constructor();
-
-    /**
-     * Consumes a grammar and returns a parser, the grammar is 
-     * consumed and the ownership is transferred to the parser
-     */
-    static fromGrammar(grammar: Grammar): Err<ParserError> | Ok<LALR1Parser>;
-}
+declare type Result<T, E> = Ok<T> | Err<E>
 `.trim()
 
 export function getTsGlobal(grammar?: string) {
@@ -232,11 +255,17 @@ export function getTsGlobal(grammar?: string) {
             regexes.push(...([...g.val.getRegexTokens().keys()].map(s => `'${s.replace(/'/g, "\\'")}'`)))
         }
     }
-    return `${DOTLR_TYPES_STRING}
-    declare type ThisNonTerminal = ${nonTerminals.join(' | ') || 'string'}
-    declare type ThisTerminal = ${terminals.join(' | ') || 'string'}
-    declare type ThisRegex = ${regexes.join(' | ') || 'string'}
-    declare type ThisToken = Token<ThisTerminal, ThisRegex>
-    declare type ThisTree = Tree<ThisNonTerminal, ThisToken>
-    declare function PARSE(text: string): Result<ThisTree, ParsingError | GrammarError | ParserError>`
+    return `declare type ThisNonTerminal = ${nonTerminals.join(' | ') || 'string'}
+declare type ThisTerminal = ${terminals.join(' | ') || 'string'}
+declare type ThisRegex = ${regexes.join(' | ') || 'string'}
+declare type ThisToken = Token<ThisTerminal, ThisRegex>
+declare type ThisTree = Tree<ThisNonTerminal, ThisToken>
+declare type ParseResult = {
+    tree: ThisTree
+    grammar: Grammar<ThisTerminal, ThisNonTerminal, ThisRegex>
+    parser: Parser<ThisTerminal, ThisNonTerminal, ThisRegex>
+}
+declare function PARSE(text: string): Result<ParseResult, ParsingError | GrammarError | ParserError>
+
+${DOTLR_TYPES_STRING}`
 }

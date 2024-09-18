@@ -38,7 +38,7 @@
 		border-radius: 0.3rem;
 		color: var(--btn-text);
 		background-color: var(--btn-color);
-		border: dashed 0.1rem var(--border-color);
+		border: dashed 0.1rem var(--border-color, transparent);
 		text-align: center;
 		display: flex;
 		transition: all 0.3s;

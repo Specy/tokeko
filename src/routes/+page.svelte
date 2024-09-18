@@ -23,7 +23,9 @@
 
 <svelte:head>
     <title>Tokeko</title>
-    <meta name="description" content="A language and platform for easy optimization models."/>
+    <meta name="description" content="An educational platform designed to help users understand and learn about different types of
+                        parsers, grammar structures, and parsing techniques. With interactive features, you can explore
+                        complex parsing concepts in a visual and intuitive way."/>
 </svelte:head>
 
 <Nav/>
@@ -42,10 +44,11 @@
                         complex parsing concepts in a visual and intuitive way.
                     </div>
                     <ul style="max-width: 30rem;" class="text">
-                        <li>Write your own grammar and parse a language with either LR(1) or LALR parsers</li>
+                        <li>Write your own grammar and parse a language with either LR(1) or LALR1 parsers</li>
                         <li>Learn how the parser is constructed, viewing the FIRST/FOLLOW and automaton tables/graphs</li>
-                        <li>View the steps needed to parse a string, and the resulting parse tree</li>
+                        <li>View the steps needed to parse a string and the resulting parse tree</li>
                         <li>Editor with text completion and error reporting, useful error messages and traces</li>
+                        <li>Typescript code runner to use the parser you created directly in the app!</li>
                     </ul>
                     <div style="text-shadow: 2px 2px 10px black;">
                     </div>

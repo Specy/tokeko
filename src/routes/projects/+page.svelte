@@ -1,17 +1,21 @@
 <script lang="ts">
-	import ButtonLink from '$cmp/inputs/ButtonLink.svelte';
-	import Nav from '$cmp/layout/Nav.svelte';
-	import Page from '$cmp/layout/Page.svelte';
-	import Row from '$cmp/layout/Row.svelte';
-	import ProjectCard from '$cmp/projects/ProjectCard.svelte';
-	import {textDownloader} from '$src/lib/utils';
-	import {type Project, projectStore} from '$stores/userProjectsStore';
-	import {prompter} from '$src/stores/promptStore';
-	import {toast} from '$src/stores/toastStore';
-	import {onMount} from 'svelte';
-	import {scale} from 'svelte/transition';
+    import ButtonLink from '$cmp/inputs/ButtonLink.svelte';
+    import Nav from '$cmp/layout/Nav.svelte';
+    import Page from '$cmp/layout/Page.svelte';
+    import Row from '$cmp/layout/Row.svelte';
+    import ProjectCard from '$cmp/projects/ProjectCard.svelte';
+    import {textDownloader} from '$src/lib/utils';
+    import {type Project, projectStore} from '$stores/userProjectsStore';
+    import {prompter} from '$src/stores/promptStore';
+    import {toast} from '$src/stores/toastStore';
+    import {onMount} from 'svelte';
+    import {scale} from 'svelte/transition';
+    import FilePicker from "$cmp/misc/FilePicker.svelte";
+    import Button from "$cmp/inputs/Button.svelte";
+    import FaPlus from "~icons/fa6-solid/plus.svelte";
+    import FaArrowUp from "~icons/fa6-solid/arrow-up.svelte";
 
-	onMount(() => {
+    onMount(() => {
         if ('launchQueue' in window) {
             // @ts-ignore
             launchQueue.setConsumer(async (launchParams) => {
@@ -39,10 +43,10 @@
     });
 
     async function deleteProject(project: Project) {
-        if (!(await prompter.confirm(`Are you sure you want to delete ${project.name}?`))) return;
+        if (!(await prompter.confirm(`Are you sure you want to delete "${project.name}"?`))) return;
         try {
             await projectStore.deleteProject(project.id);
-            toast.success(`${project.name} deleted`);
+            toast.logPill(`Project "${project.name}" deleted`);
         } catch (error) {
             toast.error(error.message);
         }
@@ -55,6 +59,19 @@
     function onDownload(project: Project) {
         textDownloader(JSON.stringify(project), `${project.name}.tokeko`);
     }
+
+    async function importString(f: string) {
+        try {
+            const project = JSON.parse(f);
+            const p = await projectStore.createNewProject(project.name, project.description);
+            await projectStore.updateProject(p.id, project);
+            toast.logPill(`Project "${project.name}" imported!`);
+        } catch (e) {
+            console.error(e);
+            toast.error('Failed to import project!');
+        }
+
+    }
 </script>
 
 <svelte:head>
@@ -64,9 +81,25 @@
 
 <Nav/>
 <Page cropped="50rem" padding="2rem" mobilePadding="1rem" gap="3rem">
-    <Row justify="between">
+    <Row justify="between" wrap gap="0.5rem">
         <h1>Projects</h1>
-        <ButtonLink href="/projects/new">New Project</ButtonLink>
+        <Row gap="0.5rem" flex1 justify="end">
+            <FilePicker
+                    as="text"
+                    on:import={f => {
+                        importString(f.detail.data);
+                    }}
+            >
+                <Button iconLeft border="secondary" color="background">
+                    <FaArrowUp/>
+                    Import
+                </Button>
+            </FilePicker>
+            <ButtonLink href="/projects/new" iconLeft>
+                <FaPlus/>
+                New Project
+            </ButtonLink>
+        </Row>
     </Row>
     <div class="projects-wrapper">
 

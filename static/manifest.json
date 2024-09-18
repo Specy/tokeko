@@ -1,12 +1,12 @@
 {
-    "name": "Parsers",
-    "short_name": "Parsers",
+    "name": "Tokeko",
+    "short_name": "Tokeko",
     "theme_color": "#ad1a5b",
-    "background_color": "#181823",
-    "display": "fullscreen",
+    "background_color": "#644e75",
+    "display": "standalone",
     "scope": "/",
     "start_url": "/projects",
-    "description": "Tools to learn and create parsers",
+    "description": "An educational platform designed to help users understand and learn about different types of parsers, grammar structures, and parsing techniques.",
     "screenshots": [
         {
             "src": "/images/tokeko-result-wide.webp",

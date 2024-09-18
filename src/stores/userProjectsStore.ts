@@ -51,7 +51,7 @@ export function createProject(): Project {
 const parseResult = PARSE("10+20-40")
 if(!parseResult.ok) throw parseResult.val
 
-const tree = parseResult.val
+const tree = parseResult.val.tree
 console.log(tree)`,
         grammar: `P -> E
 
