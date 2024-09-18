@@ -156,7 +156,7 @@ export class ParserVisualization {
             Array.from(state.transitions.entries()).map(([pattern, targetId]) => ({
                 source: state.id,
                 target: targetId,
-                label: stringifyAtom(pattern, this.config.useApostrophes)
+                label: stringifyAtom(pattern, !this.config.useApostrophes)
             }) satisfies Link)
         );
 
@@ -165,7 +165,7 @@ export class ParserVisualization {
     }
 
     private formatStateInfo(state: State): string[] {
-        return state.items.map(item => stringifyItem(item,  this.config.useApostrophes));
+        return state.items.map(item => stringifyItem(item,  !this.config.useApostrophes));
     }
 
     private createVisualization(nodes: Node[], links: Link[]): void {
