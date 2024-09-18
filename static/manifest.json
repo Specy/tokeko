@@ -1,8 +1,8 @@
 {
     "name": "Tokeko",
     "short_name": "Tokeko",
-    "theme_color": "#ad1a5b",
-    "background_color": "#644e75",
+    "theme_color": "#1f1a27",
+    "background_color": "#553b6a",
     "display": "standalone",
     "scope": "/",
     "start_url": "/projects",

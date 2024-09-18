@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fix">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/inputs/Button.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/inputs/Button.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/inputs/ButtonLink.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/inputs/ButtonLink.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/dotlr/dotlrTypesString.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dotlr/dotlrTypesString.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/projects/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" afterDir="false" />
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="improve types and add metadata">
+      <change beforePath="$PROJECT_DIR$/src/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/themeStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/themeStore.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/manifest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +89,7 @@
       <workItem from="1726605344706" duration="8735000" />
       <workItem from="1726656287809" duration="1638000" />
       <workItem from="1726659246937" duration="40000" />
-      <workItem from="1726677648124" duration="1958000" />
+      <workItem from="1726677648124" duration="2258000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -339,7 +331,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726657936663</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="improve types and add metadata">
+      <option name="closed" value="true" />
+      <created>1726679869721</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1726679869721</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,6 +369,7 @@
     <MESSAGE value="add back editor" />
     <MESSAGE value="Finish runtime" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="improve types and add metadata" />
+    <option name="LAST_COMMIT_MESSAGE" value="improve types and add metadata" />
   </component>
 </project>
