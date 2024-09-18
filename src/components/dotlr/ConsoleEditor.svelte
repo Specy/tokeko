@@ -26,7 +26,6 @@
                 {:else if typeof arg === 'number'}
                     {arg}
                 {:else}
-                    {JSON.stringify(arg, null, 2)}
                     <JSONEditor
                             content={{json: arg}}
                             mainMenuBar={false}
@@ -34,9 +33,12 @@
                             statusBar={false}
                             readOnly={true}
                     />
-
                 {/if}
             {/each}
+        </div>
+        {:else}
+        <div style="text-align: center">
+            No logs
         </div>
     {/each}
 </Card>

@@ -16,6 +16,7 @@
 		"@iconify-json/fa-brands": "^1.1.8",
 		"@iconify-json/fa-solid": "^1.2.0",
 		"@iconify-json/fa6-solid": "^1.2.0",
+		"@iconify-json/mdi": "^1.2.0",
 		"@sveltejs/adapter-auto": "^3.2.0",
 		"@sveltejs/kit": "^2.5.7",
 		"@sveltejs/vite-plugin-svelte": "^3.1.0",
@@ -37,7 +38,7 @@
 	"type": "module",
 	"dependencies": {
 		"@ctrl/tinycolor": "^4.1.0",
-		"@specy/dotlr": "^0.1.15",
+		"@specy/dotlr": "^0.1.17",
 		"@sveltejs/adapter-static": "^3.0.1",
 		"@types/clone-deep": "^4.0.4",
 		"@types/color": "^3.0.6",

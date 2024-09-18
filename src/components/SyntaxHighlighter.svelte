@@ -3,6 +3,7 @@
     import hljs from 'highlight.js/lib/core';
     import "highlight.js/styles/atom-one-dark.css"
     import {highlightJsGrammar} from '$src/lib/dotlr/hljsLanguage';
+    import typescript from 'highlight.js/lib/languages/typescript'
 
     export let style: string = ""
     export let source: string;
@@ -10,6 +11,7 @@
     let code: HTMLElement;
     onMount(() => {
         hljs.registerLanguage('dotlr', () => highlightJsGrammar);
+        hljs.registerLanguage('typescript', typescript);
     });
 
     function highlight(sourceCode: string, el: HTMLElement, lang: string) {

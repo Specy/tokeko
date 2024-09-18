@@ -20,12 +20,17 @@
     let runtimeDiagnostic: monaco.editor.IDisposable;
 
     $: {
-        if(editor && runtimeGrammar){
+        if(editor && runtimeGrammar && language === 'dotlr'){
             runtimeDiagnostic?.dispose();
             runtimeDiagnostic = createDotlrRuntimeRuntimeDiagnostics(editor.getModel(), runtimeGrammar);
         }
     }
 
+    $: {
+        if(editor && runtimeGrammar && language === 'typescript'){
+            Monaco.setRuntimeGrammar(runtimeGrammar);
+        }
+    }
 
     const toDispose = [];
     const dispatcher = createEventDispatcher<{
@@ -110,7 +115,7 @@
                         }
                     ]
                     : []),
-                ...(runtimeGrammar ? getRuntimeDeltaDecorations(editor.getModel(), runtimeGrammar, code) : [])
+                ...((runtimeGrammar && language === 'dotlr-result')  ? getRuntimeDeltaDecorations(editor.getModel(), runtimeGrammar, code) : [])
             ]);
         }
     }

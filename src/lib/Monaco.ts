@@ -8,6 +8,8 @@ import {
     createDotlrRuntimeDiagnostics,
     DotlrLanguage
 } from "$lib/dotlr/DotlrLanguage";
+import {Grammar} from "@specy/dotlr";
+import {DOTLR_TYPES_STRING, getTsGlobal} from "$lib/dotlr/dotlrTypesString";
 
 
 export type MonacoType = typeof monaco
@@ -39,7 +41,7 @@ class MonacoLoader {
     }
 
 
-    async load(): Promise<{ monaco: MonacoType}> {
+    async load(): Promise<{ monaco: MonacoType }> {
         if (this.loading) return this.loading
         this.loading = new Promise(async res => {
             const [monaco] = await Promise.all([
@@ -53,7 +55,7 @@ class MonacoLoader {
         monaco.languages.register({id: 'dotlr'})
         monaco.languages.register({id: 'dotlr-result'})
         this.monaco = monaco
-        monaco.languages.typescript.typescriptDefaults.addExtraLib(tsGlobal, 'global.d.ts')
+        monaco.languages.typescript.typescriptDefaults.addExtraLib(getTsGlobal(), 'global.d.ts')
         monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
             strict: true,
             noImplicitAny: true,
@@ -72,6 +74,14 @@ class MonacoLoader {
             }
         }
         return {monaco}
+    }
+
+    setRuntimeGrammar(grammar: string) {
+        const libs = this.monaco.languages.typescript.typescriptDefaults.getExtraLibs()
+        const ts = getTsGlobal(grammar)
+        if(libs['global.d.ts']?.content !== ts){
+            this.monaco.languages.typescript.typescriptDefaults.addExtraLib(ts, 'global.d.ts')
+        }
     }
 
     setTheme = (theme: string) => {
@@ -111,37 +121,7 @@ class MonacoLoader {
 }
 
 
-const tsGlobal = `
-    type ReturnTree = {
-        ok: true
-        val: Tree
-    } | {
-        ok: false
-        val: unknown
-    }
-    declare function PARSE(text: string): ReturnTree;
-    declare type Tree = {
-        type: 'Terminal'
-        value: {
-            token: Token,
-            slice: string
-        }
-    } | {
-        type: 'NonTerminal'
-        value: {
-            symbol: string,
-            pattern: Tree[]
-        }
-    }
-    declare type Token = {
-        type: 'Constant'
-        value: string
-    } | {
-        type: 'Regex',
-        value: string
-    } | {
-        type: 'Eof'
-    }
-`
+
+
 
 export const Monaco = new MonacoLoader()

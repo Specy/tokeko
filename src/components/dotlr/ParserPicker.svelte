@@ -2,10 +2,11 @@
     import {PARSER_TYPES, type ParserType} from "$src/routes/projects/[projectId]/projectStore";
 
     export let value: ParserType
+    export let style = '';
 </script>
 
 
-<select bind:value>
+<select bind:value {style}>
     {#each PARSER_TYPES as type}
         <option value={type}>
             {type}

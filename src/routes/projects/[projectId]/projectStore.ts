@@ -1,15 +1,13 @@
 import {type Project} from "$stores/userProjectsStore";
 import {get, writable} from "svelte/store";
-import {Grammar, LALRParser, LR1Parser} from '@specy/dotlr'
+import {Grammar, LALR1Parser, LR1Parser} from '@specy/dotlr'
 import type {GrammarError, ParserError, ParsingError, Trace, Tree} from '@specy/dotlr/types'
 import {Monaco} from "$lib/Monaco";
 import {type ConsoleOutput, runSandboxedCode} from "$lib/sandbox";
 import {stringifyError} from "$lib/dotlr/dotlrUtils";
-
-
 export const PARSER_TYPES = ['LR1', 'LALR'] as const
 export type ParserType = typeof PARSER_TYPES[number]
-type Parser = LR1Parser | LALRParser
+type Parser = LR1Parser | LALR1Parser
 
 type SomeError = ParsingError | GrammarError | ParserError
 type ProjectStoreData = {
@@ -40,7 +38,7 @@ function createParser(type: ParserType, grammar: Grammar) {
     if (type === "LR1") {
         return LR1Parser.fromGrammar(grammar)
     } else if (type === 'LALR') {
-        return LALRParser.fromGrammar(grammar)
+        return LALR1Parser.fromGrammar(grammar)
     }
 }
 
@@ -55,7 +53,7 @@ export function createCompilerStore(project: Project) {
     function parseGrammar(_grammar?: string) {
         update(s => {
             const grammar = _grammar ?? get({subscribe}).grammar
-            const grammarParser = Grammar.fromGrammar(grammar)
+            const grammarParser = Grammar.parse(grammar)
             const type = get({subscribe}).parserType
             if (!grammarParser.ok) {
                 s.result = {
@@ -117,7 +115,7 @@ export function createCompilerStore(project: Project) {
     async function executeTypescript(code: string) {
         const current = get({subscribe})
         const grammar = current.grammar
-        const grammarParser = Grammar.fromGrammar(grammar)
+        const grammarParser = Grammar.parse(grammar)
         if (!grammarParser.ok) return errorToConsoleOutput(grammarParser.val as SomeError)
         const parser = createParser(current.parserType, grammarParser.val)
         if (!parser.ok) return errorToConsoleOutput(parser.val as SomeError)
@@ -130,7 +128,10 @@ export function createCompilerStore(project: Project) {
                         ok: res.ok,
                         val: res.val
                     }
-                }
+                },
+                Grammar,
+                LALR1Parser,
+                LR1Parser,
             }
         )
     }

@@ -17,7 +17,7 @@
 </svelte:head>
 
 <Nav/>
-<Page cropped padding='1rem' mobilePadding='1rem' gap="1rem">
+<Page cropped="70ch" padding='1rem' mobilePadding='1rem' gap="1rem">
 
     <DotlrDocs />
     <a href="{url}" class="tryit">

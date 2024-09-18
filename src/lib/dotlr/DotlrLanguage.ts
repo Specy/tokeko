@@ -53,7 +53,7 @@ export function createDotlrFormatter() {
     return {
         provideDocumentFormattingEdits: (model: editor.ITextModel) => {
             const text = model.getValue()
-            const grammar = Grammar.fromGrammar(text)
+            const grammar = Grammar.parse(text)
             if (grammar.ok) {
                 return [{
                     range: model.getFullModelRange(),
@@ -93,7 +93,7 @@ export function createDotlrRuntimeDiagnostics(model: editor.ITextModel) {
     const disposable: IDisposable[] = []
     disposable.push(model.onDidChangeContent(() => {
         const text = model.getValue()
-        const grammar = Grammar.fromGrammar(text)
+        const grammar = Grammar.parse(text)
         const markers = []
         if (grammar.err) {
             const e = grammar.val

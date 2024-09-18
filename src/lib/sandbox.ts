@@ -30,6 +30,7 @@ export async function runSandboxedCode(code: string, global: Record<string, any>
         (['log', 'error', 'warn', 'info']).forEach((method) => {
             //@ts-expect-error
             iframeWindow.console[method as keyof Console] = (...args: any[]) => {
+                console[method](...args);
                 consoleOutput.push({type: method as 'log' | 'error' | 'warn' | 'info', args});
             };
         });
@@ -87,13 +88,16 @@ export async function runSandboxedCode(code: string, global: Record<string, any>
         configurable: false
       });
 
-      try {
-        ${code}
-      } catch (error) {
-        console.error(error);
-      } finally {
-        window.parent.postMessage({ type: 'CODE_EXECUTION_COMPLETE', result: (typeof result !== 'undefined') ? result : undefined }, '*');
-      }
+       (async function() {
+          try {
+            ${code}
+          } catch (error) {
+            console.error(error);
+          } finally {
+            window.parent.postMessage({ type: 'CODE_EXECUTION_COMPLETE', result: (typeof result !== 'undefined') ? result : undefined }, '*');
+          }
+       })()
+
     `;
 
         // Listen for the completion message

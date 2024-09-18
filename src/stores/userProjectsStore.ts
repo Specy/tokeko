@@ -46,17 +46,22 @@ export function createProject(): Project {
         description: "",
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime(),
-        content: `foo(bar+baz)`,
-        code: 'const tree = PARSE("")',
+        content: `10+20-40`,
+        code: `
+const parseResult = PARSE("10+20-40")
+if(!parseResult.ok) throw parseResult.val
+
+const tree = parseResult.val
+console.log(tree)`,
         grammar: `P -> E
 
 E -> E '+' T
+E -> E '-' T
 E -> T
 
-T -> %id '(' E ')'
-T -> %id
+T -> %num
 
-%id -> /[A-Za-z][A-Za-z0-9]+/`,
+%num -> /[0-9]+/`,
         parserType: 'LALR',
         keepOpen: {
             grammar: false,

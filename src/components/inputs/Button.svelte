@@ -9,12 +9,13 @@
 	export let border: ColorName | undefined = undefined;
 	export let active = false;
 	export let title = '';
+	export let className = '';
 </script>
 
 <button
 	type="button"
-	class="btn"
 	class:hasIcon
+	class={`btn ${className}`}
 	class:icon-left={iconLeft}
 	{title}
 	style="
@@ -67,13 +68,12 @@
 	.hasIcon {
 		display: flex;
 		align-items: center;
-		justify-content: center;
 		padding: 0.35rem 0.6rem;
 	}
 	.icon-left{
 		display: flex;
 		align-items: center;
-		gap: 0.3rem;
+		gap: 0.5rem;
 		padding-left: 0.5rem;
 	}
 </style>

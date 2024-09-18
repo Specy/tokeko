@@ -1,5 +1,5 @@
 import {editor, type IDisposable, Position, Range,} from "monaco-editor";
-import {Grammar, LALRParser, LR1Parser} from "@specy/dotlr";
+import {Grammar, LALR1Parser, LR1Parser} from "@specy/dotlr";
 import type {ParsingError} from "@specy/dotlr/types";
 import {stringifyParsingError, stringifyToken} from "$lib/dotlr/dotlrUtils";
 
@@ -22,7 +22,7 @@ export function createRuntimeDotlrHoverProvider() {
 }
 
 export function getRuntimeDeltaDecorations(model: editor.ITextModel, grammar: string, text: string) {
-    const grammarParser = Grammar.fromGrammar(grammar)
+    const grammarParser = Grammar.parse(grammar)
     if (!grammarParser.ok) return []
     const parser = LR1Parser.fromGrammar(grammarParser.val)
     if (!parser.ok) return []
@@ -49,13 +49,13 @@ export function getRuntimeDeltaDecorations(model: editor.ITextModel, grammar: st
 
 export function createDotlrRuntimeRuntimeDiagnostics(model: editor.ITextModel, _grammar: string) {
     const disposable: IDisposable[] = []
-    const grammar = Grammar.fromGrammar(_grammar)
+    const grammar = Grammar.parse(_grammar)
     disposable.push(model.onDidChangeContent(() => {
         const text = model.getValue()
         const end = model.getPositionAt(text.length)
         const markers = []
         if (!grammar.ok) return editor.setModelMarkers(model, 'dotlr', [])
-        const parser = LALRParser.fromGrammar(grammar.val.clone())
+        const parser = LALR1Parser.fromGrammar(grammar.val.clone())
         if (!parser.ok) return editor.setModelMarkers(model, 'dotlr', [])
         const parsed = parser.val.parse(text)
         if (parsed.ok) return editor.setModelMarkers(model, 'dotlr', [])
