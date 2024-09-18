@@ -50,10 +50,6 @@
                         <li>Editor with text completion and error reporting, useful error messages and traces</li>
                         <li>Typescript code runner to use the parser you created directly in the app!</li>
                     </ul>
-                    <div style="text-shadow: 2px 2px 10px black;">
-                    </div>
-                    <ul style="max-width: 30rem;">
-                    </ul>
                     <div class="buttons">
                         <ButtonLink
                                 color="accent"
@@ -104,7 +100,7 @@
                             Install WebApp
                         </Button>
                     {:else}
-                        <div style="height: 2.4rem">
+                        <div style="height: 2.6rem">
 
                         </div>
                     {/if}

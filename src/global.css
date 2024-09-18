@@ -42,7 +42,7 @@ a {
 }
 
 a:hover {
-    color: var(--accent)
+    color: var(--accent-5)
 }
 
 input:disabled {

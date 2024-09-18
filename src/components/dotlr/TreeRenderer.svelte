@@ -54,14 +54,14 @@
         fill: var(--primary-text);
     }
     :global(.tree_link){
-        stroke: var(--tertiary-10);
-        stroke-width: 2px;
+        stroke: var(--tertiary);
+        stroke-width: 3px;
         fill: transparent;
     }
     :global(.tree_terminal){
         fill: var(--accent);
     }
      :global(.tree_non_terminal){
-        fill: var(--primary-15);
+        fill: var(--primary-5);
     }
 </style>
