@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fixes colors">
-      <change afterPath="$PROJECT_DIR$/src/stores/userInstallEventStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraph.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraph.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraphRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/AutomatonGraphRenderer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/TreeRenderer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/TreeRenderer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
-    </list>
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fixes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,7 +87,7 @@
       <workItem from="1726659246937" duration="40000" />
       <workItem from="1726677648124" duration="2328000" />
       <workItem from="1726681749889" duration="1328000" />
-      <workItem from="1726685782590" duration="654000" />
+      <workItem from="1726685782590" duration="891000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -361,7 +353,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726683075293</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="fixes">
+      <option name="closed" value="true" />
+      <created>1726686660962</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1726686660962</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -370,7 +370,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="first version" />
     <MESSAGE value="somewhat simple start" />
     <MESSAGE value="Add tokenization and better tree pring" />
     <MESSAGE value="add first/follow ui" />
@@ -395,6 +394,7 @@
     <MESSAGE value="fix" />
     <MESSAGE value="improve types and add metadata" />
     <MESSAGE value="fixes colors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes colors" />
+    <MESSAGE value="fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes" />
   </component>
 </project>
