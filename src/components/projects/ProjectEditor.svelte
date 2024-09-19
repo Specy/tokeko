@@ -506,7 +506,8 @@
 
         :global(.with-min-width) {
             min-width: 0;
-            padding-left: 1rem !important;
+            padding: 0.5rem 0.6rem !important;
+
         }
     }
 </style>
