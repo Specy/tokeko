@@ -4,32 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fix">
-      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/+layout.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/MenuLink.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/action-and-goto/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/automaton/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/common.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/first-and-follow/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/grammar/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/parsing-tokens/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/tokenizing/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/typescript-parser/+layout.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/typescript-parser/+layout.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/typescript-parser/+page.svelte" afterDir="false" />
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="Add more docs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SyntaxHighlighter.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SyntaxHighlighter.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/ConsoleEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/ConsoleEditor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dotlr/DotlrDocs.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/DotlrDocs.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/Column.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Column.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/ExpandableContainer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/ExpandableContainer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/Nav.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Nav.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/Row.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Row.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/dotlr/hljsLanguage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dotlr/hljsLanguage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/docs/dotlr/+layout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/+layout.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/docs/dotlr/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +106,7 @@
       <workItem from="1726687291588" duration="88000" />
       <workItem from="1726743361676" duration="1154000" />
       <workItem from="1726775675151" duration="2916000" />
-      <workItem from="1727517018839" duration="8056000" />
+      <workItem from="1727517018839" duration="8693000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -420,7 +396,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726744461669</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Add more docs">
+      <option name="closed" value="true" />
+      <created>1727525813119</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1727525813119</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -429,7 +413,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="somewhat simple start" />
     <MESSAGE value="Add tokenization and better tree pring" />
     <MESSAGE value="add first/follow ui" />
     <MESSAGE value="Added action/automaton/trace UI" />
@@ -454,6 +437,7 @@
     <MESSAGE value="fixes colors" />
     <MESSAGE value="fixes" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="Add more docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add more docs" />
   </component>
 </project>

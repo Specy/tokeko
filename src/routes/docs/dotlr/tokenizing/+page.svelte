@@ -73,6 +73,9 @@ while len(remaining_input) > 0:
 tokens.push($)`}
         />
     </Card>
+      <p style="margin-top: 1rem">
+        For more info visit the <a href="https://github.com/umut-sahin/dotlr?tab=readme-ov-file#table-of-contents">dotlr</a> library docs
+    </p>
 </Page>
 
 

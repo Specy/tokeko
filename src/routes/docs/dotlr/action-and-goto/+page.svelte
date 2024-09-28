@@ -126,6 +126,9 @@ for state in automaton.states:
                 goto_table[state, atomic_pattern_after_dot] = transition`}
         />
     </Card>
+    <p style="margin-top: 1rem">
+        For more info visit the <a href="https://github.com/umut-sahin/dotlr?tab=readme-ov-file#table-of-contents">dotlr</a> library docs
+    </p>
 </Page>
 
 <style lang="scss">

@@ -16,6 +16,15 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
 }
 
+a {
+  text-decoration: underline;
+  color: var(--accent-15);
+}
+
+a:hover {
+
+}
+
 code {
   background-color: var(--primary-5);
   padding: 0.1rem 0.5rem;
