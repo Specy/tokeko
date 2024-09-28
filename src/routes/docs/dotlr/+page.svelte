@@ -1,9 +1,9 @@
 <script lang="ts">
-    import Nav from '$cmp/layout/Nav.svelte';
-    import Page from '$cmp/layout/Page.svelte';
     import {createProject} from "$stores/userProjectsStore";
     import lzstring from "lz-string";
     import DotlrDocs from "$cmp/dotlr/DotlrDocs.svelte";
+    import Page from "$cmp/layout/Page.svelte";
+
     const p = createProject();
     const s = lzstring.compressToEncodedURIComponent(JSON.stringify(p));
     const url = `/projects/share?project=${s}`;
@@ -16,10 +16,8 @@
     <meta name="description" content="The documentation of Tokeko"/>
 </svelte:head>
 
-<Nav/>
 <Page cropped="70ch" padding='1rem' mobilePadding='1rem' gap="1rem">
-
-    <DotlrDocs />
+    <DotlrDocs/>
     <a href="{url}" class="tryit">
         Try it
     </a>

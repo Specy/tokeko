@@ -4,7 +4,7 @@
     import "highlight.js/styles/atom-one-dark.css"
     import {highlightJsGrammar} from '$src/lib/dotlr/hljsLanguage';
     import typescript from 'highlight.js/lib/languages/typescript'
-
+    import python   from 'highlight.js/lib/languages/python'
     export let style: string = ""
     export let source: string;
     export let language: "dotlr"
@@ -12,6 +12,7 @@
     onMount(() => {
         hljs.registerLanguage('dotlr', () => highlightJsGrammar);
         hljs.registerLanguage('typescript', typescript);
+        hljs.registerLanguage('python', python);
     });
 
     function highlight(sourceCode: string, el: HTMLElement, lang: string) {
@@ -118,6 +119,8 @@
   :global(.hljs-invalid) {
     color: #d72d2d;
   }
-
+  :global(.hljs-comment) {
+    opacity: 1;
+  }
 
 </style>

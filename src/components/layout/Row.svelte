@@ -21,7 +21,7 @@
     {padding ? `padding: ${padding};` : ''}
     {background ? `background-color: var(--${background}); color: var(--${background}-text);` : ''}
 	{wrap ? 'flex-wrap: wrap;' : ''}
-	{flex1? 'flex: 1' : ''}
+	{flex1? 'flex: 1;' : ''}
 {style ?? ''}
     "
 >

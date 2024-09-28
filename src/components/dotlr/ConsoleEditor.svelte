@@ -1,7 +1,7 @@
 <script lang="ts">
     import type {ConsoleOutput} from "$lib/sandbox";
-    import {JSONEditor} from "svelte-jsoneditor";
-
+    //import JSONTree from 'svelte-json-tree';
+    import {JSONEditor} from 'svelte-jsoneditor';
     import Card from "$cmp/layout/Card.svelte";
     //'log' | 'error' | 'warn' | 'info'
     export let logs: ConsoleOutput[]
@@ -26,6 +26,14 @@
                 {:else if typeof arg === 'number'}
                     {arg}
                 {:else}
+                                 <!--
+                    <JSONTree
+                            shouldShowPreview={true}
+                            shouldTreatIterableAsObject={true}
+                            defaultExpandedLevel={20}
+                            value={arg}
+                    />
+                    -->
                     <JSONEditor
                             content={{json: arg}}
                             mainMenuBar={false}
@@ -36,7 +44,7 @@
                 {/if}
             {/each}
         </div>
-        {:else}
+    {:else}
         <div style="text-align: center">
             No logs
         </div>
@@ -50,9 +58,11 @@
         padding: 0.2rem 0.5rem;
         border-radius: 0.3rem;
     }
-    :global(.jse-main){
+
+    :global(.jse-main) {
         min-height: 0 !important;
     }
+
     .jse-theme-dark {
         --jse-theme: dark;
 
@@ -167,6 +177,27 @@
         /* color picker */
         --jse-color-picker-background: #656565;
         --jse-color-picker-border-box-shadow: #8c8c8c 0 0 0 1px;
+
+
+        --json-tree-string-color: var(--jse-value-color-string); /* #ce9178 */
+        --json-tree-symbol-color: var(--jse-value-color-string); /* #ce9178 */
+        --json-tree-boolean-color: var(--jse-value-color-boolean); /* #569cd6 */
+        --json-tree-function-color: var(--jse-value-color-boolean); /* #569cd6 */
+        --json-tree-number-color: var(--jse-value-color-number); /* #b5cea8 */
+        --json-tree-label-color: var(--jse-key-color); /* #9cdcfe */
+        --json-tree-property-color: var(--jse-key-color); /* #d4d4d4 */
+        --json-tree-arrow-color: var(-jse-delimiter-color); /* #464646 */
+        --json-tree-operator-color: var(--jse-delimiter-color); /* #949494 */
+        --json-tree-null-color: var(--jse-value-color-null); /* #569cd6 */
+        --json-tree-undefined-color: var(--jse-value-color-null); /* #8d8d8d from 1st theme fallback */
+        --json-tree-date-color: var(--jse-value-color-null); /* #8d8d8d */
+        --json-tree-internal-color: var(--jse-tag-color); /* #bdbdbd */
+        --json-tree-regex-color: var(--jse-value-color-string); /* #ce9178 */
+
+        --json-tree-li-indentation: 1em;
+        --json-tree-li-line-height: 1.3;
+        --json-tree-font-size: 14px;
+        --json-tree-font-family: consolas, menlo, monaco, "Ubuntu Mono", source-code-pro, monospace
     }
 
 </style>

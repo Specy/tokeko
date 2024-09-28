@@ -5,11 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="fix">
+      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/+layout.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/MenuLink.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/action-and-goto/+page.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/automaton/+page.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/common.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/first-and-follow/+page.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/grammar/+page.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/parsing-tokens/+page.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/tokenizing/+page.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/typescript-parser/+layout.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/typescript-parser/+layout.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/typescript-parser/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects/ProjectEditor.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/projects/[projectId]/projectStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SyntaxHighlighter.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SyntaxHighlighter.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dotlr/ConsoleEditor.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/ConsoleEditor.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dotlr/DotlrDocs.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dotlr/DotlrDocs.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/Column.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Column.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/ExpandableContainer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/ExpandableContainer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/Nav.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Nav.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/Row.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Row.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/dotlr/hljsLanguage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dotlr/hljsLanguage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/docs/dotlr/+layout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/+layout.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/docs/dotlr/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/docs/dotlr/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,20 +62,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.svelteservice&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\specy\\Desktop\\progetti\\parsers\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/specy/Desktop/progetti/parsers/src/routes/docs/dotlr/tokenizing",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.svelteservice",
+    "ts.external.directory.path": "C:\\Users\\specy\\Desktop\\progetti\\parsers\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\specy\Desktop\progetti\parsers\src\routes\docs\dotlr\tokenizing" />
+      <recent name="C:\Users\specy\Desktop\progetti\parsers\src\routes\docs\dotlr\parsing-tokens" />
+      <recent name="C:\Users\specy\Desktop\progetti\parsers\src\routes\docs\dotlr\grammar" />
+      <recent name="C:\Users\specy\Desktop\progetti\parsers\src\routes\docs\dotlr\first-and-follow" />
+      <recent name="C:\Users\specy\Desktop\progetti\parsers\src\routes\docs\dotlr\automaton" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\specy\Desktop\progetti\parsers\src\routes\docs\dotlr\typescript-parser" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -95,7 +128,9 @@
       <workItem from="1726681749889" duration="1328000" />
       <workItem from="1726685782590" duration="891000" />
       <workItem from="1726687291588" duration="88000" />
-      <workItem from="1726743361676" duration="1005000" />
+      <workItem from="1726743361676" duration="1154000" />
+      <workItem from="1726775675151" duration="2916000" />
+      <workItem from="1727517018839" duration="8056000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -377,7 +412,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726687319752</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="fix">
+      <option name="closed" value="true" />
+      <created>1726744461669</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1726744461669</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

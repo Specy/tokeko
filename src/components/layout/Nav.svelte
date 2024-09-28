@@ -9,9 +9,14 @@
     import Button from "$cmp/inputs/Button.svelte";
 
     let open = false;
+    export let style = '';
 </script>
 
-<div class="nav">
+<div class="mock-nav">
+
+</div>
+
+<div class="nav" {style}>
     <a href="/" title="Go to the home page" style="line-height: 0;">
         <img src="/logo.png" class="icon" alt="Tokeko logo"/>
     </a>
@@ -46,6 +51,7 @@
         </Row>
     </div>
     <div class="mobile-controls">
+        <slot/>
         <Button hasIcon on:click={() => open = !open} color="primary">
             {#if open}
                 <Close/>
@@ -53,12 +59,13 @@
                 <Burger/>
             {/if}
         </Button>
-
     </div>
 </div>
 <div class="mobile-menu" class:mobile-menu-open={open}>
     <a href="/projects" title="Go to your projects"> Projects </a>
-    <a href="/docs/dotlr" title="Go to the docs" class="link-icon"> <Book /> Docs </a>
+    <a href="/docs/dotlr" title="Go to the docs" class="link-icon">
+        <Book/>
+        Docs </a>
     <a
             href="https://specy.app/donate"
 
@@ -66,7 +73,8 @@
             target="_blank"
             class="link-icon"
     >
-       <Donate /> Donate
+        <Donate/>
+        Donate
     </a>
     <a
             href="https://specy.app"
@@ -74,7 +82,8 @@
             target="_blank"
             class="link-icon"
     >
-       <Link /> Other apps
+        <Link/>
+        Other apps
     </a>
     <a
             href="https://github.com/Specy/tokeko"
@@ -89,13 +98,22 @@
 
 <style lang="scss">
   $nav-height: 3rem;
+  .mock-nav {
+    height: $nav-height;
+  }
+
   .nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
     --nav-height: 3rem;
     display: flex;
     height: $nav-height;
     gap: 1rem;
     z-index: 5;
-    background-color: var(--primary);
+    background-color: rgba(var(--secondary-rgb), .5);
+    backdrop-filter: blur(.4rem);
     color: var(--primary-text);
     padding: 0.5rem;
     border-bottom-left-radius: 0.4rem;

@@ -4,15 +4,16 @@
 
     export let expanded: boolean = false
     export let defaultExpanded: boolean = undefined
-
+    export let style: string = ""
     onMount(() => {
         if (defaultExpanded !== undefined) expanded = defaultExpanded
     })
 
+
 </script>
 
 
-<div class="expandable-container" class:expandable-container-open={expanded}>
+<div class="expandable-container" class:expandable-container-open={expanded} {style}>
     <button
             on:click={() => expanded = !expanded}
             class="expandable-container-expand"
