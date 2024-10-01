@@ -5,7 +5,7 @@
     import ButtonLink from "$cmp/inputs/ButtonLink.svelte";
     import Icon from "$cmp/layout/Icon.svelte";
     import Button from "$cmp/inputs/Button.svelte";
-    import Download from '~icons/fa/Download.svelte';
+    import Download from '~icons/fa6-solid/download.svelte';
     import Donate from '~icons/fa/Heart.svelte';
     import Github from "~icons/fa-brands/Github.svelte";
     import Column from "$cmp/layout/Column.svelte";
@@ -45,46 +45,48 @@
                     </div>
                     <ul style="max-width: 30rem;" class="text">
                         <li>Write your own grammar and parse a language with either LR(1) or LALR1 parsers</li>
-                        <li>Learn how the parser is constructed, viewing the FIRST/FOLLOW and automaton tables/graphs</li>
+                        <li><a href="/docs/dotlr" style="color: var(--accent-15); font-weight: bold">Learn</a> how the parser is constructed, viewing the FIRST & FOLLOW and automaton tables/graphs
+                        </li>
                         <li>View the steps needed to parse a string and the resulting parse tree</li>
                         <li>Editor with text completion and error reporting, useful error messages and traces</li>
                         <li>Typescript code runner to use the parser you created directly in the app!</li>
                     </ul>
-                    <div class="buttons">
-                        <ButtonLink
-                                color="accent"
-                                href="/projects"
-                                style={'box-shadow: 0 3px 10px rgb(0 0 0 / 0.2)'}
-                                title="Open the editor"
-                        >
-                            Go to your projects
-                        </ButtonLink>
-                        <Row gap="0.6rem">
+                    <Column gap="0.5rem">
+                        <div class="buttons">
                             <ButtonLink
-                                    style={'box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); font-size: 1.2rem'}
-                                    color="secondary"
-                                    href="https://github.com/Specy/tokeko"
-                                    title="Open the project on github"
+                                    color="accent"
+                                    href="/projects"
+                                    style={'box-shadow: 0 3px 10px rgb(0 0 0 / 0.2)'}
+                                    title="Open the editor"
                             >
-                                <Github/>
+                                Go to your projects
                             </ButtonLink>
-                            <ButtonLink
-                                    style={'box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); font-size: 1.2rem'}
+                            <Row gap="0.6rem">
+                                <ButtonLink
+                                        style={'box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); font-size: 1.2rem'}
+                                        color="secondary"
+                                        href="https://github.com/Specy/tokeko"
+                                        title="Open the project on github"
+                                >
+                                    <Github/>
+                                </ButtonLink>
+                                <ButtonLink
+                                        style={'box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); font-size: 1.2rem'}
+                                        color="secondary"
+                                        href="https://specy.app/donate"
+                                        title="Donate to the project"
+                                >
+                                    <Donate/>
+                                </ButtonLink>
+                            </Row>
+
+                        </div>
+
+                        {#if $installEventStore}
+                            <Button
+                                    style="gap: 0.5rem;"
                                     color="secondary"
-                                    href="https://specy.app/donate"
-                                    title="Donate to the project"
-                            >
-                                <Donate/>
-                            </ButtonLink>
-                        </Row>
-
-                    </div>
-
-                    {#if $installEventStore}
-                        <Button
-                                style="gap: 0.5rem;"
-                                color="secondary"
-                                on:click={async () => {
+                                    on:click={async () => {
 							try {
 								// @ts-ignore
 								await $installEventStore.prompt()
@@ -93,17 +95,19 @@
 							}
 							$installEventStore = null
 						}}
-                        >
-                            <Icon>
-                                <Download/>
-                            </Icon>
-                            Install WebApp
-                        </Button>
-                    {:else}
-                        <div style="height: 2.6rem">
+                            >
+                                <Icon>
+                                    <Download/>
+                                </Icon>
+                                Install WebApp
+                            </Button>
+                        {:else}
+                            <div style="height: 2.6rem">
 
-                        </div>
-                    {/if}
+                            </div>
+                        {/if}
+                    </Column>
+
                 </Column>
             </div>
         </div>
@@ -209,7 +213,7 @@
       padding: 0 1rem;
     }
     .preview-image {
-    mask: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.05) 70%);
+      mask: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.05) 70%);
       background-image: url('/images/tokeko-editor-narrow.webp');
 
     }

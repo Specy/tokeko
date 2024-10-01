@@ -25,7 +25,7 @@
         Alternatively you can use directly the parsers and grammar functions, look at the type definitions below.
     </p>
     <ExpandableContainer>
-        <h2 slot="title">Type definitions</h2>
+        <h2 slot="title" style="margin: 0">Type definitions</h2>
         <div style="width: 100%; overflow-x: auto">
             <SyntaxHighlighter
                     language="typescript"
@@ -34,4 +34,8 @@
         </div>
     </ExpandableContainer>
 </Page>
+
+<style>
+    @import "../common.scss";
+</style>
 

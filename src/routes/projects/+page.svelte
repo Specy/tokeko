@@ -13,7 +13,7 @@
     import FilePicker from "$cmp/misc/FilePicker.svelte";
     import Button from "$cmp/inputs/Button.svelte";
     import FaPlus from "~icons/fa6-solid/plus.svelte";
-    import FaArrowUp from "~icons/fa6-solid/arrow-up.svelte";
+    import FaUpload from "~icons/fa6-solid/upload.svelte";
 
     onMount(() => {
         if ('launchQueue' in window) {
@@ -91,7 +91,7 @@
                     }}
             >
                 <Button iconLeft border="secondary" color="background">
-                    <FaArrowUp/>
+                    <FaUpload/>
                     Import
                 </Button>
             </FilePicker>

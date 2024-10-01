@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="Add more docs">
+    <list default="true" id="9e5eee70-9fd4-4995-b2bd-31f52055fed1" name="Changes" comment="Add dotlr notice">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,21 +38,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/specy/Desktop/progetti/parsers/src/routes/docs/dotlr/tokenizing",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.svelteservice",
-    "ts.external.directory.path": "C:\\Users\\specy\\Desktop\\progetti\\parsers\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/specy/Desktop/progetti/parsers/src/routes/docs/dotlr/tokenizing&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.svelteservice&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\specy\\Desktop\\progetti\\parsers\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\specy\Desktop\progetti\parsers\src\routes\docs\dotlr\tokenizing" />
@@ -107,6 +107,8 @@
       <workItem from="1726743361676" duration="1154000" />
       <workItem from="1726775675151" duration="2916000" />
       <workItem from="1727517018839" duration="8693000" />
+      <workItem from="1727526425821" duration="818000" />
+      <workItem from="1727548738374" duration="171000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <option name="closed" value="true" />
@@ -404,7 +406,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727525813119</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Add dotlr notice">
+      <option name="closed" value="true" />
+      <created>1727526591034</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1727526591034</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,7 +423,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Add tokenization and better tree pring" />
     <MESSAGE value="add first/follow ui" />
     <MESSAGE value="Added action/automaton/trace UI" />
     <MESSAGE value="update readme" />
@@ -438,6 +447,7 @@
     <MESSAGE value="fixes" />
     <MESSAGE value="fix" />
     <MESSAGE value="Add more docs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add more docs" />
+    <MESSAGE value="Add dotlr notice" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add dotlr notice" />
   </component>
 </project>

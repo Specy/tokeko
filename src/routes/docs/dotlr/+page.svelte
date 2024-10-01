@@ -16,7 +16,7 @@
     <meta name="description" content="The documentation of Tokeko"/>
 </svelte:head>
 
-<Page cropped="70ch" padding='1rem' mobilePadding='1rem' gap="1rem">
+<Page cropped="70ch" padding='1rem' mobilePadding='1rem' gap="1rem" style="padding-top: 2rem">
     <DotlrDocs/>
     <a href="{url}" class="tryit">
         Try it

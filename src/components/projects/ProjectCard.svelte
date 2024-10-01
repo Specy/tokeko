@@ -8,7 +8,7 @@
 	export let project: Project;
 	import sago from 's-ago';
 	import Delete from '~icons/fa/Trash.svelte';
-	import Download from '~icons/fa/Download.svelte';
+	import Download from '~icons/fa6-solid/download.svelte';
 	import Button from '$cmp/inputs/Button.svelte';
 	import SyntaxHighlighter from '$cmp/SyntaxHighlighter.svelte';
 	const dispatcher = createEventDispatcher<{

@@ -140,7 +140,7 @@
     flex-direction: column;
     gap: 0.8rem;
     z-index: 4;
-    position: absolute;
+    position: fixed;
     top: $nav-height;
     right: 0;
     width: 100%;

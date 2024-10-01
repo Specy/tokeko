@@ -20,6 +20,7 @@
     import Link from "~icons/fa6-solid/share-nodes.svelte";
     import DotlrDocs from "$cmp/dotlr/DotlrDocs.svelte";
     import type {ConsoleOutput} from "$lib/sandbox";
+    import Github from "~icons/fa-brands/Github.svelte";
 
     let showDocs = false;
     let project: Project | undefined;
@@ -104,6 +105,15 @@
         </h3>
 
         <Row gap="0.5rem" style="margin-left: auto; height: 2.4rem">
+             <ButtonLink
+                    href="https://github.com/Specy/tokeko"
+                    hasIcon
+                    style="height: 100%; font-size: 1.2rem"
+                    blank
+                    title="Github"
+            >
+                <Github/>
+            </ButtonLink>
             <ButtonLink
                     href="https://specy.app/donate"
                     hasIcon
