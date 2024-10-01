@@ -141,14 +141,14 @@
     color: var(--accent-text);
   }
 
-  :global(.runtime-token-Constant) {
+  :global(.runtime-token-Constant, .runtime-token-Constant-alt) {
 
     background: rgba(100, 74, 72, 0.2);
     border-radius: 2px;
     border: solid 1px rgba(100, 74, 72, 1);
   }
 
-  :global(.runtime-token-Regex) {
+  :global(.runtime-token-Regex, .runtime-token-Regex-alt) {
     background: rgb(78, 143, 121, 0.1);
     border-radius: 2px;
     border: solid 1px rgb(78, 143, 121, 0.8);

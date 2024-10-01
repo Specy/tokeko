@@ -140,7 +140,7 @@ export function createDotlrRuntimeDiagnostics(model: editor.ITextModel) {
 
 export function createDotlrCompletion() {
     return {
-        triggerCharacters: [' '],
+        triggerCharacters: [' ', '%'],
         provideCompletionItems: (model: editor.ITextModel, position: Position) => {
             const word = model.getWordUntilPosition(position)
             const text = model.getValue()

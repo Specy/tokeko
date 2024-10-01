@@ -1,7 +1,7 @@
 import {editor, type IDisposable, Position, Range,} from "monaco-editor";
 import {Grammar, LALR1Parser, LR1Parser} from "@specy/dotlr";
 import type {ParsingError} from "@specy/dotlr/types";
-import {stringifyParsingError, stringifyToken} from "$lib/dotlr/dotlrUtils";
+import {stringifyParsingError} from "$lib/dotlr/dotlrUtils";
 
 export function createRuntimeDotlrHoverProvider() {
     return {
@@ -30,18 +30,21 @@ export function getRuntimeDeltaDecorations(model: editor.ITextModel, grammar: st
     if (!tokens.ok) {
         return []
     }
-    //add a background to each token
-    let offset = 0
 
-    return tokens.val.map(({slice, token}) => {
-        const start = offset
-        offset += slice.length
+    let typeAlternate: {
+        [key: string]: boolean
+    } = {}
+    return tokens.val.map(({token}) => {
+        const start = token.span.offset
         const startPositon = model.getPositionAt(start)
-        const endPosition = model.getPositionAt(offset)
+        const endPosition = model.getPositionAt(token.span.offset + token.span.len)
+
+        typeAlternate[token.value.type] = !(typeAlternate[token.value.type] ?? false)
+
         return {
             range: new Range(startPositon.lineNumber, startPositon.column, endPosition.lineNumber, endPosition.column),
             options: {
-                className: 'runtime-token-' + token.type
+                className: 'runtime-token-' + token.value.type + (typeAlternate[token.value.type] ? '-alt' : '')
             }
         }
     })
@@ -60,35 +63,16 @@ export function createDotlrRuntimeRuntimeDiagnostics(model: editor.ITextModel, _
         const parsed = parser.val.parse(text)
         if (parsed.ok) return editor.setModelMarkers(model, 'dotlr', [])
         const err = parsed.val as ParsingError
-        if (err.type === "UnexpectedEof") {
-            markers.push({
-                startLineNumber: end.lineNumber,
-                startColumn: end.column,
-                endLineNumber: end.lineNumber,
-                endColumn: end.column + 1,
-                message: stringifyParsingError(err),
-                severity: 8
-            })
-        } else if (err.type === 'UnknownToken') {
-            markers.push({
-                startLineNumber: 0,
-                startColumn: 0,
-                endLineNumber: end.lineNumber,
-                endColumn: end.column,
-                message: stringifyParsingError(err),
-                severity: 8
-            })
-        } else if (err.type === "UnexpectedToken") {
-            markers.push({
-                startLineNumber: 0,
-                startColumn: 0,
-                endLineNumber: end.lineNumber,
-                endColumn: end.column,
-                message: stringifyParsingError(err),
-                severity: 8
-            })
-        }
-
+        const posStart = model.getPositionAt(err.value.span.offset)
+        const posEnd = model.getPositionAt(err.value.span.offset + err.value.span.len)
+        markers.push({
+            startLineNumber: posStart.lineNumber,
+            startColumn: posStart.column,
+            endLineNumber: posEnd.lineNumber,
+            endColumn: posEnd.column,
+            severity: 8,
+            message: stringifyParsingError(err),
+        })
         editor.setModelMarkers(model, 'dotlr', markers)
     }))
     return {

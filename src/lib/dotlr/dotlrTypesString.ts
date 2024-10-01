@@ -20,6 +20,7 @@ declare type Tree<NT extends string = string, T extends Token = Token> = {
     value: {
         token: T;
         slice: string;
+        span: Span;
     };
 } | {
     type: 'NonTerminal';
@@ -73,7 +74,7 @@ class Parser<
     getFirstTable(): FirstTable<Token<T, R>>;
     getFollowTable(): FollowTable<Token<T, R>>;
     tokenize(input: string): Err<ParsingError> | Ok<{
-        token: Token<T, R>;
+        token: Spanned<Token<T, R>>;
         slice: string;
     }[]>;
     trace(input: string): Err<ParsingError> | Ok<{
@@ -214,24 +215,38 @@ declare type ParserError<T extends Token = Token> = {
     token: string;
 };
 
-declare type ParsingError<T extends Token = Token> = {
-    type: "UnknownToken";
+declare export type ParsingError<T extends Token = Token> = {
+    type: "UnknownToken",
     value: {
-        token: string;
-    };
+        token: string
+        span: Span
+    }
 } | {
-    type: "UnexpectedToken";
+    type: "UnexpectedToken"
     value: {
-        token: string;
-        expected: T[];
-    };
+        token: string
+        span: Span
+        expected: T[]
+    }
 } | {
-    type: "UnexpectedEof";
+    type: "UnexpectedEof"
     value: {
-        expected: T[];
-    };
-};
+        span: Span
+        expected: T[]
+    }
+}
 
+export type Span = {
+    offset: number,
+    len: number,
+    column: number,
+    line: number
+}
+
+export type Spanned<T> = {
+    span: Span,
+    value: T
+}
 
 declare type Err<T> = {
     ok: false;
