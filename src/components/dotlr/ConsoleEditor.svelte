@@ -7,6 +7,19 @@
     export let logs: ConsoleOutput[]
 
 
+function classToPlainObject(obj: any): any {
+  if (obj !== null && typeof obj === 'object') {
+    if (obj.constructor && obj.constructor.name !== 'Object' && !(obj instanceof Array) && !(obj instanceof Date)) {
+      const plainObj: any = {};
+      for (const key of Object.keys(obj)) {
+        plainObj[key] = classToPlainObject((obj as any)[key]);
+      }
+      return plainObj;
+    }
+  }
+  return obj;
+}
+
     const colors = {
         log: 'rgba(var(--primary-rgb), 0.2)',
         error: 'rgba(var(--danger-rgb), 0.2)',
@@ -35,7 +48,7 @@
                     />
                     -->
                     <JSONEditor
-                            content={{json: arg}}
+                            content={{json: classToPlainObject(arg)}}
                             mainMenuBar={false}
                             navigationBar={false}
                             statusBar={false}

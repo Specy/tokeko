@@ -40,6 +40,7 @@ declare type Token<C = string, R = string> = {
     type: 'Eof';
 };
 
+declare type _Grammar = any
 declare class Grammar<
     T extends string = string, 
     NT extends string = string, 
@@ -58,6 +59,7 @@ declare class Grammar<
     clone(): Grammar<T, NT, R>;
 }
 
+declare type _Parser = any;
 class Parser<
     T extends string = string, 
     NT extends string = string, 
@@ -215,38 +217,24 @@ declare type ParserError<T extends Token = Token> = {
     token: string;
 };
 
-declare export type ParsingError<T extends Token = Token> = {
-    type: "UnknownToken",
+declare type ParsingError<T extends Token = Token> = {
+    type: "UnknownToken";
     value: {
-        token: string
-        span: Span
-    }
+        token: string;
+    };
 } | {
-    type: "UnexpectedToken"
+    type: "UnexpectedToken";
     value: {
-        token: string
-        span: Span
-        expected: T[]
-    }
+        token: string;
+        expected: T[];
+    };
 } | {
-    type: "UnexpectedEof"
+    type: "UnexpectedEof";
     value: {
-        span: Span
-        expected: T[]
-    }
-}
+        expected: T[];
+    };
+};
 
-export type Span = {
-    offset: number,
-    len: number,
-    column: number,
-    line: number
-}
-
-export type Spanned<T> = {
-    span: Span,
-    value: T
-}
 
 declare type Err<T> = {
     ok: false;
@@ -258,7 +246,20 @@ declare type Ok<T> = {
     val: T;
 }
 
+declare type Span = {
+    offset: number,
+    len: number,
+    column: number,
+    line: number
+}
+
+declare type Spanned<T> = {
+    span: Span,
+    value: T
+}
+
 declare type Result<T, E> = Ok<T> | Err<E>
+
 `.trim()
 
 export function getTsGlobal(grammar?: string) {
