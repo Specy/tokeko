@@ -5,7 +5,7 @@
     import {onMount} from 'svelte';
     import {type Project} from '$stores/userProjectsStore';
     import Row from '$cmp/layout/Row.svelte';
-    import {createCompilerStore} from '$src/routes/projects/[projectId]/projectStore';
+    import { createCompilerStore, stringifyGenericError } from '$src/routes/projects/[projectId]/projectStore';
     import Column from "$cmp/layout/Column.svelte";
     import ExpandableContainer from "$cmp/layout/ExpandableContainer.svelte";
     import FirstTableRenderer from "$cmp/dotlr/FirstTableRenderer.svelte";
@@ -195,7 +195,7 @@
         <Column style="flex: 1; height: 100%; overflow-y: auto" gap="0.5rem">
             <div class="pipe-container-inner">
                 {#if $store.result?.type === 'error'}
-                    <pre>{stringifyError($store.result.error)}</pre>
+                    <pre>{stringifyGenericError($store.result.error)}</pre>
                 {:else}
                     <TreeRenderer
                             tree={$store.result?.result ?? {type: "Terminal", value: {slice: "Root"}}}

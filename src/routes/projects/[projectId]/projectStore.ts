@@ -4,12 +4,15 @@ import {Grammar, LALR1Parser, LR1Parser} from '@specy/dotlr'
 import type {GrammarError, ParserError, ParsingError, Trace, Tree} from '@specy/dotlr/types'
 import {Monaco} from "$lib/Monaco";
 import {type ConsoleOutput, runSandboxedCode} from "$lib/sandbox";
-import {stringifyError} from "$lib/dotlr/dotlrUtils";
+import {
+    stringifyGrammarError,
+    stringifyParserError,
+    stringifyParsingError
+} from '$lib/dotlr/dotlrUtils';
 export const PARSER_TYPES = ['LR1', 'LALR'] as const
 export type ParserType = typeof PARSER_TYPES[number]
 type Parser = LR1Parser | LALR1Parser
 
-type SomeError = ParsingError | GrammarError | ParserError
 type ProjectStoreData = {
     grammar: string,
     content: string,
@@ -26,7 +29,7 @@ type ProjectStoreData = {
         trace: Trace
     } | {
         type: 'error',
-        error: ParsingError | GrammarError | ParserError
+        error: GenericError
         grammar?: Grammar,
         parser?: Parser,
         result?: Tree
@@ -34,6 +37,16 @@ type ProjectStoreData = {
     }
 }
 
+type GenericError = {
+    type: 'ParsingError',
+    error: ParsingError
+} | {
+    type: 'GrammarError',
+    error: GrammarError
+} | {
+    type: 'ParserError',
+    error: ParserError
+}
 function createParser(type: ParserType, grammar: Grammar) {
     if (type === "LR1") {
         return LR1Parser.fromGrammar(grammar)
@@ -58,7 +71,10 @@ export function createCompilerStore(project: Project) {
             if (!grammarParser.ok) {
                 s.result = {
                     type: 'error',
-                    error: grammarParser.val as GrammarError,
+                    error: {
+                        type: 'GrammarError',
+                        error: grammarParser.val as GrammarError
+                    },
                 }
                 return s
             }
@@ -67,7 +83,10 @@ export function createCompilerStore(project: Project) {
             if (!parser.ok) {
                 s.result = {
                     type: 'error',
-                    error: parser.val as ParserError,
+                    error: {
+                        type: 'ParserError',
+                        error: parser.val as ParserError
+                    },
                     grammar: grammarClone
                 }
                 return s
@@ -94,7 +113,10 @@ export function createCompilerStore(project: Project) {
             if (!result.ok) {
                 s.result = {
                     type: 'error',
-                    error: result.val as ParsingError,
+                    error: {
+                        type: 'ParsingError',
+                        error: result.val as ParsingError
+                    },
                     grammar: s.result.grammar,
                     parser: parser
                 }
@@ -116,9 +138,15 @@ export function createCompilerStore(project: Project) {
         const current = get({subscribe})
         const grammar = current.grammar
         const grammarParser = Grammar.parse(grammar)
-        if (!grammarParser.ok) return errorToConsoleOutput(grammarParser.val as SomeError)
+        if (!grammarParser.ok) return errorToConsoleOutput({
+            type: 'GrammarError',
+            error: grammarParser.val as GrammarError
+        })
         const parser = createParser(current.parserType, grammarParser.val)
-        if (!parser.ok) return errorToConsoleOutput(parser.val as SomeError)
+        if (!parser.ok) return errorToConsoleOutput({
+            type: 'ParserError',
+            error: parser.val as ParserError
+        })
         const stripTs = await Monaco.typescriptToJavascript(code)
         return await runSandboxedCode(
             stripTs, {
@@ -161,10 +189,21 @@ export function createCompilerStore(project: Project) {
 }
 
 
-function errorToConsoleOutput(error: SomeError) {
+function errorToConsoleOutput(error: GenericError) {
     return {
         consoleOutput: [
-            {type: 'error', args: [stringifyError(error)]}
+            {type: 'error', args: [stringifyGenericError(error)]}
         ] as ConsoleOutput[]
+    }
+}
+
+export function stringifyGenericError(error: GenericError) {
+    switch (error.type) {
+        case 'ParsingError':
+            return stringifyParsingError(error.error)
+        case 'GrammarError':
+            return stringifyGrammarError(error.error)
+        case 'ParserError':
+            return stringifyParserError(error.error)
     }
 }

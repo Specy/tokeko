@@ -20,7 +20,7 @@
     let runtimeDiagnostic: monaco.editor.IDisposable;
 
     $: {
-        if(editor && runtimeGrammar && language === 'dotlr'){
+        if(editor && runtimeGrammar && language === 'dotlr-result'){
             runtimeDiagnostic?.dispose();
             runtimeDiagnostic = createDotlrRuntimeRuntimeDiagnostics(editor.getModel(), runtimeGrammar);
         }

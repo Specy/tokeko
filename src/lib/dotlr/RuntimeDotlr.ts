@@ -31,7 +31,7 @@ export function getRuntimeDeltaDecorations(model: editor.ITextModel, grammar: st
         return []
     }
 
-    let typeAlternate: {
+    const typeAlternate: {
         [key: string]: boolean
     } = {}
     return tokens.val.map(({token}) => {
@@ -55,7 +55,6 @@ export function createDotlrRuntimeRuntimeDiagnostics(model: editor.ITextModel, _
     const grammar = Grammar.parse(_grammar)
     disposable.push(model.onDidChangeContent(() => {
         const text = model.getValue()
-        const end = model.getPositionAt(text.length)
         const markers = []
         if (!grammar.ok) return editor.setModelMarkers(model, 'dotlr', [])
         const parser = LALR1Parser.fromGrammar(grammar.val.clone())

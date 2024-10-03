@@ -1,6 +1,5 @@
 import {editor, type IDisposable, languages, Position, Range} from 'monaco-editor'
-import {Grammar} from "@specy/dotlr";
-import type {GrammarError} from "@specy/dotlr/types";
+import { Grammar } from '@specy/dotlr';
 import {stringifyGrammarError} from "$lib/dotlr/dotlrUtils";
 
 
@@ -89,6 +88,7 @@ export function createDotlrHoverProvider() {
 }
 
 
+
 export function createDotlrRuntimeDiagnostics(model: editor.ITextModel) {
     const disposable: IDisposable[] = []
     disposable.push(model.onDidChangeContent(() => {
@@ -126,6 +126,7 @@ export function createDotlrRuntimeDiagnostics(model: editor.ITextModel) {
                 })
             }
         }
+
         editor.setModelMarkers(model, 'dotlr', markers)
     }))
     return {
