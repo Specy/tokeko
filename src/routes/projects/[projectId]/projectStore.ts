@@ -68,33 +68,34 @@ export function createCompilerStore(project: Project) {
             const grammar = _grammar ?? get({subscribe}).grammar
             const grammarParser = Grammar.parse(grammar)
             const type = get({subscribe}).parserType
-            if (!grammarParser.ok) {
+            if (grammarParser.isErr()) {
                 s.result = {
                     type: 'error',
                     error: {
                         type: 'GrammarError',
-                        error: grammarParser.val as GrammarError
+                        error: grammarParser.error
                     },
                 }
                 return s
             }
-            const grammarClone = grammarParser.val.clone()
-            const parser = createParser(type, grammarParser.val)
-            if (!parser.ok) {
+            const grammarClone = grammarParser.value.clone()
+            const parser = createParser(type, grammarParser.value)
+            if (parser.isErr()) {
                 s.result = {
                     type: 'error',
                     error: {
                         type: 'ParserError',
-                        error: parser.val as ParserError
+                        error: parser.error
                     },
-                    grammar: grammarClone
+                    grammar: grammarClone,
+                    parser: parser.error.type === 'Conflict' ? parser.error.value.parser : undefined
                 }
                 return s
             }
             s.result = {
                 type: 'prepare',
                 grammar: grammarClone,
-                parser: parser.val
+                parser: parser.value
             }
             return s;
         })
@@ -110,12 +111,12 @@ export function createCompilerStore(project: Project) {
             }
             const parser = s.result.parser
             const result = parser.trace(content)
-            if (!result.ok) {
+            if (result.isErr()) {
                 s.result = {
                     type: 'error',
                     error: {
                         type: 'ParsingError',
-                        error: result.val as ParsingError
+                        error: result.error
                     },
                     grammar: s.result.grammar,
                     parser: parser
@@ -126,8 +127,8 @@ export function createCompilerStore(project: Project) {
                 grammar: s.result.grammar,
                 parser: parser,
                 type: 'parse',
-                result: result.val.tree,
-                trace: result.val.trace
+                result: result.value.tree,
+                trace: result.value.trace
             }
             return s;
         })
@@ -138,26 +139,32 @@ export function createCompilerStore(project: Project) {
         const current = get({subscribe})
         const grammar = current.grammar
         const grammarParser = Grammar.parse(grammar)
-        if (!grammarParser.ok) return errorToConsoleOutput({
+        if (grammarParser.isErr()) return errorToConsoleOutput({
             type: 'GrammarError',
-            error: grammarParser.val as GrammarError
+            error: grammarParser.error
         })
-        const parser = createParser(current.parserType, grammarParser.val)
-        if (!parser.ok) return errorToConsoleOutput({
+        const parser = createParser(current.parserType, grammarParser.value)
+        if (parser.isErr()) return errorToConsoleOutput({
             type: 'ParserError',
-            error: parser.val as ParserError
+            error: parser.error
         })
         const stripTs = await Monaco.typescriptToJavascript(code)
         return await runSandboxedCode(
             stripTs, {
                 PARSE: (code: string) => {
-                    const res = parser.val.parse(code)
-                    return {
-                        ok: res.ok,
+                    const res = parser.value.parse(code)
+                    if(res.isErr()) return {
+                        ok: false,
                         val: {
-                            tree: res.val,
-                            parser: parser.val,
-                            grammar: grammarParser.val
+                            error: res.error
+                        }
+                    }
+                    return {
+                        ok: true,
+                        val: {
+                            tree: res.value,
+                            parser: parser.value,
+                            grammar: grammarParser.value
                         }
                     }
                 },

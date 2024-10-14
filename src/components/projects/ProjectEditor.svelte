@@ -242,7 +242,7 @@
 
     </div>
 </div>
-{#if $store.result?.type !== 'error' && $store.result}
+{#if $store.result}
     <Column padding="0.5rem" gap="0.5rem">
         <h1 id="jump-to">
             Result

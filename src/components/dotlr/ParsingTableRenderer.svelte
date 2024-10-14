@@ -80,17 +80,15 @@
             </div>
         {/each}
         <div class="body-cell">
-            <div class="item-centered">
-                {#each eofAction ?? [] as action}
-                    <div class="item-centered">
-                        {stringifyAction(action)}
-                    </div>
-                {:else}
-                    <div class="item-centered">
+						{#each eofAction ?? [] as action}
+								<div class="item-centered">
+										{stringifyAction(action)}
+								</div>
+						{:else}
+								<div class="item-centered">
 
-                    </div>
-                {/each}
-            </div>
+								</div>
+						{/each}
         </div>
         {#each nonTerminals as nt}
             <div class="body-cell">
