@@ -21,6 +21,7 @@
     import DotlrDocs from "$cmp/dotlr/DotlrDocs.svelte";
     import type {ConsoleOutput} from "$lib/sandbox";
     import Github from "~icons/fa-brands/Github.svelte";
+    import {goto} from '$app/navigation'
 
     let showDocs = false;
     let project: Project | undefined;
@@ -58,6 +59,7 @@
                 const newProject = await projectStore.createNewProject(project.name, project.description);
                 project.id = newProject.id;
                 toast.logPill('Project added to your projects');
+                goto(`/projects/${project.id}`)
             }
             await projectStore.updateProject(project.id, project);
         } catch (e) {
