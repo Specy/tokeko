@@ -268,10 +268,10 @@ export function getTsGlobal(grammar?: string) {
     const regexes = [] as string[]
     if(grammar){
         const g = Grammar.parse(grammar)
-        if(g.ok){
-            nonTerminals.push(...g.val.getSymbols().map(s => `'${s.replace(/'/g, "\\'")}'`))
-            terminals.push(...g.val.getConstantTokens().map(s => `'${s.replace(/'/g, "\\'")}'`))
-            regexes.push(...([...g.val.getRegexTokens().keys()].map(s => `'${s.replace(/'/g, "\\'")}'`)))
+        if(g.isOk()){
+            nonTerminals.push(...g.value.getSymbols().map(s => `'${s.replace(/'/g, "\\'")}'`))
+            terminals.push(...g.value.getConstantTokens().map(s => `'${s.replace(/'/g, "\\'")}'`))
+            regexes.push(...([...g.value.getRegexTokens().keys()].map(s => `'${s.replace(/'/g, "\\'")}'`)))
         }
     }
     return `declare type ThisNonTerminal = ${nonTerminals.join(' | ') || 'string'}

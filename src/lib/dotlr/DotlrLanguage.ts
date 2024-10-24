@@ -53,10 +53,10 @@ export function createDotlrFormatter() {
         provideDocumentFormattingEdits: (model: editor.ITextModel) => {
             const text = model.getValue()
             const grammar = Grammar.parse(text)
-            if (grammar.ok) {
+            if (grammar.isOk()) {
                 return [{
                     range: model.getFullModelRange(),
-                    text: grammar.val.stringify()
+                    text: grammar.value.stringify()
                 }]
             } else {
                 return [{

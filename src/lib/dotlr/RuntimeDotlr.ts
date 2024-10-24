@@ -23,18 +23,18 @@ export function createRuntimeDotlrHoverProvider() {
 
 export function getRuntimeDeltaDecorations(model: editor.ITextModel, grammar: string, text: string) {
     const grammarParser = Grammar.parse(grammar)
-    if (!grammarParser.ok) return []
-    const parser = LR1Parser.fromGrammar(grammarParser.val)
-    if (!parser.ok) return []
-    const tokens = parser.val.tokenize(text)
-    if (!tokens.ok) {
+    if (!grammarParser.isOk()) return []
+    const parser = LR1Parser.fromGrammar(grammarParser.value)
+    if (!parser.isOk()) return []
+    const tokens = parser.value.tokenize(text)
+    if (!tokens.isOk()) {
         return []
     }
 
     const typeAlternate: {
         [key: string]: boolean
     } = {}
-    return tokens.val.map(({token}) => {
+    return tokens.value.map(({token}) => {
         const start = token.span.offset
         const startPositon = model.getPositionAt(start)
         const endPosition = model.getPositionAt(token.span.offset + token.span.len)
@@ -57,12 +57,12 @@ export function createDotlrRuntimeRuntimeDiagnostics(model: editor.ITextModel, _
     disposable.push(model.onDidChangeContent(() => {
         const text = model.getValue()
         const markers = []
-        if (!grammar.ok) return editor.setModelMarkers(model, 'dotlr', [])
-        const parser = LALR1Parser.fromGrammar(grammar.val.clone())
-        if (!parser.ok) return editor.setModelMarkers(model, 'dotlr', [])
-        const parsed = parser.val.parse(text)
-        if (parsed.ok) return editor.setModelMarkers(model, 'dotlr', [])
-        const err = parsed.val as ParsingError
+        if (!grammar.isOk()) return editor.setModelMarkers(model, 'dotlr', [])
+        const parser = LALR1Parser.fromGrammar(grammar.value.clone())
+        if (!parser.isOk()) return editor.setModelMarkers(model, 'dotlr', [])
+        const parsed = parser.value.parse(text)
+        if (parsed.isOk()) return editor.setModelMarkers(model, 'dotlr', [])
+        const err = parsed.error
         const posStart = model.getPositionAt(err.value.span.offset)
         const posEnd = model.getPositionAt(err.value.span.offset + err.value.span.len)
         markers.push({
