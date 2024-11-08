@@ -147,14 +147,12 @@
                             <FaTextWidth/>
                         </div>
                         Show tokens
-
                     {/if}
                 </Button>
                 {#if project.options.mode === 'code'}
                     <Button
                             iconLeft
-                            color="primary"
-                            border="secondary"
+                            color="accent"
                             className="with-min-width"
                             on:click={async () => {
                             const res = await store.executeTypescript(project.code)
@@ -173,7 +171,7 @@
                             iconLeft
                             className="with-min-width"
                             on:click={parseString}
-                            border="secondary" color="primary"
+														color="accent"
                             disabled={project.content.trim() === ""}>
                         <div class="no-mobile">
                             <FaSitemap/>
@@ -209,7 +207,7 @@
 
         <Row justify="between" gap="0.5rem" wrap>
             <Row gap="0.5rem" wrap>
-                <Button on:click={parseGrammar} border="secondary" color="primary"
+                <Button on:click={parseGrammar} color="accent"
                         disabled={project.grammar.trim() === ""} className="with-min-width" iconLeft>
                     <div class="no-mobile">
                         <FaAlignLeft/>
