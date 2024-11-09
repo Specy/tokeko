@@ -34,6 +34,7 @@
         align-items: center;
         gap: 1rem;
         background-color: transparent;
+        padding: 0.5rem;
         cursor: pointer;
         color: var(--primary-text);
     }
@@ -41,7 +42,6 @@
     .expandable-container {
         display: flex;
         flex-direction: column;
-        padding: 0.5rem;
         background-color: var(--primary);
         color: var(--primary-text);
         border-radius: 0.4rem;
@@ -65,9 +65,8 @@
     .expandable-container-content {
         display: none;
         flex-direction: column;
+        padding: 0.5rem;
         border-top: solid 0.2rem var(--secondary-5);
-        margin-top: 0.5rem;
-        padding-top: 0.5rem;
     }
 
     .expandable-container-open .expandable-container-content {

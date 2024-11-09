@@ -159,6 +159,9 @@
                 padding="0.8rem"
                 gap="0.5rem"
         >
+            <p>
+                If you want to read the full documentation, visit <a style="text-decoration: underline" target="_blank" href="/docs/dotlr">here</a>
+            </p>
             <DotlrDocs />
         </Column>
     </FloatingContainer>
