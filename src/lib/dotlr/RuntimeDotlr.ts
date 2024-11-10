@@ -39,13 +39,13 @@ export function getRuntimeDeltaDecorations(model: editor.ITextModel, grammar: st
         const startPositon = model.getPositionAt(start)
         const endPosition = model.getPositionAt(token.span.offset + token.span.length)
 
-        typeAlternate[token.value.type] = !(typeAlternate[token.value.type] ?? false)
+        typeAlternate[token.object.type] = !(typeAlternate[token.object.type] ?? false)
         const col = startPositon.column
         const line = startPositon.lineNumber
         return {
             range: new Range(line, col, endPosition.lineNumber, endPosition.column),
             options: {
-                className: 'runtime-token-' + token.value.type + (typeAlternate[token.value.type] ? '-alt' : '')
+                className: 'runtime-token-' + token.object.type + (typeAlternate[token.object.type] ? '-alt' : '')
             }
         }
     })

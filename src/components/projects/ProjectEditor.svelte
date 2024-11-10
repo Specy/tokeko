@@ -76,7 +76,7 @@
 
     function parseGrammar() {
         store?.parseGrammar()
-        scrollToNearestResult()
+        if($store.result?.type !== 'error') scrollToNearestResult()
     }
 
     function reset() {
