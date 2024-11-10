@@ -38,7 +38,9 @@ declare type Token<C = string, R = string> = {
     value: R;
 } | {
     type: 'Eof';
-};
+} | {
+	  type: 'Empty';
+}
 
 declare type _Grammar = any
 declare class Grammar<
@@ -122,7 +124,7 @@ declare type AtomicPattern<T extends Token = Token> = {
 } | {
     type: 'Token';
     value: T;
-};
+}
 
 declare type Trace<Tr extends Tree = Tree> = {
     steps: Step<Tr>[];
@@ -248,14 +250,14 @@ declare type Ok<T> = {
 
 declare type Span = {
     offset: number,
-    len: number,
+    length: number,
     column: number,
     line: number
 }
 
 declare type Spanned<T> = {
     span: Span,
-    value: T
+    object: T
 }
 
 declare type Result<T, E> = Ok<T> | Err<E>

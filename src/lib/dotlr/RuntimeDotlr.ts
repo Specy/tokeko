@@ -37,7 +37,7 @@ export function getRuntimeDeltaDecorations(model: editor.ITextModel, grammar: st
     return tokens.value.map(({token}) => {
         const start = token.span.offset
         const startPositon = model.getPositionAt(start)
-        const endPosition = model.getPositionAt(token.span.offset + token.span.len)
+        const endPosition = model.getPositionAt(token.span.offset + token.span.length)
 
         typeAlternate[token.value.type] = !(typeAlternate[token.value.type] ?? false)
         const col = startPositon.column
@@ -64,7 +64,7 @@ export function createDotlrRuntimeRuntimeDiagnostics(model: editor.ITextModel, _
         if (parsed.isOk()) return editor.setModelMarkers(model, 'dotlr', [])
         const err = parsed.error
         const posStart = model.getPositionAt(err.value.span.offset)
-        const posEnd = model.getPositionAt(err.value.span.offset + err.value.span.len)
+        const posEnd = model.getPositionAt(err.value.span.offset + err.value.span.length)
         markers.push({
             startLineNumber: posStart.lineNumber,
             startColumn: posStart.column,

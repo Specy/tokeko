@@ -35,7 +35,7 @@
         </div>
         <div class="body-cell">
             <div class="item">
-                {step.remaining_tokens.map(i => stringifyToken(i.value, true)).join(' ')}
+                {step.remaining_tokens.map(i => stringifyToken(i.object, true)).join(' ')}
             </div>
         </div>
         <div class="body-cell" style="gap: 0">
