@@ -6,15 +6,13 @@
     export let follow: FollowTable
     export let column = true
 
-
-
     function sortItems(a: Token, b: Token) {
         return stringifyToken(a).localeCompare(stringifyToken(b))
     }
 
     $: keys = [...first.keys()]
-    $: firstItems = [...first.values()].map(i => i.sort(sortItems))
-    $: followItems = [...follow.values()].map(i => i.sort(sortItems))
+    $: firstItems = [...first.entries()].filter(([k]) => keys.includes(k)).map(([_,v]) => v.sort(sortItems))
+    $: followItems = [...follow.entries()].filter(([k]) => keys.includes(k)).map(([_,v]) => v.sort(sortItems))
 </script>
 
 {#if column}
