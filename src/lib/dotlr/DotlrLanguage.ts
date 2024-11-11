@@ -95,8 +95,8 @@ export function createDotlrRuntimeDiagnostics(model: editor.ITextModel) {
         const text = model.getValue()
         const grammar = Grammar.parse(text)
         const markers = []
-        if (grammar.err) {
-            const e = grammar.val
+        if (grammar.isErr()) {
+            const e = grammar.error
             if (e.type === "UnexpectedToken") {
                 markers.push({
                     startLineNumber: e.value.line,
