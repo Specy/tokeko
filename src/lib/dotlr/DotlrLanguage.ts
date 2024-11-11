@@ -56,7 +56,7 @@ export function createDotlrFormatter() {
             if (grammar.isOk()) {
                 return [{
                     range: model.getFullModelRange(),
-                    text: grammar.value.stringify()
+                    text: grammar.value.stringify().replace('ε', `''`)
                 }]
             } else {
                 return [{
