@@ -5,12 +5,11 @@
     export let first: FirstTable
     export let follow: FollowTable
     export let column = true
-
+    export let keys = [] as string[]
     function sortItems(a: Token, b: Token) {
         return stringifyToken(a).localeCompare(stringifyToken(b))
     }
 
-    $: keys = [...first.keys()]
     $: firstItems = keys.map(v => (first.get(v) ?? []).sort(sortItems))
     $: followItems = keys.map(v => (follow.get(v) ?? []).sort(sortItems))
 </script>

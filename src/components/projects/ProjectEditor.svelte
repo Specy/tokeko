@@ -272,6 +272,7 @@
                 </Row>
                 <Row justify="center">
                     <FirstTableRenderer
+                            keys={$store.result.grammar.getSymbols()}
                             column={project.options.columnFirstAndFollow}
                             first={$store.result.parser.getFirstTable()}
                             follow={$store.result.parser.getFollowTable()}
