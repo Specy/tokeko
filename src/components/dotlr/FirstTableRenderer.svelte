@@ -11,8 +11,8 @@
     }
 
     $: keys = [...first.keys()]
-    $: firstItems = [...first.entries()].filter(([k]) => keys.includes(k)).map(([_,v]) => v.sort(sortItems))
-    $: followItems = [...follow.entries()].filter(([k]) => keys.includes(k)).map(([_,v]) => v.sort(sortItems))
+    $: firstItems = keys.map(v => (first.get(v) ?? []).sort(sortItems))
+    $: followItems = keys.map(v => (follow.get(v) ?? []).sort(sortItems))
 </script>
 
 {#if column}
