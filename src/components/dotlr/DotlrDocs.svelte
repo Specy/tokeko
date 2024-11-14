@@ -36,6 +36,24 @@ T -> %id
     <Card padding="1rem">
         foo(bar+baz)
     </Card>
+
+    <h2>
+        Episilon
+    </h2>
+    <p>
+        You can write the epsilon symbol by writing a rule with only the empty string as it's body <code>S -> ''</code>
+    </p>
+        <Card padding="1rem">
+
+        <SyntaxHighlighter
+                source={`S -> 'h' B 'e'
+B -> B A
+B -> ''
+A -> 'x'
+A -> 't'`}
+                language="dotlr"
+        />
+    </Card>
 </Column>
 
 
@@ -56,5 +74,11 @@ T -> %id
 <style>
   p{
     line-height: 1.5;
+  }
+  code{
+    background-color: var(--primary);
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.2rem;
+      white-space: nowrap;
   }
 </style>
