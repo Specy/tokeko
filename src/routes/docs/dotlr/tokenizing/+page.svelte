@@ -1,15 +1,15 @@
 <script>
+    import DocsSeo from "$cmp/seo/DocsSeo.svelte";
     import Page from "$cmp/layout/Page.svelte";
     import Card from "$cmp/layout/Card.svelte";
     import SyntaxHighlighter from "$cmp/SyntaxHighlighter.svelte";
 </script>
 
-<svelte:head>
-    <title>
-        Tokenizing
-    </title>
-    <meta name="description" content="The documentation of Tokeko: Tokenizing"/>
-</svelte:head>
+<DocsSeo
+	title="Tokenizing input (lexical analysis)"
+	description="What tokenization is: how a lexer splits input such as int x = 42; into tokens before the parser runs."
+	path="/docs/dotlr/tokenizing"
+/>
 
 <Page cropped="70ch" padding='1rem' mobilePadding='1rem' gap="1rem">
     <h1>

@@ -1,15 +1,15 @@
 <script>
+    import DocsSeo from "$cmp/seo/DocsSeo.svelte";
     import Page from "$cmp/layout/Page.svelte";
     import Card from "$cmp/layout/Card.svelte";
     import SyntaxHighlighter from "$cmp/SyntaxHighlighter.svelte";
 </script>
 
-<svelte:head>
-    <title>
-        Parsing tokens
-    </title>
-    <meta name="description" content="The documentation of Tokeko: Parsing tokens"/>
-</svelte:head>
+<DocsSeo
+	title="Parsing tokens into a parse tree"
+	description="How a parser consumes a stream of tokens and builds a parse tree that shows the hierarchical structure of the input."
+	path="/docs/dotlr/parsing-tokens"
+/>
 
 <Page cropped="70ch" padding='1rem' mobilePadding='1rem' gap="1rem">
     <h1>

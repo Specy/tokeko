@@ -1,15 +1,15 @@
 <script>
+    import DocsSeo from "$cmp/seo/DocsSeo.svelte";
     import Page from "$cmp/layout/Page.svelte";
     import Card from "$cmp/layout/Card.svelte";
     import SyntaxHighlighter from "$cmp/SyntaxHighlighter.svelte";
 </script>
 
-<svelte:head>
-    <title>
-        Action & Goto
-    </title>
-    <meta name="description" content="The documentation of Tokeko: Action & Goto"/>
-</svelte:head>
+<DocsSeo
+	title="ACTION and GOTO tables explained"
+	description="How the ACTION and GOTO tables are built from the LR(1) automaton, and when the parser shifts, reduces, accepts or reports an error."
+	path="/docs/dotlr/action-and-goto"
+/>
 
 
 <Page cropped="70ch" padding='1rem' mobilePadding='1rem'>

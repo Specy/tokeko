@@ -1,16 +1,16 @@
 <script>
+    import DocsSeo from "$cmp/seo/DocsSeo.svelte";
     import {getTsGlobal} from "$lib/dotlr/dotlrTypesString";
     import ExpandableContainer from "$cmp/layout/ExpandableContainer.svelte";
     import SyntaxHighlighter from "$cmp/SyntaxHighlighter.svelte";
     import Page from "$cmp/layout/Page.svelte";
 </script>
 
-<svelte:head>
-    <title>
-        Typescript runtime
-    </title>
-    <meta name="description" content="The documentation of Tokeko: Typescript runtime"/>
-</svelte:head>
+<DocsSeo
+	title="TypeScript runtime for your parser"
+	description="Use the TypeScript runtime: the global PARSE function, the grammar-derived types and the parser and grammar functions."
+	path="/docs/dotlr/typescript-parser"
+/>
 <Page cropped="70ch" padding='1rem' mobilePadding='1rem' gap="1rem">
     <h2>
         Typescript runtime

@@ -1,15 +1,15 @@
 <script>
+    import DocsSeo from "$cmp/seo/DocsSeo.svelte";
     import Page from "$cmp/layout/Page.svelte";
     import SyntaxHighlighter from "$cmp/SyntaxHighlighter.svelte";
     import Card from "$cmp/layout/Card.svelte";
 </script>
 
-<svelte:head>
-    <title>
-        First & Follow
-    </title>
-    <meta name="description" content="The documentation of Tokeko: First & Follow"/>
-</svelte:head>
+<DocsSeo
+	title="FIRST and FOLLOW sets explained"
+	description="How FIRST and FOLLOW sets are computed for grammar symbols, including the end-of-input token and the tokens that can follow a symbol."
+	path="/docs/dotlr/first-and-follow"
+/>
 
 <Page cropped="70ch" padding='1rem' mobilePadding='1rem'>
     <h1>

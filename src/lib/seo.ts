@@ -41,3 +41,49 @@ export function softwareApplicationLd() {
 		sameAs: ['https://github.com/Specy/tokeko', 'https://github.com/Specy/dotlr']
 	};
 }
+
+export const DOCS_ROOT_PATH = '/docs/dotlr';
+
+/** Same image the homepage uses for its preview. */
+export const SOCIAL_IMAGE_URL = toAbsoluteUrl('/images/tokeko-result-wide.webp');
+
+export function docsTitle(pageTitle: string) {
+	return `${pageTitle} | Tokeko docs`;
+}
+
+export function docsTechArticleLd({
+	headline,
+	description,
+	url
+}: {
+	headline: string;
+	description: string;
+	url: string;
+}) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'TechArticle',
+		headline,
+		description,
+		url,
+		mainEntityOfPage: url,
+		image: SOCIAL_IMAGE_URL,
+		inLanguage: 'en',
+		author: AUTHOR,
+		publisher: { '@type': 'Organization', name: 'Tokeko', url: SITE_URL },
+		isPartOf: { '@type': 'WebSite', name: 'Tokeko', url: SITE_URL }
+	};
+}
+
+export function breadcrumbListLd(items: { name: string; url: string }[]) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: items.map((item, index) => ({
+			'@type': 'ListItem',
+			position: index + 1,
+			name: item.name,
+			item: item.url
+		}))
+	};
+}
