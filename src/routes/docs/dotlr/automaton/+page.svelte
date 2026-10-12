@@ -1,15 +1,15 @@
 <script>
+    import DocsSeo from "$cmp/seo/DocsSeo.svelte";
     import Page from "$cmp/layout/Page.svelte";
     import Card from "$cmp/layout/Card.svelte";
     import SyntaxHighlighter from "$cmp/SyntaxHighlighter.svelte";
 </script>
 
-<svelte:head>
-    <title>
-        Automaton
-    </title>
-    <meta name="description" content="The documentation of Tokeko: Automaton"/>
-</svelte:head>
+<DocsSeo
+	title="LR(1) automaton explained"
+	description="What an LR(1) automaton is: items with a one-token lookahead, the shift and reduce operations, and how its states guide the parser."
+	path="/docs/dotlr/automaton"
+/>
 
 <Page cropped="70ch" padding='1rem' mobilePadding='1rem'>
     <h1 id="what-is-an-lr-1-automaton-">LR(1) Automaton</h1>

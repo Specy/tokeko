@@ -9,7 +9,7 @@
     <Icon size={0.4} style="color: var(--accent);">
         <FaCircle />
     </Icon>
-	<h2 class="menu-title">{title}</h2>
+	<span class="menu-title">{title}</span>
 </a>
 
 <style lang="scss">

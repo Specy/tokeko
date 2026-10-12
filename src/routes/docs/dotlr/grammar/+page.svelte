@@ -1,15 +1,15 @@
 <script>
+    import DocsSeo from "$cmp/seo/DocsSeo.svelte";
     import Page from "$cmp/layout/Page.svelte";
     import SyntaxHighlighter from "$cmp/SyntaxHighlighter.svelte";
     import Card from "$cmp/layout/Card.svelte";
 </script>
 
-<svelte:head>
-    <title>
-        Grammar
-    </title>
-    <meta name="description" content="The documentation of Tokeko: Grammar"/>
-</svelte:head>
+<DocsSeo
+	title="Writing a parser grammar"
+	description="How to write a grammar with terminals, non-terminals and regex tokens, with a worked example that parses foo(bar+baz)."
+	path="/docs/dotlr/grammar"
+/>
 
 <Page cropped="70ch" padding='1rem' mobilePadding='1rem'>
     <h1>

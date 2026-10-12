@@ -1,4 +1,5 @@
 <script lang="ts">
+    import DocsSeo from "$cmp/seo/DocsSeo.svelte";
     import {createProject} from "$stores/userProjectsStore";
     import lzstring from "lz-string";
     import DotlrDocs from "$cmp/dotlr/DotlrDocs.svelte";
@@ -9,12 +10,11 @@
     const url = `/projects/share?project=${s}`;
 </script>
 
-<svelte:head>
-    <title>
-        Tokeko documentation
-    </title>
-    <meta name="description" content="How Tokeko builds LR(1) and LALR parsers: grammar syntax, FIRST and FOLLOW sets, the automaton, ACTION and GOTO tables, and the parse trace."/>
-</svelte:head>
+<DocsSeo
+	title="Introduction to LR parsing"
+	description="How Tokeko builds LR(1) and LALR parsers: grammar syntax, FIRST and FOLLOW sets, the automaton, ACTION and GOTO tables, and the parse trace."
+	path="/docs/dotlr"
+/>
 
 <Page cropped="70ch" padding='1rem' mobilePadding='1rem' gap="1rem" style="padding-top: 2rem">
     <h1>

@@ -44,46 +44,48 @@
             </Button>
         </div>
         <Column gap="1rem" flex1 padding="0 1rem">
-            <MenuLink
-                    href="/docs/dotlr/"
-                    title="Introduction"
-                    on:click={() => (menuOpen = false)}
-            />
-            <MenuLink
-                    href="/docs/dotlr/grammar"
-                    title="Grammar"
-                    on:click={() => (menuOpen = false)}
-            />
-            <MenuLink
-                    href="/docs/dotlr/first-and-follow"
-                    title="First & Follow"
-                    on:click={() => (menuOpen = false)}
-            />
-            <MenuLink
-                    href="/docs/dotlr/automaton"
-                    title="Automaton"
-                    on:click={() => (menuOpen = false)}
-            />
-            <MenuLink
-                    href="/docs/dotlr/action-and-goto"
-                    title="Action & Goto"
-                    on:click={() => (menuOpen = false)}
-            />
-            <MenuLink
-                    href="/docs/dotlr/tokenizing"
-                    title="Tokenizing"
-                    on:click={() => (menuOpen = false)}
-            />
-            <MenuLink
-                    href="/docs/dotlr/parsing-tokens"
-                    title="Parsing tokens"
-                    on:click={() => (menuOpen = false)}
-            />
-            <MenuLink
-                    href="/docs/dotlr/typescript-parser"
-                    title="Typescript runtime"
-                    on:click={() => (menuOpen = false)}
-            />
+            <nav aria-label="Documentation" class="menu-nav">
+                <MenuLink
+                        href="/docs/dotlr/"
+                        title="Introduction"
+                        on:click={() => (menuOpen = false)}
+                />
+                <MenuLink
+                        href="/docs/dotlr/grammar"
+                        title="Grammar"
+                        on:click={() => (menuOpen = false)}
+                />
+                <MenuLink
+                        href="/docs/dotlr/first-and-follow"
+                        title="First & Follow"
+                        on:click={() => (menuOpen = false)}
+                />
+                <MenuLink
+                        href="/docs/dotlr/automaton"
+                        title="Automaton"
+                        on:click={() => (menuOpen = false)}
+                />
+                <MenuLink
+                        href="/docs/dotlr/action-and-goto"
+                        title="Action & Goto"
+                        on:click={() => (menuOpen = false)}
+                />
+                <MenuLink
+                        href="/docs/dotlr/tokenizing"
+                        title="Tokenizing"
+                        on:click={() => (menuOpen = false)}
+                />
+                <MenuLink
+                        href="/docs/dotlr/parsing-tokens"
+                        title="Parsing tokens"
+                        on:click={() => (menuOpen = false)}
+                />
+                <MenuLink
+                        href="/docs/dotlr/typescript-parser"
+                        title="Typescript runtime"
+                        on:click={() => (menuOpen = false)}
+                />
+            </nav>
             <a href="{url}" class="tryit">
                 Try it
             </a>
@@ -115,6 +117,11 @@
   .mock{
     width: 15rem;
     min-width: 15rem;
+  }
+  .menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
   .tryit {
     border-radius: 0.8rem;
